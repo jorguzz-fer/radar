@@ -1,0 +1,227 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============ MULTI-TENANT CORE ============
+
+model Tenant {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  nome        String
+  vertical    String
+  vocabPackId String
+  status      TenantStatus @default(ATIVO)
+  plano       String       @default("piloto")
+  criadoEm   DateTime     @default(now())
+
+  pilares         TenantPilar[]
+  fontes          TenantFonte[]
+  pautas          Pauta[]
+  postsPublicados PostPublicado[]
+  usuarios        Usuario[]
+
+  @@map("tenants")
+}
+
+enum TenantStatus {
+  ATIVO
+  INATIVO
+  TRIAL
+}
+
+model TenantPilar {
+  id        String  @id @default(cuid())
+  tenantId  String
+  nome      String
+  pesoPct   Int
+  descricao String?
+  ordem     Int
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_pilares")
+}
+
+model Usuario {
+  id       String  @id @default(cuid())
+  tenantId String?
+  email    String  @unique
+  nome     String
+  role     Role    @default(VIEWER)
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
+
+  @@map("usuarios")
+}
+
+enum Role {
+  ADMIN_PLATFORM
+  ADMIN_TENANT
+  EDITOR
+  VIEWER
+}
+
+// ============ COLETA ============
+
+model Source {
+  id           String     @id @default(cuid())
+  tipo         SourceType
+  nome         String
+  url          String
+  idioma       String
+  frequencia   String
+  ativo        Boolean    @default(true)
+  ultimaColeta DateTime?
+  config       Json?
+
+  rawContents  RawContent[]
+  tenantFontes TenantFonte[]
+
+  @@map("sources")
+}
+
+enum SourceType {
+  PUBMED
+  RSS
+  GOOGLE_NEWS
+  INSTAGRAM
+  TWITTER
+  WEBSITE
+}
+
+model TenantFonte {
+  tenantId   String
+  sourceId   String
+  prioridade Int    @default(1)
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  source Source @relation(fields: [sourceId], references: [id])
+
+  @@id([tenantId, sourceId])
+  @@map("tenant_fontes")
+}
+
+model RawContent {
+  id          String    @id @default(cuid())
+  sourceId    String
+  externalUrl String
+  titulo      String
+  rawText     String    @db.Text
+  publishedAt DateTime?
+  idioma      String
+  hash        String    @unique
+  coletadoEm DateTime  @default(now())
+
+  source    Source             @relation(fields: [sourceId], references: [id])
+  processed ProcessedContent[]
+
+  @@index([sourceId, publishedAt])
+  @@map("raw_contents")
+}
+
+// ============ PROCESSAMENTO ============
+
+model ProcessedContent {
+  id                  String   @id @default(cuid())
+  rawId               String
+  tenantId            String
+  resumoPt            String   @db.Text
+  pilarSugerido       String
+  novidadeScore       Float
+  relevanciaScore     Float
+  anguloSugerido      String   @db.Text
+  embeddingPineconeId String?
+  custoTokens         Int
+  processadoEm       DateTime @default(now())
+
+  raw RawContent @relation(fields: [rawId], references: [id])
+
+  @@unique([rawId, tenantId])
+  @@index([tenantId, novidadeScore, relevanciaScore])
+  @@map("processed_contents")
+}
+
+// ============ MEMÓRIA DO PUBLICADO ============
+
+model PostPublicado {
+  id                  String    @id @default(cuid())
+  tenantId            String
+  plataforma          String
+  externalUrl         String?
+  publicadoEm        DateTime
+  titulo              String
+  copyFull            String    @db.Text
+  pilar               String?
+  layout              String?
+  embeddingPineconeId String?
+  performanceJson     Json?
+  fonte               PostFonte
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, publicadoEm])
+  @@map("posts_publicados")
+}
+
+enum PostFonte {
+  MANUAL_INPUT
+  INSTAGRAM_API
+  SCRAPE
+  PLANILHA_N8N
+}
+
+// ============ PAUTAS ============
+
+model Pauta {
+  id              String      @id @default(cuid())
+  tenantId        String
+  processedId     String?
+  status          PautaStatus @default(SUGERIDA)
+  titulo          String
+  resumo          String      @db.Text
+  anguloSugerido  String      @db.Text
+  pilarSugerido   String
+  fonteOriginal   String
+  scoreNovidade   Float
+  scoreRelevancia Float
+  scoreFinal      Float
+  semanaRef       String
+  aprovadoPor     String?
+  aprovadoEm     DateTime?
+  rejeitadoMotivo String?
+  postPublicadoId String?
+  criadoEm       DateTime    @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, semanaRef, scoreFinal])
+  @@map("pautas")
+}
+
+enum PautaStatus {
+  SUGERIDA
+  APROVADA
+  REJEITADA
+  EM_PRODUCAO
+  PUBLICADA
+}
+
+// ============ AUDITORIA E BILLING ============
+
+model UsageLog {
+  id       String   @id @default(cuid())
+  tenantId String?
+  acao     String
+  custoUsd Float?
+  metadata Json?
+  criadoEm DateTime @default(now())
+
+  @@index([tenantId, criadoEm])
+  @@map("usage_logs")
+}

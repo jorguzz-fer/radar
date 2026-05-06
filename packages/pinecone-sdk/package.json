@@ -1,0 +1,16 @@
+{
+  "name": "@radar/pinecone-sdk",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pinecone-database/pinecone": "^3.0.0",
+    "@radar/database": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
