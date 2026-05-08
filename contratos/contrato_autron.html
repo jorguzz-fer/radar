@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { margin: 3cm 2.5cm; }
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.8;
+    color: #000;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 14pt;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 10pt;
+    color: #444;
+    margin-bottom: 30px;
+  }
+  h2 {
+    font-size: 12pt;
+    text-transform: uppercase;
+    margin-top: 28px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+  }
+  .clause-title {
+    font-weight: bold;
+    display: inline;
+  }
+  p { margin: 10px 0; text-align: justify; }
+  .parties-box {
+    border: 1px solid #000;
+    padding: 16px 20px;
+    margin: 20px 0;
+    background: #fafafa;
+  }
+  .parties-box table { width: 100%; border-collapse: collapse; }
+  .parties-box td { padding: 4px 8px; vertical-align: top; font-size: 11pt; }
+  .parties-box td:first-child { font-weight: bold; width: 160px; }
+  .party-label {
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    margin-bottom: 6px;
+    margin-top: 14px;
+  }
+  .value-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 11pt;
+  }
+  .value-table th {
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    text-align: left;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .value-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  .value-table tr:last-child td { border-bottom: 2px solid #000; font-weight: bold; }
+  .signature-block {
+    margin-top: 60px;
+    page-break-inside: avoid;
+  }
+  .sig-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    margin-top: 40px;
+  }
+  .sig-item {
+    flex: 1;
+    text-align: center;
+    border-top: 1px solid #000;
+    padding-top: 8px;
+    font-size: 10pt;
+  }
+  .witness-block {
+    margin-top: 40px;
+    display: flex;
+    gap: 60px;
+  }
+  .witness-item {
+    flex: 1;
+    border-top: 1px solid #000;
+    padding-top: 8px;
+    font-size: 10pt;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .nota {
+    background: #f5f5f5;
+    border-left: 3px solid #666;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 10.5pt;
+    color: #333;
+  }
+  .center { text-align: center; }
+  ol { padding-left: 20px; }
+  ol li { margin-bottom: 6px; text-align: justify; }
+  .exclusao-list { list-style: disc; padding-left: 24px; }
+  .exclusao-list li { margin-bottom: 4px; }
+  hr { border: none; border-top: 2px solid #000; margin: 30px 0; }
+</style>
+</head>
+<body>
+
+<h1>Contrato de Prestação de Serviços de Consultoria em</h1>
+<h1>Tecnologia da Informação e Marketing Digital</h1>
+<div class="subtitle">Proposta Comercial de Referência nº 001/2026 · Data: 27/04/2026</div>
+
+<hr>
+
+<p>As partes abaixo qualificadas celebram o presente <strong>Contrato de Prestação de Serviços de Consultoria em Tecnologia da Informação e Marketing Digital</strong> ("Contrato"), que se regerá pelas cláusulas e condições seguintes, bem como pela legislação vigente aplicável, em especial o Código Civil Brasileiro (Lei nº 10.406/2002) e a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
+
+<div class="parties-box">
+  <div class="party-label">CONTRATADA (Prestadora de Serviços)</div>
+  <table>
+    <tr><td>Razão Social:</td><td>Tudo Mudou Marketing e Consultoria</td></tr>
+    <tr><td>CNPJ:</td><td>40.790.711/0001-21</td></tr>
+    <tr><td>Endereço:</td><td>Av. Santo Antônio, 1453 — Vila Osasco</td></tr>
+    <tr><td>CEP:</td><td>06083-210 — Osasco / SP</td></tr>
+    <tr><td>Chave PIX (CNPJ):</td><td>40.790.711/0001-21</td></tr>
+    <tr><td>Representante:</td><td>________________________________________</td></tr>
+    <tr><td>Cargo:</td><td>________________________________________</td></tr>
+    <tr><td>CPF:</td><td>________________________________________</td></tr>
+  </table>
+
+  <div class="party-label" style="margin-top:16px;">CONTRATANTE (Cliente)</div>
+  <table>
+    <tr><td>Razão Social:</td><td>Autron Automação Indústria e Comércio Ltda</td></tr>
+    <tr><td>Nome Fantasia:</td><td>Autron</td></tr>
+    <tr><td>CNPJ:</td><td>72.932.718/0001-27</td></tr>
+    <tr><td>Endereço:</td><td>R. Caetés, 601 — Térreo — Perdizes</td></tr>
+    <tr><td>CEP:</td><td>05.016-081 — São Paulo / SP</td></tr>
+    <tr><td>Telefone:</td><td>(11) 4810-7979</td></tr>
+    <tr><td>Representante:</td><td>________________________________________</td></tr>
+    <tr><td>Cargo:</td><td>________________________________________</td></tr>
+    <tr><td>CPF:</td><td>________________________________________</td></tr>
+  </table>
+</div>
+
+<h2>Cláusula 1 — Objeto</h2>
+
+<p><span class="clause-title">1.1</span> O presente Contrato tem por objeto a <strong>prestação de serviços de desenvolvimento, implantação, suporte e manutenção de plataforma de Business Intelligence (BI)</strong> para a CONTRATANTE, conforme escopo técnico detalhado na Proposta Comercial nº 001/2026, incorporada a este instrumento como Anexo I.</p>
+
+<p><span class="clause-title">1.2</span> A plataforma objeto deste Contrato consolida dados provenientes de 7 (sete) fontes distintas — Protheus ERP, CRM Ploomes e Budget/Metas — em um único ambiente de análise, composto por 8 (oito) módulos de análise operacional e financeira, conforme especificado na Cláusula 2.</p>
+
+<p><span class="clause-title">1.3</span> O projeto encontra-se em estágio de produção, devidamente validado junto ao usuário final da CONTRATANTE, tendo percorrido as seguintes fases: (i) Discovery &amp; Modelagem; (ii) Desenvolvimento Core; (iii) Módulos &amp; Refino; e (iv) Deploy &amp; Validação.</p>
+
+<h2>Cláusula 2 — Escopo dos Serviços</h2>
+
+<p><span class="clause-title">2.1</span> Os serviços contratados compreendem, sem limitação:</p>
+<ol type="a">
+  <li><strong>Plataforma BI completa</strong> com os 8 (oito) módulos de análise: (1) Visão Geral, (2) Entrada de Pedidos, (3) Disponibilidade, (4) Previsão de Entrega, (5) Estoque &amp; SC/OP, (6) Faturamento, (7) Previsão de Faturamento, e (8) Ploomes × Protheus;</li>
+  <li><strong>Integração das 7 (sete) fontes de dados</strong>: <em>entrada_pedido.xlsx</em>, <em>followup.xlsx</em>, <em>mata010.xlsx</em>, <em>faturamento.xlsx</em>, <em>sciozvs0.csv</em> (todos Protheus), <em>Metas_Budget_2026.xlsx</em> (Budget) e <em>Ganhas.xlsx</em> (CRM Ploomes);</li>
+  <li><strong>Deploy e configuração inicial</strong> em ambiente VPS com Coolify, containerização Docker e integração com repositório GitHub privado;</li>
+  <li><strong>Autenticação e segurança</strong>: login com e-mail e senha, comunicação HTTPS com certificado SSL Let's Encrypt, variáveis de ambiente para credenciais;</li>
+  <li><strong>Iterações e ajustes</strong> com o usuário em ambiente de produção durante o período contratual;</li>
+  <li><strong>Suporte e manutenção evolutiva</strong> pelo período de 12 (doze) meses, incluindo correções de bugs e ajustes funcionais;</li>
+  <li><strong>Entrega do código-fonte</strong> versionado em repositório privado de titularidade da CONTRATANTE.</li>
+</ol>
+
+<p><span class="clause-title">2.2</span> A stack tecnológica utilizada é composta exclusivamente por tecnologias open-source e padrão de mercado: Python 3.11+, Pandas, NumPy, Plotly, Docker, Coolify, GitHub e Let's Encrypt, sem qualquer lock-in de fornecedor proprietário.</p>
+
+<p><span class="clause-title">2.3</span> Os seguintes itens <strong>não estão incluídos</strong> no escopo deste Contrato, podendo ser cotados separadamente mediante aditivo:</p>
+<ul class="exclusao-list">
+  <li>Integrações com fontes de dados além das 7 (sete) previstas no item 2.1(b);</li>
+  <li>Hospedagem, infraestrutura de VPS, cloud, domínios e renovação de SSL — de responsabilidade exclusiva da CONTRATANTE;</li>
+  <li>Servidores e equipamentos físicos;</li>
+  <li>Novos módulos de análise não previstos no escopo original;</li>
+  <li>Migração para outras stacks ou plataformas tecnológicas;</li>
+  <li>Treinamento formal de equipe (cotado sob demanda).</li>
+</ul>
+
+<h2>Cláusula 3 — Prazo de Vigência</h2>
+
+<p><span class="clause-title">3.1</span> O presente Contrato vigorará pelo prazo de <strong>12 (doze) meses</strong>, contados da data de sua assinatura, podendo ser renovado por igual período mediante acordo escrito entre as partes, com antecedência mínima de 30 (trinta) dias do término.</p>
+
+<p><span class="clause-title">3.2</span> O prazo de vigência abrange a manutenção, o suporte e os ajustes evolutivos da plataforma já entregue e em produção, conforme descrito na Cláusula 2.</p>
+
+<p><span class="clause-title">3.3</span> Eventuais serviços adicionais solicitados após o encerramento do prazo contratual serão objeto de novo instrumento ou aditivo.</p>
+
+<h2>Cláusula 4 — Valor e Condições de Pagamento</h2>
+
+<p><span class="clause-title">4.1</span> As partes elegem uma das modalidades de pagamento abaixo, conforme opção assinalada no momento da assinatura:</p>
+
+<table class="value-table">
+  <thead>
+    <tr>
+      <th>Parcela / Evento</th>
+      <th>Modalidade Parcelada</th>
+      <th>Modalidade à Vista</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Setup Inicial (na assinatura)</td>
+      <td>R$ 2.500,00</td>
+      <td>— incluso —</td>
+    </tr>
+    <tr>
+      <td>Mensalidades</td>
+      <td>11 × R$ 2.000,00</td>
+      <td>— incluso —</td>
+    </tr>
+    <tr>
+      <td>Desconto</td>
+      <td>—</td>
+      <td>15% (− R$ 3.675,00)</td>
+    </tr>
+    <tr>
+      <td><strong>Total do Contrato</strong></td>
+      <td><strong>R$ 24.500,00</strong></td>
+      <td><strong>R$ 20.825,00</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>( ) Modalidade Parcelada &nbsp;&nbsp;&nbsp; ( ) Modalidade à Vista</p>
+
+<p><span class="clause-title">4.2</span> O pagamento deverá ser realizado via <strong>PIX ou transferência bancária</strong> para a seguinte chave:</p>
+<div class="nota">
+  <strong>Favorecido:</strong> Tudo Mudou Marketing e Consultoria &nbsp;|&nbsp; <strong>Chave PIX (CNPJ):</strong> 40.790.711/0001-21
+</div>
+
+<p><span class="clause-title">4.3</span> Na modalidade parcelada, o vencimento do setup inicial ocorre na data de assinatura do Contrato, e as parcelas mensais subsequentes vencem no mesmo dia dos meses seguintes.</p>
+
+<p><span class="clause-title">4.4</span> O atraso no pagamento sujeitará a CONTRATANTE à incidência de multa moratória de <strong>2% (dois por cento)</strong> sobre o valor em atraso, acrescida de juros de mora de <strong>1% (um por cento) ao mês</strong> e correção monetária pelo índice IGPM/FGV, sem prejuízo das demais penalidades previstas neste Contrato.</p>
+
+<p><span class="clause-title">4.5</span> O inadimplemento superior a <strong>30 (trinta) dias</strong> faculta à CONTRATADA suspender o acesso à plataforma até a regularização, sem que isso caracterize rescisão ou descumprimento contratual por parte da CONTRATADA.</p>
+
+<p><span class="clause-title">4.6</span> Os valores contratados serão reajustados anualmente pelo <strong>IGPM/FGV</strong> acumulado nos 12 (doze) meses anteriores à data de aniversário do Contrato, em caso de renovação.</p>
+
+<h2>Cláusula 5 — Obrigações da CONTRATADA</h2>
+
+<p>A CONTRATADA obriga-se a:</p>
+<ol type="a">
+  <li>Prestar os serviços descritos na Cláusula 2 com zelo, técnica e qualidade;</li>
+  <li>Manter canal de comunicação responsivo para atendimento de chamados de suporte em dias úteis, das 9h às 18h, com prazo de resposta inicial de até 24 (vinte e quatro) horas;</li>
+  <li>Corrigir bugs críticos que afetem a operação principal da plataforma em até 48 (quarenta e oito) horas úteis após o reporte pela CONTRATANTE;</li>
+  <li>Manter o código-fonte versionado em repositório privado e entregar acesso à CONTRATANTE ao fim do Contrato ou quando solicitado;</li>
+  <li>Guardar sigilo sobre todas as informações, dados e documentos da CONTRATANTE, conforme Cláusula 8;</li>
+  <li>Comunicar a CONTRATANTE com antecedência mínima de 5 (cinco) dias úteis sobre manutenções programadas que impliquem indisponibilidade do serviço;</li>
+  <li>Não subcontratar os serviços objeto deste Contrato sem prévia autorização escrita da CONTRATANTE.</li>
+</ol>
+
+<h2>Cláusula 6 — Obrigações da CONTRATANTE</h2>
+
+<p>A CONTRATANTE obriga-se a:</p>
+<ol type="a">
+  <li>Efetuar os pagamentos nas datas e formas pactuadas na Cláusula 4;</li>
+  <li>Fornecer, tempestivamente, os arquivos de dados nas extensões e formatos acordados (XLSX, CSV), necessários ao funcionamento da plataforma;</li>
+  <li>Responsabilizar-se pela contratação e manutenção da infraestrutura de hospedagem (VPS, domínio, SSL e internet), conforme Cláusula 2.3;</li>
+  <li>Designar um interlocutor técnico/operacional para acompanhamento do projeto e aprovação de entregas;</li>
+  <li>Comunicar à CONTRATADA, por escrito, eventuais mudanças nas estruturas dos arquivos-fonte que possam impactar o funcionamento da plataforma, com antecedência mínima de 5 (cinco) dias úteis;</li>
+  <li>Não ceder, sublicenciar ou disponibilizar a terceiros o acesso à plataforma sem prévia autorização escrita da CONTRATADA;</li>
+  <li>Zelar pela segurança das credenciais de acesso, sendo responsável por usos indevidos decorrentes de negligência no seu armazenamento ou compartilhamento.</li>
+</ol>
+
+<h2>Cláusula 7 — Propriedade Intelectual e Código-Fonte</h2>
+
+<p><span class="clause-title">7.1</span> O código-fonte desenvolvido especificamente para este projeto será de <strong>propriedade da CONTRATANTE</strong> após o cumprimento integral das obrigações financeiras deste Contrato, sendo entregue versionado em repositório privado.</p>
+
+<p><span class="clause-title">7.2</span> Durante a vigência do Contrato e até o pagamento integral, o código-fonte poderá ser utilizado pela CONTRATANTE exclusivamente para os fins previstos neste instrumento, sendo vedada a cessão, sublicenciamento ou exploração comercial a terceiros.</p>
+
+<p><span class="clause-title">7.3</span> A CONTRATADA reserva-se o direito de reutilizar componentes, bibliotecas, frameworks e metodologias genéricas de sua propriedade intelectual em outros projetos, desde que não caracterize divulgação de dados ou regras de negócio exclusivas da CONTRATANTE.</p>
+
+<p><span class="clause-title">7.4</span> Os dados processados pela plataforma são e permanecem de <strong>titularidade exclusiva da CONTRATANTE</strong>, armazenados na infraestrutura própria da CONTRATANTE, sem transmissão a terceiros, conforme arquitetura de segurança descrita na Proposta.</p>
+
+<h2>Cláusula 8 — Confidencialidade e LGPD</h2>
+
+<p><span class="clause-title">8.1</span> As partes comprometem-se a manter absoluto sigilo sobre todas as informações técnicas, comerciais, financeiras, estratégicas e operacionais obtidas em razão da execução deste Contrato, pelo período de <strong>5 (cinco) anos</strong> após o seu término, independentemente do motivo.</p>
+
+<p><span class="clause-title">8.2</span> A CONTRATADA não divulgará, publicará, venderá, cederá ou utilizará para fins próprios quaisquer dados da CONTRATANTE, seus clientes ou parceiros.</p>
+
+<p><span class="clause-title">8.3</span> As partes declaram estar cientes das obrigações impostas pela <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD)</strong> e comprometem-se a adotar as medidas técnicas e organizacionais adequadas para a proteção dos dados pessoais eventualmente tratados no âmbito deste Contrato.</p>
+
+<p><span class="clause-title">8.4</span> A CONTRATADA atua, neste Contrato, na qualidade de <strong>operadora de dados</strong>, processando dados estritamente conforme as instruções da CONTRATANTE (controladora), sem finalidade autônoma.</p>
+
+<h2>Cláusula 9 — Rescisão</h2>
+
+<p><span class="clause-title">9.1</span> Este Contrato poderá ser rescindido:</p>
+<ol type="a">
+  <li><strong>Por mútuo acordo</strong>, mediante notificação escrita com antecedência mínima de 30 (trinta) dias;</li>
+  <li><strong>Por inadimplência</strong> de qualquer das partes, após notificação escrita concedendo prazo de 10 (dez) dias úteis para regularização;</li>
+  <li><strong>Imediatamente</strong>, por qualquer das partes, em caso de descumprimento grave das obrigações de confidencialidade ou propriedade intelectual.</li>
+</ol>
+
+<p><span class="clause-title">9.2</span> Em caso de rescisão antecipada por iniciativa da CONTRATANTE sem justa causa, será devida à CONTRATADA uma <strong>multa rescisória equivalente a 20% (vinte por cento)</strong> do valor remanescente das parcelas vincendas até o término do prazo contratual.</p>
+
+<p><span class="clause-title">9.3</span> Em caso de rescisão antecipada por iniciativa da CONTRATADA sem justa causa, será devida à CONTRATANTE uma <strong>multa rescisória equivalente a 20% (vinte por cento)</strong> do valor das parcelas vincendas, sem prejuízo da entrega do código-fonte atualizado até a data da rescisão.</p>
+
+<p><span class="clause-title">9.4</span> A rescisão não desobriga as partes do cumprimento das obrigações anteriores à data efetiva de encerramento, nem das obrigações de confidencialidade previstas na Cláusula 8.</p>
+
+<h2>Cláusula 10 — Limitação de Responsabilidade</h2>
+
+<p><span class="clause-title">10.1</span> A CONTRATADA não se responsabiliza por falhas, indisponibilidades ou perda de dados decorrentes de problemas na infraestrutura de hospedagem sob responsabilidade da CONTRATANTE (VPS, conexão à internet, energia elétrica).</p>
+
+<p><span class="clause-title">10.2</span> A CONTRATADA não se responsabiliza por imprecisões nos resultados da plataforma causadas por dados-fonte incorretos, incompletos ou fornecidos fora do formato acordado pela CONTRATANTE.</p>
+
+<p><span class="clause-title">10.3</span> A responsabilidade total da CONTRATADA, em qualquer hipótese, fica limitada ao valor pago pela CONTRATANTE nos 3 (três) meses anteriores ao evento danoso.</p>
+
+<h2>Cláusula 11 — Disposições Gerais</h2>
+
+<p><span class="clause-title">11.1</span> Este Contrato representa o acordo integral entre as partes em relação ao seu objeto, substituindo quaisquer negociações, propostas ou acordos anteriores, exceto o quanto expressamente incorporado como Anexo.</p>
+
+<p><span class="clause-title">11.2</span> Qualquer alteração ao presente instrumento somente produzirá efeitos se formalizada por escrito e assinada por ambas as partes.</p>
+
+<p><span class="clause-title">11.3</span> A tolerância de qualquer das partes em relação a eventual descumprimento não implica novação, renúncia ou alteração das condições deste Contrato.</p>
+
+<p><span class="clause-title">11.4</span> Se qualquer cláusula ou disposição deste Contrato for considerada inválida ou inexequível, as demais permanecerão em pleno vigor e efeito.</p>
+
+<p><span class="clause-title">11.5</span> As partes elegem o envio de comunicações por e-mail como meio válido de notificação, com confirmação de recebimento.</p>
+
+<h2>Cláusula 12 — Foro</h2>
+
+<p><span class="clause-title">12.1</span> As partes elegem o Foro da Comarca de <strong>Osasco — Estado de São Paulo</strong> para dirimir quaisquer controvérsias decorrentes deste Contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+
+<hr>
+
+<p class="center">Por estarem assim justas e contratadas, as partes assinam o presente instrumento em 2 (duas) vias de igual teor e forma, juntamente com as 2 (duas) testemunhas abaixo.</p>
+
+<p class="center"><strong>Osasco / SP, ______ de __________________ de 2026.</strong></p>
+
+<div class="signature-block">
+  <div class="sig-line">
+    <div class="sig-item">
+      <br><br><br>
+      _______________________________________________<br>
+      <strong>Tudo Mudou Marketing e Consultoria</strong><br>
+      CNPJ: 40.790.711/0001-21<br>
+      Representante: ______________________________<br>
+      CPF: _____________________
+    </div>
+    <div class="sig-item">
+      <br><br><br>
+      _______________________________________________<br>
+      <strong>Autron Automação Indústria e Comércio Ltda</strong><br>
+      CNPJ: 72.932.718/0001-27<br>
+      Representante: ______________________________<br>
+      CPF: _____________________
+    </div>
+  </div>
+
+  <p class="center" style="margin-top:40px;"><strong>Testemunhas:</strong></p>
+  <div class="sig-line">
+    <div class="sig-item">
+      <br><br><br>
+      _______________________________________________<br>
+      Nome: _______________________________________<br>
+      CPF: _____________________
+    </div>
+    <div class="sig-item">
+      <br><br><br>
+      _______________________________________________<br>
+      Nome: _______________________________________<br>
+      CPF: _____________________
+    </div>
+  </div>
+</div>
+
+<br><br>
+<hr>
+<p class="center" style="font-size:9pt; color:#666;">
+  Contrato nº 001/2026 · Tudo Mudou Marketing e Consultoria × Autron Automação Indústria e Comércio Ltda<br>
+  Gerado em 08/05/2026
+</p>
+
+</body>
+</html>
