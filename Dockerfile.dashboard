@@ -13,6 +13,7 @@ RUN pnpm install --no-frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 ENV NODE_ENV=development
+ENV PRISMA_GENERATE_SKIP_AUTOINSTALL=true
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN node_modules/.bin/prisma generate --schema=packages/database/prisma/schema.prisma
