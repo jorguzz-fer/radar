@@ -11,7 +11,7 @@ COPY packages/types/package.json ./packages/types/
 COPY packages/claude-sdk/package.json ./packages/claude-sdk/
 COPY packages/pinecone-sdk/package.json ./packages/pinecone-sdk/
 COPY packages/vocab-packs/package.json ./packages/vocab-packs/
-RUN pnpm install --no-frozen-lockfile
+RUN pnpm install --no-frozen-lockfile --shamefully-hoist
 
 FROM base AS builder
 WORKDIR /app
@@ -19,7 +19,7 @@ ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN cd packages/database && ../../node_modules/.bin/prisma generate
-RUN pnpm --filter @radar/api build
+RUN cd apps/api && ../../node_modules/.bin/nest build
 
 FROM base AS runner
 WORKDIR /app

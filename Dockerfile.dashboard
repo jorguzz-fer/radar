@@ -8,7 +8,7 @@ COPY package.json pnpm-workspace.yaml ./
 COPY apps/dashboard/package.json ./apps/dashboard/
 COPY packages/database/package.json ./packages/database/
 COPY packages/types/package.json ./packages/types/
-RUN pnpm install --no-frozen-lockfile
+RUN pnpm install --no-frozen-lockfile --shamefully-hoist
 
 FROM base AS builder
 WORKDIR /app
@@ -16,7 +16,7 @@ ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN cd packages/database && ../../node_modules/.bin/prisma generate
-RUN pnpm --filter @radar/dashboard build
+RUN cd apps/dashboard && ../../node_modules/.bin/next build
 
 FROM base AS runner
 WORKDIR /app
