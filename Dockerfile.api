@@ -3,20 +3,20 @@ RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 
 FROM base AS deps
 WORKDIR /app
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
+COPY package.json pnpm-workspace.yaml ./
 COPY apps/api/package.json ./apps/api/
 COPY packages/database/package.json ./packages/database/
 COPY packages/types/package.json ./packages/types/
 COPY packages/claude-sdk/package.json ./packages/claude-sdk/
 COPY packages/pinecone-sdk/package.json ./packages/pinecone-sdk/
 COPY packages/vocab-packs/package.json ./packages/vocab-packs/
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm db:generate
+RUN pnpm --filter @radar/database db:generate
 RUN pnpm --filter @radar/api build
 
 FROM base AS runner
