@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@radar/database": ["../../packages/database/src"],
+      "@radar/types": ["../../packages/types/src"],
+      "@radar/claude-sdk": ["../../packages/claude-sdk/src"],
+      "@radar/pinecone-sdk": ["../../packages/pinecone-sdk/src"],
+      "@radar/vocab-packs": ["../../packages/vocab-packs/src"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test"]
+}
