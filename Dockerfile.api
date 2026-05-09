@@ -3,7 +3,6 @@ RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 
 FROM base AS deps
 WORKDIR /app
-# forçar development para instalar devDeps (prisma CLI, typescript, etc)
 ENV NODE_ENV=development
 COPY package.json pnpm-workspace.yaml ./
 COPY apps/api/package.json ./apps/api/
@@ -19,7 +18,7 @@ WORKDIR /app
 ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm --filter @radar/database db:generate
+RUN node_modules/.bin/prisma generate --schema=packages/database/prisma/schema.prisma
 RUN pnpm --filter @radar/api build
 
 FROM base AS runner

@@ -15,7 +15,7 @@ WORKDIR /app
 ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm --filter @radar/database db:generate
+RUN node_modules/.bin/prisma generate --schema=packages/database/prisma/schema.prisma
 RUN pnpm --filter @radar/dashboard build
 
 FROM base AS runner
