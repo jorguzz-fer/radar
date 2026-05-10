@@ -14,7 +14,7 @@ export function AppShell({ children, user }: AppShellProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} role={user.role} />
 
       <div className="lg:pl-64">
         <Header user={user} onMenuClick={() => setSidebarOpen(true)} />

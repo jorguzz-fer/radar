@@ -3,20 +3,25 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Radar, LayoutDashboard, Newspaper, Users, X } from 'lucide-react'
+import type { HeaderUser } from './Header'
 
-const navItems = [
+type Role = HeaderUser['role']
+
+const navItems: { href: string; label: string; icon: typeof LayoutDashboard; roles?: Role[] }[] = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/pautas', label: 'Pautas', icon: Newspaper },
-  { href: '/clientes', label: 'Clientes', icon: Users },
+  { href: '/clientes', label: 'Clientes', icon: Users, roles: ['ADMIN_PLATFORM'] },
 ]
 
 interface SidebarProps {
   isOpen: boolean
   onClose: () => void
+  role: Role
 }
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, role }: SidebarProps) {
   const pathname = usePathname()
+  const items = navItems.filter((i) => !i.roles || i.roles.includes(role))
 
   return (
     <>
@@ -50,7 +55,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         <nav className="flex-1 px-3 py-4 overflow-y-auto">
           <ul className="space-y-1">
-            {navItems.map(({ href, label, icon: Icon }) => {
+            {items.map(({ href, label, icon: Icon }) => {
               const active = href === '/' ? pathname === '/' : pathname.startsWith(href)
               return (
                 <li key={href}>

@@ -7,7 +7,14 @@ import { logoutAction } from '@/lib/auth/actions'
 export type HeaderUser = {
   nome: string
   email: string
-  role: string
+  role: 'ADMIN_PLATFORM' | 'ADMIN_TENANT' | 'EDITOR' | 'VIEWER'
+}
+
+const roleLabel: Record<HeaderUser['role'], string> = {
+  ADMIN_PLATFORM: 'Admin plataforma',
+  ADMIN_TENANT: 'Admin do cliente',
+  EDITOR: 'Editor',
+  VIEWER: 'Leitor',
 }
 
 interface HeaderProps {
@@ -66,7 +73,7 @@ export function Header({ onMenuClick, user }: HeaderProps) {
           </div>
           <div className="hidden md:block text-left">
             <p className="text-sm font-medium text-gray-900 leading-tight">{user.nome}</p>
-            <p className="text-xs text-gray-500 leading-tight">{user.role}</p>
+            <p className="text-xs text-gray-500 leading-tight">{roleLabel[user.role]}</p>
           </div>
           <ChevronDown className="w-4 h-4 text-gray-400 hidden md:block" />
         </button>
