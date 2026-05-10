@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { DataTable, type Column } from '@/components/dashboard/DataTable'
 import type { PautaRow } from '@/lib/data/pautas'
 
@@ -30,7 +31,19 @@ type Row = {
 }
 
 const columns: Column<Row>[] = [
-  { key: 'titulo', header: 'Título', sortable: true },
+  {
+    key: 'titulo',
+    header: 'Título',
+    sortable: true,
+    render: (row) => (
+      <Link
+        href={`/pautas/${row.id}`}
+        className="font-medium text-brand-700 hover:text-brand-900 hover:underline"
+      >
+        {row.titulo}
+      </Link>
+    ),
+  },
   { key: 'clienteNome', header: 'Cliente', sortable: true },
   { key: 'fonteOriginal', header: 'Fonte', sortable: true },
   { key: 'semanaRef', header: 'Semana', sortable: true },

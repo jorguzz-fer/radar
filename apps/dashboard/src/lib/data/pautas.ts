@@ -39,6 +39,18 @@ export async function listPautas(session: SessionPayload): Promise<PautaRow[]> {
   }))
 }
 
+export async function getPautaById(session: SessionPayload, id: string) {
+  // tenantScope() já garante isolamento: ADMIN_PLATFORM vê tudo, outros
+  // só veem se for do próprio tenant. findFirst com where combinado
+  // garante que não há vazamento de id de outros tenants.
+  return prisma.pauta.findFirst({
+    where: { id, ...tenantScope(session) },
+    include: {
+      tenant: { select: { id: true, nome: true, slug: true } },
+    },
+  })
+}
+
 export async function listRecentPautas(session: SessionPayload, limit = 5) {
   const rows = await prisma.pauta.findMany({
     where: tenantScope(session),
