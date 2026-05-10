@@ -61,6 +61,28 @@ export async function listRecentPautas(session: SessionPayload, limit = 5) {
   }))
 }
 
+export async function getPautasPorSemana(session: SessionPayload, weeks = 12) {
+  const rows = await prisma.pauta.groupBy({
+    by: ['semanaRef'],
+    where: tenantScope(session),
+    _count: { _all: true },
+    orderBy: { semanaRef: 'desc' },
+    take: weeks,
+  })
+  return rows
+    .map((r) => ({ semanaRef: r.semanaRef, count: r._count._all }))
+    .sort((a, b) => a.semanaRef.localeCompare(b.semanaRef))
+}
+
+export async function getPautasPorStatus(session: SessionPayload) {
+  const rows = await prisma.pauta.groupBy({
+    by: ['status'],
+    where: tenantScope(session),
+    _count: { _all: true },
+  })
+  return rows.map((r) => ({ status: r.status, count: r._count._all }))
+}
+
 export async function listTopFontes(session: SessionPayload, limit = 5) {
   const grouped = await prisma.pauta.groupBy({
     by: ['fonteOriginal'],
