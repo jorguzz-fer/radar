@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-type PautaStatus = 'aprovada' | 'pendente' | 'em_revisao' | 'rejeitada'
+type PautaStatus = 'SUGERIDA' | 'APROVADA' | 'REJEITADA' | 'EM_PRODUCAO' | 'PUBLICADA'
 
 type Pauta = {
   id: string
@@ -11,17 +11,19 @@ type Pauta = {
 }
 
 const statusLabel: Record<PautaStatus, string> = {
-  aprovada: 'Aprovada',
-  pendente: 'Pendente',
-  em_revisao: 'Em revisão',
-  rejeitada: 'Rejeitada',
+  SUGERIDA: 'Sugerida',
+  APROVADA: 'Aprovada',
+  REJEITADA: 'Rejeitada',
+  EM_PRODUCAO: 'Em produção',
+  PUBLICADA: 'Publicada',
 }
 
 const statusBadge: Record<PautaStatus, string> = {
-  aprovada: 'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
-  pendente: 'bg-amber-50 text-amber-700 ring-amber-600/20',
-  em_revisao: 'bg-brand-50 text-brand-700 ring-brand-600/20',
-  rejeitada: 'bg-rose-50 text-rose-700 ring-rose-600/20',
+  SUGERIDA: 'bg-amber-50 text-amber-700 ring-amber-600/20',
+  APROVADA: 'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
+  REJEITADA: 'bg-rose-50 text-rose-700 ring-rose-600/20',
+  EM_PRODUCAO: 'bg-brand-50 text-brand-700 ring-brand-600/20',
+  PUBLICADA: 'bg-violet-50 text-violet-700 ring-violet-600/20',
 }
 
 interface RecentPautasProps {

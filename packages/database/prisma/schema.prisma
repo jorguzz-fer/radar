@@ -55,6 +55,10 @@ model Usuario {
   nome     String
   role     Role    @default(VIEWER)
 
+  passwordHash String?
+  ultimoLogin  DateTime?
+  criadoEm     DateTime  @default(now())
+
   tenant Tenant? @relation(fields: [tenantId], references: [id])
 
   @@map("usuarios")

@@ -1,44 +1,34 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useActionState, useState } from 'react'
 import Link from 'next/link'
 import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react'
+import { loginAction, type LoginState } from '@/lib/auth/actions'
 
-// PLACEHOLDER: este form ainda NÃO autentica.
-// A submissão precisa ser ligada a uma server action ou endpoint da API
-// (passar credenciais por POST com cookie httpOnly+secure+sameSite=strict
-// na resposta, rate limit por IP/email, hash bcrypt/argon2 no banco).
-// Não promover esta página em produção até que a auth real esteja conectada.
+const initialState: LoginState = {}
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSubmitting(true)
-    setError('Autenticação ainda não implementada. Aguardando endpoint /auth/login.')
-    setTimeout(() => setSubmitting(false), 600)
-  }
+  const [state, formAction, pending] = useActionState(loginAction, initialState)
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Entrar</h1>
-        <p className="text-sm text-gray-500 mt-1">
-          Acesse sua conta do RadarVet.
-        </p>
+        <p className="text-sm text-gray-500 mt-1">Acesse sua conta do RadarVet.</p>
       </div>
 
-      {error && (
-        <div className="mb-5 rounded-md bg-amber-50 ring-1 ring-amber-200 px-3 py-2.5 flex items-start gap-2 text-sm text-amber-800">
+      {state.error && (
+        <div
+          role="alert"
+          className="mb-5 rounded-md bg-rose-50 ring-1 ring-rose-200 px-3 py-2.5 flex items-start gap-2 text-sm text-rose-800"
+        >
           <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
-          <span>{error}</span>
+          <span>{state.error}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4" autoComplete="on">
+      <form action={formAction} className="space-y-4" autoComplete="on">
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
             E-mail
@@ -49,6 +39,7 @@ export default function LoginPage() {
             type="email"
             required
             autoComplete="email"
+            maxLength={254}
             className="w-full px-3 py-2.5 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
             placeholder="voce@empresa.com.br"
           />
@@ -74,6 +65,7 @@ export default function LoginPage() {
               required
               autoComplete="current-password"
               minLength={8}
+              maxLength={256}
               className="w-full px-3 py-2.5 pr-10 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
               placeholder="••••••••"
             />
@@ -90,11 +82,11 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          disabled={submitting}
+          disabled={pending}
           className="w-full inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium py-2.5 px-4 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <LogIn className="w-4 h-4" />
-          {submitting ? 'Entrando...' : 'Entrar'}
+          {pending ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
 
