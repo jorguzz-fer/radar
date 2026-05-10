@@ -1,0 +1,405 @@
+<template>
+  <div
+    class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md mb-[25px]"
+  >
+    <div
+      class="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between"
+    >
+      <div class="trezo-card-title">
+        <h5 class="!mb-0">Customer Reviews</h5>
+      </div>
+
+      <div class="trezo-card-subtitle">
+        <div class="trezo-card-dropdown relative">
+          <button
+            type="button"
+            :class="{
+              'trezo-card-dropdown-btn inline-block rounded-md bg-[#f5f7f8] dark:bg-[#0a0e19] py-[5px] md:py-[6.5px] px-[12px] md:px-[19px] transition-all hover:bg-gray-100 dark:hover:bg-dark': true,
+              active: isActive,
+            }"
+            id="dropdownToggle"
+            @click.stop="toggleActive"
+          >
+            <span
+              class="inline-block relative ltr:pr-[17px] ltr:md:pr-[20px] rtl:pl-[17px] rtl:ml:pr-[20px]"
+            >
+              Weekly
+              <i
+                class="ri-arrow-down-s-line text-lg absolute ltr:-right-[3px] rtl:-left-[3px] top-1/2 -translate-y-1/2 mt-px"
+              ></i>
+            </span>
+          </button>
+
+          <ul
+            class="trezo-card-dropdown-menu transition-all bg-white shadow-3xl rounded-md top-full py-[15px] absolute ltr:right-0 rtl:left-0 w-[195px] z-[5] dark:bg-dark dark:shadow-none"
+          >
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                Weekly
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                Monthly
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                Yearly
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="trezo-card-content">
+      <div class="table-responsive overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th
+                v-for="header in headers"
+                :key="header"
+                class="whitespace-nowrap uppercase text-[10px] font-bold tracking-[1px] ltr:text-left rtl:text-right pt-0 pb-[11px] px-[20px] text-gray-500 dark:text-gray-400 ltr:first:pl-0 rtl:first:pr-0 ltr:last:pr-0 rtl:first:pl-0"
+              >
+                {{ header }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="text-black dark:text-white">
+            <tr v-for="rating in paginatedRatings" :key="rating.id">
+              <td
+                class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] ltr:first:pl-0 rtl:first:pr-0 border-b border-primary-50 dark:border-[#172036] ltr:last:pr-0 rtl:last:pl-0 align-top"
+              >
+                <span
+                  class="block text-xs font-semibold text-gray-600 dark:text-gray-400"
+                >
+                  #{{ rating.id }}
+                </span>
+              </td>
+              <td
+                class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] ltr:first:pl-0 rtl:first:pr-0 border-b border-primary-50 dark:border-[#172036] ltr:last:pr-0 rtl:last:pl-0 align-top"
+              >
+                <div class="flex items-center gap-[10px]">
+                  <div class="rounded-full w-[30px] h-[30px] overflow-hidden">
+                    <img
+                      :src="rating.avatar"
+                      class="w-full h-full object-cover"
+                      :alt="rating.name"
+                    />
+                  </div>
+                  <span class="font-semibold inline-block">
+                    {{ rating.name }}
+                  </span>
+                </div>
+              </td>
+
+              <td
+                class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] ltr:first:pl-0 rtl:first:pr-0 border-b border-primary-50 dark:border-[#172036] ltr:last:pr-0 rtl:last:pl-0 align-top"
+              >
+                <div class="flex items-center leading-none gap-[2px]">
+                  <i
+                    v-for="star in 5"
+                    :key="star"
+                    class="ri-star-fill"
+                    :class="{
+                      'text-orange-500': star <= Math.floor(rating.score),
+                      'text-gray-300 dark:text-gray-600':
+                        star > Math.ceil(rating.score),
+                      'text-orange-300':
+                        star > rating.score && star <= Math.ceil(rating.score),
+                    }"
+                  ></i>
+                  <span
+                    class="block relative top-px text-xs text-gray-500 dark:text-gray-400 ltr:ml-[2px] rtl:mr-[2px] font-semibold"
+                  >
+                    {{ rating.score.toFixed(1) }}
+                  </span>
+                </div>
+              </td>
+
+              <td
+                class="ltr:text-left rtl:text-right whitespace-normal px-[20px] py-[15px] ltr:first:pl-0 rtl:first:pr-0 border-b border-primary-50 dark:border-[#172036] ltr:last:pr-0 rtl:last:pl-0 align-top w-[620px]"
+              >
+                <span
+                  class="block text-xs mb-[5px] font-semibold text-gray-600 dark:text-gray-400"
+                >
+                  {{ rating.title }}
+                </span>
+                <p class="text-xs text-gray-500 dark:text-gray-400">
+                  {{ rating.review }}
+                </p>
+              </td>
+              <td
+                class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] ltr:first:pl-0 rtl:first:pr-0 border-b border-primary-50 dark:border-[#172036] ltr:last:pr-0 rtl:last:pl-0 align-top"
+              >
+                <span
+                  class="block text-xs font-semibold text-gray-600 dark:text-gray-400"
+                >
+                  {{ formatDate(rating.date) }}
+                </span>
+              </td>
+
+              <td
+                class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] ltr:first:pl-0 rtl:first:pr-0 border-b border-primary-50 dark:border-[#172036] ltr:last:pr-0 rtl:last:pl-0 align-top"
+              >
+                <div class="flex items-center gap-[9px]">
+                  <button
+                    type="button"
+                    class="text-primary-500 leading-none custom-tooltip"
+                    data-text="View"
+                  >
+                    <i class="material-symbols-outlined !text-md">visibility</i>
+                  </button>
+                  <button
+                    type="button"
+                    class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip"
+                    data-text="Edit"
+                  >
+                    <i class="material-symbols-outlined !text-md">edit</i>
+                  </button>
+                  <button
+                    type="button"
+                    @click="deleteRating(rating)"
+                    class="text-danger-500 leading-none custom-tooltip"
+                    data-text="Delete"
+                  >
+                    <i class="material-symbols-outlined !text-md">delete</i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pt-[11px] sm:flex sm:items-center justify-between">
+        <p class="!mb-0 text-xs">
+          Showing {{ showingStart }}-{{ showingEnd }} of
+          {{ ratings.length }} results
+        </p>
+        <ol class="mt-[10px] sm:mt-0">
+          <li
+            class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0"
+          >
+            <button
+              @click="prevPage"
+              :disabled="currentPage === 1"
+              class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-current disabled:hover:border-gray-100"
+            >
+              <span class="opacity-0">0</span>
+              <i
+                class="material-symbols-outlined left-0 right-0 absolute top-1/2 -translate-y-1/2"
+              >
+                chevron_left
+              </i>
+            </button>
+          </li>
+          <li
+            v-for="page in totalPages"
+            :key="page"
+            class="inline-block mx-[3px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0"
+          >
+            <button
+              @click="goToPage(page)"
+              class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500"
+              :class="{
+                'border-primary-500 bg-primary-500 text-white':
+                  currentPage === page,
+                'border-gray-100 dark:border-[#172036]': currentPage !== page,
+              }"
+            >
+              {{ page }}
+            </button>
+          </li>
+          <li
+            class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0"
+          >
+            <button
+              @click="nextPage"
+              :disabled="currentPage === totalPages"
+              class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-current disabled:hover:border-gray-100"
+            >
+              <span class="opacity-0">0</span>
+              <i
+                class="material-symbols-outlined left-0 right-0 absolute top-1/2 -translate-y-1/2"
+              >
+                chevron_right
+              </i>
+            </button>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, computed } from "vue";
+import { useClickOutside } from "@/utils/useClickOutside";
+
+import image1 from "@/assets/images/users/user58.jpg";
+import image2 from "@/assets/images/users/user59.jpg";
+import image3 from "@/assets/images/users/user60.jpg";
+import image4 from "@/assets/images/users/user61.jpg";
+import image5 from "@/assets/images/users/user62.jpg";
+
+interface Rating {
+  id: number;
+  name: string;
+  avatar: string;
+  score: number;
+  title: string;
+  review: string;
+  date: Date;
+}
+
+export default defineComponent({
+  name: "CustomerReviews",
+  setup() {
+    const { isActive, toggleActive } = useClickOutside("dropdownToggle");
+
+    // Table headers
+    const headers = [
+      "User ID",
+      "Customer Name",
+      "Ratings",
+      "Reviews",
+      "Date",
+      "",
+    ];
+
+    const ratings = ref<Rating[]>([
+      {
+        id: 1,
+        name: "Joanna Watson",
+        avatar: image1,
+        score: 5.0,
+        title: "Amazing Ambiance and Delicious Food!",
+        review:
+          "Trezo was a fantastic dining experience. The ambiance is warm and inviting, perfect for a date night or celebration. I ordered the truffle pasta, which was rich and perfectly seasoned. The service was impeccable, and the staff made us feel like family. Highly recommend!",
+        date: new Date(2025, 10, 13),
+      },
+      {
+        id: 2,
+        name: "Jenelia Anderson",
+        avatar: image2,
+        score: 4.9,
+        title: "Best Brunch Spot in Town",
+        review:
+          "Visited Trezo for brunch with friends, and it exceeded our expectations. The avocado toast was fresh, and their mimosas were spot-on. Our server was attentive without being intrusive. Definitely coming back!",
+        date: new Date(2025, 10, 14),
+      },
+      {
+        id: 3,
+        name: "Jonathon Ronan",
+        avatar: image3,
+        score: 4.0,
+        title: "Good Food, Slow Service",
+        review:
+          "The food at Trezo was delicious, but the service was a bit slow. We had to wait a while for our appetizers, and our main course was delayed. It's a nice spot, but they could work on speeding up their service.",
+        date: new Date(2025, 10, 15),
+      },
+      {
+        id: 4,
+        name: "Sarah Johnson",
+        avatar: image4,
+        score: 4.5,
+        title: "Great Cocktails, Average Food",
+        review:
+          "The cocktails were creative and well-made, but the food was just okay. The atmosphere is nice though, and it's a good place for drinks with friends.",
+        date: new Date(2025, 10, 12),
+      },
+      {
+        id: 5,
+        name: "Michael Brown",
+        avatar: image5,
+        score: 3.5,
+        title: "Overpriced for What You Get",
+        review:
+          "The food was decent but not worth the high prices. Service was good but the portions were small for what you pay. Probably won't return.",
+        date: new Date(2025, 10, 11),
+      },
+    ]);
+
+    // Pagination
+    const itemsPerPage = 3;
+    const currentPage = ref(1);
+
+    const totalPages = computed(() =>
+      Math.ceil(ratings.value.length / itemsPerPage)
+    );
+    const paginatedRatings = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      return ratings.value.slice(start, end);
+    });
+
+    const showingStart = computed(
+      () => (currentPage.value - 1) * itemsPerPage + 1
+    );
+    const showingEnd = computed(() =>
+      Math.min(currentPage.value * itemsPerPage, ratings.value.length)
+    );
+
+    const formatDate = (date: Date) => {
+      return date.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
+    };
+
+    const prevPage = () => {
+      if (currentPage.value > 1) currentPage.value--;
+    };
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) currentPage.value++;
+    };
+
+    const goToPage = (page: number) => {
+      currentPage.value = page;
+    };
+
+    const deleteRating = (rating: Rating) => {
+      console.log("Delete rating:", rating);
+      // Implement delete functionality
+      const index = ratings.value.findIndex(
+        (r: { id: number }) => r.id === rating.id
+      );
+      if (index !== -1) {
+        ratings.value.splice(index, 1);
+      }
+    };
+
+    return {
+      isActive,
+      toggleActive,
+      headers,
+      ratings,
+      paginatedRatings,
+      currentPage,
+      totalPages,
+      showingStart,
+      showingEnd,
+      formatDate,
+      prevPage,
+      nextPage,
+      goToPage,
+      deleteRating,
+    };
+  },
+});
+</script>

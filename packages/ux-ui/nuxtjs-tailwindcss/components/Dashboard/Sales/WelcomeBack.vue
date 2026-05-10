@@ -1,0 +1,49 @@
+<template>
+  <div
+    class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex items-center justify-between"
+  >
+    <div class="trezo-card-title">
+      <h5 class="!mb-0 md:!text-xl flex items-center !font-normal">
+        Welcome Back,
+        <span class="text-primary-500 font-medium">Olivia!</span
+        ><img
+          src="@/assets/images/icons/dog.svg"
+          class="inline-block ltr:ml-[5px] rtl:mr-[5px]"
+          alt="dog"
+        />
+      </h5>
+    </div>
+    <div class="trezo-card-subtitle sm:flex items-center mt-[10px] sm:mt-0">
+      <button
+        type="button"
+        class="ltr:mr-[10px] rtl:ml-[10px] rounded-md inline-block transition-all py-[3.5px] px-[17px] border border-gray-100 dark:border-[#172036] hover:border-primary-500 hover:bg-primary-500 hover:text-white"
+      >
+        <span class="inline-block relative ltr:pl-[26px] rtl:pr-[26px]">
+          <i
+            class="ri-calendar-line absolute text-[18px] top-1/2 -translate-y-1/2 ltr:left-0 rtl:right-0"
+          ></i>
+          Oct 01 - Oct 31, 2025
+        </span>
+      </button>
+      <button
+        type="button"
+        class="inline-block rounded-md transition-all bg-primary-500 text-white py-[4.5px] px-[17px] hover:bg-primary-400 mt-[10px] sm:mt-0"
+      >
+        <span class="inline-block relative ltr:pl-[26px] rtl:pr-[26px]">
+          <i
+            class="ri-download-2-line absolute text-[18px] top-1/2 -translate-y-1/2 ltr:left-0 rtl:right-0"
+          ></i>
+          Export CSV
+        </span>
+      </button>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "WelcomeBack",
+});
+</script>
