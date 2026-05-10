@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { AppShell } from '@/components/layout/AppShell'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -10,9 +9,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body className="text-gray-900 antialiased">
-        <AppShell>{children}</AppShell>
-      </body>
+      <body className="text-gray-900 antialiased">{children}</body>
     </html>
   )
 }
