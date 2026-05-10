@@ -1,0 +1,42 @@
+<template>
+  <div class="trezo-card mb-[25px]">
+    <div class="trezo-card-content lg:flex justify-between items-center">
+      <div>
+        <h5 class="!mb-[6px] md:!mb-[3px] !font-semibold !text-[20px]">
+          School Overview Dashboard
+        </h5>
+        <p>Manage Students, Teachers, and School Data Seamlessly!</p>
+      </div>
+      <div class="flex items-center gap-[10px] mt-[12px] lg:mt-0">
+        <div
+          class="rounded-md inline-block text-primary-500 py-[3.5px] px-[15px] bg-primary-50 dark:bg-[#0a0e19] border border-primary-100 dark:border-[#172036]"
+          id="currentDayDate"
+        >
+          <span class="inline-block relative ltr:pl-[24px] rtl:pr-[24px]">
+            <i
+              class="ri-calendar-line absolute text-[16px] top-1/2 -translate-y-1/2 ltr:left-0 rtl:right-0"
+            ></i>
+            Today - {{ currentDate }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "SchoolOverview",
+  data() {
+    return {
+      currentDate: new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }),
+    };
+  },
+});
+</script>

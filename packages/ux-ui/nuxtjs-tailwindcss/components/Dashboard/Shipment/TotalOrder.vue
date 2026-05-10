@@ -1,0 +1,40 @@
+<template>
+  <div
+    class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md"
+  >
+    <div class="trezo-card-content">
+      <div class="flex justify-between">
+        <div>
+          <span
+            class="inline-block px-[8.5px] text-danger-600 border border-danger-300 bg-danger-100 dark:bg-[#15203c] dark:border-[#15203c] text-sm rounded-[100px] text-xs"
+          >
+            -2.5%
+          </span>
+        </div>
+        <div class="ltr:text-right rtl:text-left">
+          <span class="block text-xs mb-px"> Last 30 days </span>
+          <span class="block font-bold text-orange-500 text-xs"> -140 </span>
+        </div>
+      </div>
+      <div class="mt-[20px] md:mt-[25px] flex items-end justify-between">
+        <div>
+          <span class="block mb-[4px]"> Total Order </span>
+          <h3 class="!mb-0 !text-[20px]">49,120</h3>
+        </div>
+        <div
+          class="w-[55px] lg:w-[60px] h-[55px] lg:h-[60px] flex items-center justify-center rounded-full text-white bg-orange-500"
+        >
+          <i class="material-symbols-outlined !text-[28px]"> deployed_code </i>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "TotalOrder",
+});
+</script>

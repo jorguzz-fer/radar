@@ -1,0 +1,41 @@
+<template>
+  <div
+    class="trezo-card p-[20px] md:p-[25px] rounded-md !pb-0"
+    style="background: linear-gradient(104deg, #361e7d 2.4%, #403cff 112.33%)"
+  >
+    <div class="trezo-card-content 2xl:px-[15px]">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
+        <div class="lg:col-span-2">
+          <div
+            class="md:pt-[20px] text-center ltr:md:text-left rtl:md:text-right"
+          >
+            <span class="block text-primary-200 font-medium mb-[4px]">
+              Hello Olivia ✋
+            </span>
+            <h1 class="!text-white !text-2xl !mb-0 !font-normal">
+              Welcome To Trezo –
+              <strong class="font-black">Your Store</strong>
+            </h1>
+          </div>
+        </div>
+        <div class="lg:col-span-1">
+          <div class="text-center ltr:md:text-right rtl:md:text-left">
+            <img
+              src="@/assets/images/store.png"
+              class="inline-block"
+              alt="image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "WelcomeToStore",
+});
+</script>

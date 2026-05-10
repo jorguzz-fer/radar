@@ -1,0 +1,195 @@
+<template>
+  <div
+    class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md"
+  >
+    <div
+      class="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between"
+    >
+      <div class="trezo-card-title">
+        <h5 class="!mb-0">Portfolio Distribution</h5>
+      </div>
+      <div class="trezo-card-subtitle">
+        <div class="trezo-card-dropdown relative">
+          <button
+            type="button"
+            :class="{
+              'trezo-card-dropdown-btn inline-block transition-all text-[26px] text-gray-500 dark:text-gray-400 leading-none hover:text-primary-500': true,
+              active: isActive,
+            }"
+            id="dropdownToggle"
+            @click.stop="toggleActive"
+          >
+            <i class="ri-more-fill"></i>
+          </button>
+
+          <ul
+            class="trezo-card-dropdown-menu transition-all bg-white shadow-3xl rounded-md top-full py-[15px] absolute ltr:right-0 rtl:left-0 w-[195px] z-[5] dark:bg-dark dark:shadow-none"
+          >
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                This Day
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                This Week
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                This Month
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black"
+              >
+                This Year
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="trezo-card-content">
+      <div class="-mt-[5px] -mb-[5px]">
+        <apexchart
+          v-if="isClient"
+          type="donut"
+          height="195"
+          :options="patientDistribution"
+          :series="distribution"
+        ></apexchart>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, onMounted } from "vue";
+import { useClickOutside } from "@/utils/useClickOutside";
+
+export default defineComponent({
+  name: "PortfolioDistributionChart",
+  setup() {
+    const { isActive, toggleActive } = useClickOutside("dropdownToggle");
+    const isClient = ref(false);
+
+    const distribution = ref([30, 20, 12, 10, 8, 6]);
+
+    const patientDistribution = ref({
+      chart: {
+        height: 195,
+        type: "donut",
+      },
+      labels: ["Bitcoin", "Ethereum", "BNB", "Tether", "Ripple", "Others"],
+      colors: [
+        "#9135E8",
+        "#AD63F6",
+        "#BF85FB",
+        "#D7B5FD",
+        "#E9D5FF",
+        "#F3E8FF",
+      ],
+      stroke: {
+        width: 2,
+        show: true,
+        colors: ["#ffffff"],
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      plotOptions: {
+        pie: {
+          expandOnClick: false,
+          donut: {
+            labels: {
+              show: false,
+              name: {
+                color: "#64748B",
+              },
+              value: {
+                show: true,
+                color: "#3A4252",
+                fontSize: "28px",
+                fontWeight: "600",
+                formatter: (
+                  val: number,
+                  opts: { w: { globals: { seriesTotals: any[] } } }
+                ) => {
+                  const total = opts.w.globals.seriesTotals.reduce(
+                    (a, b) => a + b,
+                    0
+                  );
+                  const percentage = ((val / total) * 100).toFixed(1); // Calculate percentage
+                  return `${val}k (${percentage}%)`; // Show value in currency + percentage
+                },
+              },
+              total: {
+                show: true,
+                color: "#64748B",
+                formatter: (w: { globals: { seriesTotals: any[] } }) => {
+                  return `${w.globals.seriesTotals.reduce(
+                    (a, b) => a + b,
+                    0
+                  )}k`; // Show total in currency
+                },
+              },
+            },
+          },
+        },
+      },
+      legend: {
+        show: true,
+        offsetY: 0,
+        fontSize: "12px",
+        position: "left",
+        horizontalAlign: "center",
+        itemMargin: {
+          horizontal: 0,
+          vertical: 5,
+        },
+        labels: {
+          colors: "#64748B",
+        },
+        markers: {
+          size: 6,
+          offsetX: -2,
+          offsetY: -0.5,
+          shape: "square",
+        },
+      },
+      tooltip: {
+        y: {
+          formatter: function (val: string) {
+            return val + "%";
+          },
+        },
+      },
+    });
+
+    onMounted(() => {
+      isClient.value = true;
+    });
+
+    return {
+      isClient,
+      isActive,
+      toggleActive,
+      distribution,
+      patientDistribution,
+    };
+  },
+});
+</script>

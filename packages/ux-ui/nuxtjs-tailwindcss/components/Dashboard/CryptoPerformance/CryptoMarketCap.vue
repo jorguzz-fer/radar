@@ -1,0 +1,25 @@
+<template>
+  <div
+    class="trezo-card bg-purple-100 dark:bg-[#162243] py-[15px] px-[20px] md:px-[25px] rounded-md"
+  >
+    <div class="trezo-card-content flex items-center justify-between">
+      <div>
+        <span class="block"> Crypto Market Cap </span>
+        <h5 class="!mb-0 mt-[4px] !text-[20px]">$2.64T</h5>
+      </div>
+      <div
+        class="w-[53px] h-[53px] rounded-full bg-white dark:bg-[#0c1427] text-purple-500 flex items-center justify-center"
+      >
+        <i class="material-symbols-outlined"> payments </i>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "CryptoMarketCap",
+});
+</script>
