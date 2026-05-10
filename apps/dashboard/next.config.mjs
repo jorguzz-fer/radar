@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@radar/database', '@radar/types'],
+  output: 'standalone',
+  transpilePackages: [],
 }
 
 export default nextConfig
