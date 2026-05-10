@@ -1,6 +1,9 @@
 import { PrismaClient, SourceType } from '@prisma/client'
+import * as bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
+
+const SEED_PASSWORD = process.env.SEED_PASSWORD ?? 'radar-dev-2026!'
 
 async function main() {
   const alchemypet = await prisma.tenant.upsert({
@@ -24,13 +27,15 @@ async function main() {
     },
   })
 
+  const passwordHash = await bcrypt.hash(SEED_PASSWORD, 12)
   await prisma.usuario.upsert({
     where: { email: 'fernando@tudomudou.com.br' },
-    update: {},
+    update: { passwordHash },
     create: {
       email: 'fernando@tudomudou.com.br',
       nome: 'Fernando Jorge',
       role: 'ADMIN_PLATFORM',
+      passwordHash,
     },
   })
 
