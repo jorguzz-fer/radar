@@ -13,7 +13,7 @@ RUN pnpm install --no-frozen-lockfile --shamefully-hoist
 
 FROM base AS builder
 WORKDIR /app
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN cd packages/database && ../../node_modules/.bin/prisma generate
