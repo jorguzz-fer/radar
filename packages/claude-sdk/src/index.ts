@@ -73,9 +73,11 @@ export async function claudeCallWithRetry(
     try {
       return await claudeCall(prompt, systemPrompt, options)
     } catch (err: unknown) {
-      const isRateLimit =
-        err instanceof Anthropic.RateLimitError || err instanceof Anthropic.APIStatusError
-      if (!isRateLimit || attempt === maxRetries - 1) throw err
+      // Retry em rate limits e 5xx (InternalServerError). Outros erros
+      // de API (auth, bad request) sobem direto — retry não vai resolver.
+      const isRetriable =
+        err instanceof Anthropic.RateLimitError || err instanceof Anthropic.InternalServerError
+      if (!isRetriable || attempt === maxRetries - 1) throw err
       const delay = Math.pow(2, attempt) * 1000
       await new Promise((r) => setTimeout(r, delay))
     }
