@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro WOW+ · Escolha sua persona</title>
+    <meta
+      name="description"
+      content="Cadastre-se na WOW+ como Cliente, Consultor, Especialista ou PDV e participe do ecossistema."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"><span class="plus">+</span></span>
+          <span>WOW+</span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Personas</a>
+          <a href="persona.html?persona=cliente">Cliente</a>
+          <a href="persona.html?persona=consultor">Consultor</a>
+          <a href="persona.html?persona=especialista">Especialista</a>
+          <a href="persona.html?persona=pdv">PDV</a>
+        </nav>
+        <a class="btn-ghost" href="#">Entrar</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hub-hero">
+        <span class="eyebrow">Como a WOW+ cresce</span>
+        <h1>
+          Escolha como você quer participar do
+          <span class="accent">ecossistema WOW+</span>
+        </h1>
+        <p>
+          Nosso crescimento acontece através de personas estratégicas, cada
+          uma com um papel claro e complementar. Selecione abaixo o seu perfil
+          para iniciar o cadastro.
+        </p>
+      </section>
+
+      <section class="persona-grid" id="persona-grid">
+        <!-- Cards renderizados via JS -->
+      </section>
+
+      <section class="institutional">
+        <h2>Parceiro Estratégico</h2>
+        <p>
+          Empresas e instituições que queiram operar em escala com a WOW+
+          devem entrar em contato com o time comercial para estruturar a
+          parceria.
+        </p>
+        <a class="btn-outline" href="mailto:parcerias@wowmais.com">
+          Falar com o time comercial →
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© WOW+ · Ecossistema de crescimento</span>
+        <div class="links">
+          <a href="index.html">Cadastre-se</a>
+          <a href="#">Já tenho conta</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="personas.js"></script>
+    <script src="script.js"></script>
+    <script>
+      renderHub()
+    </script>
+  </body>
+</html>
