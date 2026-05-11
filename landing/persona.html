@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Cadastro WOW+</title>
+    <meta name="description" id="page-description" content="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"><span class="plus">+</span></span>
+          <span>WOW+</span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Personas</a>
+          <a href="persona.html?persona=cliente">Cliente</a>
+          <a href="persona.html?persona=consultor">Consultor</a>
+          <a href="persona.html?persona=especialista">Especialista</a>
+          <a href="persona.html?persona=pdv">PDV</a>
+        </nav>
+        <a class="btn-ghost" href="#">Entrar</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <a class="back-link" href="index.html">← Voltar para todas as personas</a>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <span class="eyebrow">
+            <span id="hero-icon"></span>
+            <span>Persona <span id="hero-persona-name"></span></span>
+          </span>
+          <h1 id="hero-headline"></h1>
+          <p class="tagline" id="hero-tagline"></p>
+          <p class="description" id="hero-description"></p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#cadastro"
+              >Quero me cadastrar <span aria-hidden="true">→</span></a
+            >
+            <a class="btn-outline" href="#como-funciona">Como funciona</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-head">
+            <span class="persona-icon" id="hero-card-icon"></span>
+            <div>
+              <p class="label">Papel no ecossistema</p>
+              <p class="role" id="hero-card-role"></p>
+            </div>
+          </div>
+          <ul id="hero-card-list"></ul>
+        </div>
+      </section>
+
+      <!-- BENEFÍCIOS -->
+      <section class="section">
+        <span class="section-eyebrow">Benefícios</span>
+        <h2 class="section-title">
+          Por que ser <span id="benefits-persona-name"></span> WOW+
+        </h2>
+        <div class="cards-grid cols-4" id="benefits-grid"></div>
+      </section>
+
+      <!-- COMO FUNCIONA -->
+      <section class="section" id="como-funciona">
+        <span class="section-eyebrow">Como funciona</span>
+        <h2 class="section-title">
+          Comece em <span id="steps-count"></span> passos
+        </h2>
+        <ol class="steps" id="steps-list"></ol>
+      </section>
+
+      <!-- PARA QUEM É -->
+      <section class="section">
+        <span class="section-eyebrow">Para quem é</span>
+        <h2 class="section-title">
+          O perfil <span id="audience-persona-name"></span>
+        </h2>
+        <div class="audience">
+          <span class="heading">👥 Indicado para</span>
+          <ul id="audience-list"></ul>
+        </div>
+      </section>
+
+      <!-- CADASTRO -->
+      <section class="section" id="cadastro">
+        <span class="section-eyebrow">Cadastro</span>
+        <h2 class="section-title">
+          Cadastre-se como <span id="form-persona-name"></span>
+        </h2>
+        <div class="form-grid">
+          <div class="form-card" id="form-card">
+            <form id="registration-form" novalidate>
+              <input type="hidden" name="persona" id="form-persona-id" />
+              <div class="row two">
+                <div class="field">
+                  <label for="nome">Nome completo</label>
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="field">
+                  <label for="email">E-mail</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+              </div>
+              <div class="row two">
+                <div class="field">
+                  <label for="telefone">Telefone / WhatsApp</label>
+                  <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="(11) 98000-0000"
+                    required
+                    autocomplete="tel"
+                  />
+                </div>
+                <div class="field">
+                  <label id="doc-label" for="documento">CPF</label>
+                  <input
+                    type="text"
+                    id="documento"
+                    name="documento"
+                    placeholder="000.000.000-00"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row" id="razao-row" style="display: none">
+                <div class="field">
+                  <label for="razaoSocial">Razão social / Nome fantasia</label>
+                  <input type="text" id="razaoSocial" name="razaoSocial" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="cidadeEstado">Cidade / Estado</label>
+                  <input
+                    type="text"
+                    id="cidadeEstado"
+                    name="cidadeEstado"
+                    placeholder="Ex.: Carapicuíba / SP"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="objetivo">Conte um pouco sobre seu objetivo</label>
+                  <textarea
+                    id="objetivo"
+                    name="objetivo"
+                    rows="3"
+                    placeholder="Por que você quer participar da WOW+?"
+                  ></textarea>
+                </div>
+              </div>
+              <label class="consent">
+                <input type="checkbox" required />
+                <span>
+                  Concordo com os termos de uso e a política de privacidade
+                  da WOW+.
+                </span>
+              </label>
+              <button class="btn-primary" type="submit" id="submit-btn">
+                Quero me cadastrar como <span id="submit-persona-name"></span>
+              </button>
+            </form>
+          </div>
+          <aside class="info-card">
+            <h3>O que acontece depois?</h3>
+            <ol>
+              <li>
+                <span>1.</span> Recebemos seu cadastro e validamos as
+                informações.
+              </li>
+              <li>
+                <span>2.</span> Nosso time entra em contato pelo canal
+                informado.
+              </li>
+              <li>
+                <span>3.</span> Você recebe o acesso ao painel e o onboarding
+                como <span id="info-persona-name"></span>.
+              </li>
+            </ol>
+            <p class="footnote">
+              Dúvidas?
+              <a href="mailto:contato@wowmais.com">contato@wowmais.com</a>
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section">
+        <span class="section-eyebrow">Dúvidas frequentes</span>
+        <h2 class="section-title">Perguntas comuns</h2>
+        <div class="faq" id="faq-list"></div>
+      </section>
+
+      <!-- OUTRAS PERSONAS -->
+      <section class="section">
+        <span class="section-eyebrow">Outras personas</span>
+        <h2 class="section-title">
+          Talvez você se identifique com outro perfil
+        </h2>
+        <div class="other-grid" id="other-grid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© WOW+ · Ecossistema de crescimento</span>
+        <div class="links">
+          <a href="index.html">Cadastre-se</a>
+          <a href="#">Já tenho conta</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="personas.js"></script>
+    <script src="script.js"></script>
+    <script>
+      renderPersonaPage()
+    </script>
+  </body>
+</html>
