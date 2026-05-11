@@ -22,8 +22,22 @@ RUN cd apps/dashboard && ../../node_modules/.bin/next build
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+
+# Prisma CLI global — usado pelo entrypoint para sincronizar schema no boot.
+# Versão fixada para coincidir com a do builder (evita drift de migration engine).
+RUN npm install -g prisma@5.22.0
+
+# Saída standalone do Next.js (inclui o @prisma/client gerado e suas engines)
 COPY --from=builder /app/apps/dashboard/.next/standalone ./
 COPY --from=builder /app/apps/dashboard/.next/static ./apps/dashboard/.next/static
 
+# Schema do Prisma — apenas o CLI usa, o client já está embutido no standalone
+COPY --from=builder /app/packages/database/prisma ./packages/database/prisma
+
+# Entrypoint que roda 'prisma db push' antes de subir o servidor Next
+COPY apps/dashboard/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 3000
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "apps/dashboard/server.js"]
