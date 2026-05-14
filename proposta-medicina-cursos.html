@@ -336,6 +336,56 @@
   .scope-list li:last-child { border-bottom: 1px solid var(--line); }
   .scope-list li strong { color: var(--text-primary); font-weight: 600; }
 
+  /* ============ BANNER CONSULTORIA ============ */
+  .consultoria-banner {
+    margin-top: 32px;
+    padding: 36px 48px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    box-shadow: var(--shadow-soft);
+  }
+  .consultoria-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .consultoria-banner > * { position: relative; z-index: 1; }
+  .consultoria-icon {
+    width: 56px; height: 56px; flex-shrink: 0;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(6px);
+  }
+  .consultoria-icon svg { width: 26px; height: 26px; color: #fff; }
+  .consultoria-text { flex: 1; }
+  .consultoria-text .c-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.75); margin-bottom: 8px;
+  }
+  .consultoria-text .c-phrase {
+    font-family: 'Fraunces', serif;
+    font-weight: 700; font-style: italic;
+    font-size: clamp(22px, 3vw, 32px);
+    color: #ffffff; line-height: 1.1; letter-spacing: -0.02em;
+  }
+  .consultoria-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+    color: #fff; white-space: nowrap; flex-shrink: 0;
+  }
+
   .invest-note { margin-top: 32px; padding: 20px 24px; background: var(--bg-card); border-left: 3px solid var(--warn); font-size: 14px; color: var(--text-muted); }
   .invest-note strong { color: var(--warn); font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 6px; }
 
@@ -841,7 +891,7 @@
   <div class="container">
     <div class="reveal">
       <div class="section-label">01 · Diagnóstico</div>
-      <h2 class="section-title">O lead chegou. Mas o time não <em>dá conta</em>.</h2>
+      <h2 class="section-title">O lead chegou. <em>Bora qualificar e distribuir</em> para o Closer certo!</h2>
     </div>
 
     <div class="pain-grid" style="margin-top: 64px;">
@@ -1129,6 +1179,22 @@
       </div>
     </div>
 
+    <!-- Banner consultoria -->
+    <div class="consultoria-banner reveal">
+      <div class="consultoria-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v4l3 3"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </div>
+      <div class="consultoria-text">
+        <div class="c-label">Incluso · 12 meses de contrato</div>
+        <div class="c-phrase">Consultoria estratégica por todo o período do contrato.</div>
+      </div>
+      <div class="consultoria-badge">Incluso no plano</div>
+    </div>
+
     <!-- O que está incluso vs não incluso -->
     <div class="scope-grid reveal" style="margin-top: 64px;">
       <div class="scope-card included">
@@ -1145,6 +1211,7 @@
           <li>Suporte técnico ao Chatwoot e canais conectados</li>
           <li>Monitoramento de uptime e melhorias contínuas</li>
           <li>Refinamento da IA com base em conversas reais</li>
+          <li><strong>Treinamento formal de equipe</strong> incluso no contrato</li>
           <li><strong>Consultoria estratégica</strong> por todo o período do contrato</li>
         </ul>
       </div>
@@ -1160,7 +1227,6 @@
           <li>Custos de infraestrutura: VPS, domínio, SSL</li>
           <li>Custos de API de IA (OpenAI, Claude) e Evolution API</li>
           <li>Novas frentes ou módulos não previstos no escopo</li>
-          <li>Treinamento formal de equipe (sob demanda)</li>
         </ul>
       </div>
     </div>
@@ -2233,6 +2299,7 @@ class PDFBuilder {
       'Ajustes e refinamentos no SDR de qualificação de leads',
       'Suporte técnico ao Chatwoot e canais conectados',
       'Refinamento da IA com base em conversas reais',
+      'Treinamento formal de equipe incluso no contrato',
       'Consultoria estratégica por todo o período do contrato'
     ];
 
@@ -2241,8 +2308,7 @@ class PDFBuilder {
       'Integração com plataformas além das listadas',
       'Custos de infraestrutura (VPS, domínio, SSL)',
       'APIs de IA (OpenAI, Claude) e Evolution API',
-      'Novas frentes ou módulos fora do escopo',
-      'Treinamento formal de equipe (sob demanda)'
+      'Novas frentes ou módulos fora do escopo'
     ];
 
     const colW = (this.contentW - 6) / 2;
@@ -2565,6 +2631,46 @@ class PDFBuilder {
     this.y += 70;
   }
 
+  // Banner destaque: Consultoria estratégica inclusa
+  consultoriaBanner() {
+    const d = this.doc;
+    const bannerH = 22;
+    this.ensure(bannerH + 6);
+    const startY = this.y;
+
+    // Fundo accent sólido
+    d.setFillColor(...PDF.c.accent);
+    d.rect(PDF.marginX, startY, this.contentW, bannerH, 'F');
+
+    // Barra esquerda mais escura
+    d.setFillColor(...PDF.c.accentDeep);
+    d.rect(PDF.marginX, startY, 3, bannerH, 'F');
+
+    // Label topo
+    d.setFont('helvetica', 'bold');
+    d.setFontSize(7);
+    d.setTextColor(255, 255, 255);
+    d.text('INCLUSO · 12 MESES DE CONTRATO', PDF.marginX + 8, startY + 6);
+
+    // Frase principal em destaque
+    d.setFont('times', 'bolditalic');
+    d.setFontSize(14);
+    d.setTextColor(255, 255, 255);
+    d.text('Consultoria estratégica por todo o período do contrato.', PDF.marginX + 8, startY + 16);
+
+    // Badge direita
+    const badge = 'INCLUSO NO PLANO';
+    d.setFont('helvetica', 'bold');
+    d.setFontSize(7);
+    const bw = d.getTextWidth(badge) + 10;
+    d.setFillColor(...PDF.c.accentDeep);
+    d.roundedRect(PDF.marginX + this.contentW - bw - 4, startY + 6, bw, 8, 1, 1, 'F');
+    d.setTextColor(255, 255, 255);
+    d.text(badge, PDF.marginX + this.contentW - bw - 4 + bw / 2, startY + 11.5, { align: 'center' });
+
+    this.y = startY + bannerH + 6;
+  }
+
   build(includeAcceptance) {
     const d = this.doc;
 
@@ -2678,7 +2784,7 @@ class PDFBuilder {
     // ============ PÁGINA — DIAGNÓSTICO ============
     this.newPage();
     this.sectionLabel('01 · Diagnóstico');
-    this.sectionTitle('O lead chegou. Hora de Qualificar e distribuir para o Closer certo.');
+    this.sectionTitle('O lead chegou. Bora qualificar e distribuir para o Closer certo!');
     this.spacer(2);
 
     this.twoColList(
@@ -2873,6 +2979,9 @@ class PDFBuilder {
 
     // Cards de pagamento (Setup + Recorrência)
     this.paymentCards();
+
+    // Banner consultoria
+    this.consultoriaBanner();
 
     this.spacer(8);
 
