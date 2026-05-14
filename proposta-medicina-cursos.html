@@ -1145,7 +1145,11 @@
           <div class="payment-divider"></div>
           <div class="payment-total">
             <span class="payment-total-label">Setup inicial</span>
-            <span class="payment-total-value">R$ 5.800,00</span>
+            <span class="payment-total-value">R$ 6.800,00</span>
+          </div>
+          <div style="margin-top: 14px; padding: 12px 16px; background: var(--bg-card); border-left: 3px solid var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+            <span style="color: var(--accent); font-weight: 700; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.1em;">Condição de pagamento</span>
+            2x · 50% na assinatura do contrato + 50% em 30 dias
           </div>
         </div>
       </div>
@@ -1167,13 +1171,8 @@
             <span class="payment-value">12 meses</span>
           </div>
           <div class="payment-row">
-            <span class="payment-label">Total da recorrência</span>
-            <span class="payment-value">R$ 24.000,00</span>
-          </div>
-          <div class="payment-divider"></div>
-          <div class="payment-total">
-            <span class="payment-total-label">Investimento total</span>
-            <span class="payment-total-value">R$ 29.800,00</span>
+            <span class="payment-label">Início da recorrência</span>
+            <span class="payment-value">a partir do mês 3</span>
           </div>
         </div>
       </div>
@@ -1877,9 +1876,9 @@ class PDFBuilder {
     const amountsY = startY + 52;
 
     const amounts = [
-      { label: 'Setup inicial', value: 'R$ 5.800,00' },
-      { label: 'Mensalidade', value: 'R$ 2.000,00' },
-      { label: 'Total 12 meses', value: 'R$ 29.800,00', highlight: true }
+      { label: 'Setup inicial', value: 'R$ 6.800,00' },
+      { label: 'Mensalidade (a partir do mês 3)', value: 'R$ 2.000,00' },
+      { label: 'Pagamento setup: 2x (50% + 50% em 30d)', value: '', highlight: false }
     ];
 
     const amountColW = (this.contentW - 20) / 3;
@@ -2098,7 +2097,20 @@ class PDFBuilder {
     d.setFont('times', 'bold');
     d.setFontSize(20);
     d.setTextColor(...PDF.c.accent);
-    d.text('R$ 5.800,00', xL + colW - 6, startY + 62, { align: 'right' });
+    d.text('R$ 6.800,00', xL + colW - 6, startY + 62, { align: 'right' });
+
+    // Nota condição de pagamento
+    d.setFillColor(...PDF.c.accentLight);
+    d.rect(xL + 3, startY + 65, colW - 6, 12, 'F');
+    d.setFillColor(...PDF.c.accent);
+    d.rect(xL + 3, startY + 65, 1, 12, 'F');
+    d.setFont('helvetica', 'bold');
+    d.setFontSize(7);
+    d.setTextColor(...PDF.c.accent);
+    d.text('CONDIÇÃO', xL + 6, startY + 70);
+    d.setFont('helvetica', 'normal');
+    d.setTextColor(...PDF.c.textMuted);
+    d.text('2x · 50% na assinatura + 50% em 30 dias', xL + 6, startY + 75);
 
     // === CARD DIREITO: Recorrência (highlight) ===
     const xR = PDF.marginX + colW + 6;
@@ -2155,30 +2167,15 @@ class PDFBuilder {
     d.setTextColor(...PDF.c.text);
     d.text('12 meses', xR + colW - 6, startY + 36, { align: 'right' });
 
-    // Total recorrência
+    // Início da recorrência
     d.setFont('helvetica', 'normal');
     d.setFontSize(8.5);
     d.setTextColor(...PDF.c.textMuted);
-    d.text('Total recorrência', xR + 6, startY + 42);
+    d.text('Início da recorrência', xR + 6, startY + 42);
     d.setFont('courier', 'bold');
     d.setFontSize(10);
-    d.setTextColor(...PDF.c.text);
-    d.text('R$ 24.000,00', xR + colW - 6, startY + 42, { align: 'right' });
-
-    // Linha total
-    d.setDrawColor(...PDF.c.accent);
-    d.setLineWidth(0.2);
-    d.line(xR + 6, startY + 48, xR + colW - 6, startY + 48);
-
-    // Total geral
-    d.setFont('times', 'bolditalic');
-    d.setFontSize(11);
-    d.setTextColor(...PDF.c.text);
-    d.text('Investimento total', xR + 6, startY + 58);
-    d.setFont('times', 'bold');
-    d.setFontSize(20);
     d.setTextColor(...PDF.c.accent);
-    d.text('R$ 29.800,00', xR + colW - 6, startY + 62, { align: 'right' });
+    d.text('a partir do mês 3', xR + colW - 6, startY + 42, { align: 'right' });
 
     this.y = startY + cardH + 4;
   }
