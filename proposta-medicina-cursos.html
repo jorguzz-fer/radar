@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Proposta Comercial Autron para Medicina Cursos — Atendimento Inteligente com IA Omnichannel">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Proposta Comercial — Autron × Medicina Cursos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────────── */
+    :root {
+      --bg-primary:    #0D1B2A;
+      --bg-alt:        #132030;
+      --accent:        #00C6AE;
+      --accent2:       #F0A500;
+      --text-main:     #E8EDF2;
+      --text-sec:      #8FA3B1;
+      --card-bg:       rgba(255,255,255,0.04);
+      --card-border:   rgba(0,198,174,0.15);
+      --font-title:    'Syne', sans-serif;
+      --font-body:     'Inter', sans-serif;
+      --radius:        12px;
+      --radius-lg:     20px;
+      --transition:    0.3s ease;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; transition: opacity var(--transition); }
+    a:hover { opacity: 0.8; }
+    img { max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ─── Utility ───────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section {
+      padding: 96px 0;
+    }
+    .section-alt {
+      background: var(--bg-alt);
+    }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-sec);
+      max-width: 600px;
+      font-weight: 300;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .badge-green {
+      background: rgba(0,198,174,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(0,198,174,0.35);
+    }
+    .badge-amber {
+      background: rgba(240,165,0,0.15);
+      color: var(--accent2);
+      border: 1px solid rgba(240,165,0,0.35);
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,198,174,0.10);
+      border-color: rgba(0,198,174,0.35);
+    }
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin: 20px 0 32px;
+    }
+
+    /* ─── Fade-in on scroll ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── 1. HERO ────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,198,174,0.12) 0%, transparent 70%),
+                  var(--bg-primary);
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 40px;
+    }
+    .hero-logo {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+    .hero-logo span { color: var(--accent); }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+    }
+    .hero-headline {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-main);
+      margin: 20px 0 24px;
+      max-width: 900px;
+    }
+    .hero-headline em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), #00e8d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-sec);
+      max-width: 640px;
+      margin-bottom: 40px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-meta-item {
+      font-size: 0.8rem;
+      color: var(--text-sec);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta-item svg { flex-shrink: 0; }
+    .dot { color: var(--card-border); font-size: 1.2rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #00a898 100%);
+      color: #0D1B2A;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,198,174,0.40);
+      color: #0D1B2A;
+      opacity: 1;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll span {
+      font-size: 0.68rem;
+      color: var(--text-sec);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── 2. SOBRE O CLIENTE ────────────────────────────────── */
+    .client-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .client-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .client-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .client-info-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(0,198,174,0.1);
+      border: 1px solid rgba(0,198,174,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .client-info-item strong {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-sec);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .client-info-item p {
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    .challenge-text {
+      font-size: 1rem;
+      color: var(--text-sec);
+      line-height: 1.8;
+    }
+    .challenge-text strong { color: var(--accent); font-weight: 600; }
+
+    /* ─── 3. DESAFIO ────────────────────────────────────────── */
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .challenge-card {
+      text-align: center;
+      padding: 40px 28px;
+    }
+    .challenge-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: rgba(240,165,0,0.1);
+      border: 1px solid rgba(240,165,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .challenge-card h3 {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .challenge-card p {
+      font-size: 0.9rem;
+      color: var(--text-sec);
+      line-height: 1.7;
+    }
+
+    /* ─── 4. SOLUÇÃO ─────────────────────────────────────────── */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 56px;
+    }
+    .solution-visual {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0,198,174,0.08) 0%, rgba(0,198,174,0.02) 100%);
+      border: 1px solid var(--card-border);
+      padding: 40px 32px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .solution-visual::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,198,174,0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 20px 12px;
+      background: rgba(0,198,174,0.06);
+      border: 1px solid rgba(0,198,174,0.15);
+      border-radius: var(--radius);
+    }
+    .stat-number {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-sec);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      margin-top: 4px;
+      display: block;
+    }
+    .solution-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,198,174,0.1);
+      border: 1px solid rgba(0,198,174,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .benefit-item h4 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .benefit-item p {
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+
+    /* ─── 5. ESCOPO ──────────────────────────────────────────── */
+    .accordion {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .accordion-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+    .accordion-item.open {
+      border-color: rgba(0,198,174,0.35);
+    }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--transition);
+    }
+    .accordion-header:hover {
+      background: rgba(255,255,255,0.03);
+    }
+    .accordion-num {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      min-width: 24px;
+    }
+    .accordion-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,198,174,0.08);
+      border: 1px solid rgba(0,198,174,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .accordion-title {
+      flex: 1;
+      font-weight: 600;
+      font-size: 0.97rem;
+      color: var(--text-main);
+    }
+    .accordion-chevron {
+      width: 20px;
+      height: 20px;
+      color: var(--text-sec);
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .accordion-item.open .accordion-body {
+      max-height: 300px;
+    }
+    .accordion-body-inner {
+      padding: 0 24px 24px 80px;
+      font-size: 0.9rem;
+      color: var(--text-sec);
+      line-height: 1.7;
+    }
+
+    /* ─── 6. CANAIS ──────────────────────────────────────────── */
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .channel-card {
+      text-align: center;
+      padding: 36px 24px;
+    }
+    .channel-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .channel-card h3 {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .channel-card p {
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+
+    /* ─── 7. INVESTIMENTO ────────────────────────────────────── */
+    #investimento {
+      background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,198,174,0.06) 0%, transparent 70%),
+                  var(--bg-alt);
+    }
+    .invest-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .invest-card {
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .invest-card-setup {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,198,174,0.25);
+    }
+    .invest-card-monthly {
+      background: linear-gradient(135deg, rgba(0,198,174,0.12) 0%, rgba(0,198,174,0.04) 100%);
+      border: 1px solid rgba(0,198,174,0.4);
+    }
+    .invest-card-monthly::after {
+      content: 'MAIS POPULAR';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      background: rgba(0,198,174,0.15);
+      border: 1px solid rgba(0,198,174,0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .invest-card-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-sec);
+      margin-bottom: 12px;
+    }
+    .invest-price {
+      font-family: var(--font-title);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .invest-price sup {
+      font-size: 1.2rem;
+      vertical-align: super;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .invest-price span.cents {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-sec);
+    }
+    .invest-period {
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      margin-bottom: 24px;
+    }
+    .invest-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 24px 0;
+    }
+    .invest-feat {
+      font-size: 0.88rem;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+    .invest-bottom {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .invest-includes {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+    }
+    .invest-includes h3 {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .includes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .includes-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-sec);
+    }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(0,198,174,0.15);
+      border: 1px solid rgba(0,198,174,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .consult-badge {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(240,165,0,0.12) 0%, rgba(240,165,0,0.04) 100%);
+      border: 1px solid rgba(240,165,0,0.3);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--accent2);
+      font-weight: 500;
+    }
+    .comparison-table {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      overflow: hidden;
+    }
+    .comparison-table h3 {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .comp-table th {
+      padding: 12px 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: left;
+    }
+    .comp-table th:first-child { color: var(--text-sec); }
+    .comp-table th.col-no { color: #ff6b6b; }
+    .comp-table th.col-yes { color: var(--accent); }
+    .comp-table td {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .comp-table td:first-child { color: var(--text-sec); }
+    .comp-no { color: #ff6b6b; }
+    .comp-yes { color: var(--accent); }
+
+    /* ─── 8. PRÓXIMOS PASSOS ─────────────────────────────────── */
+    .timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-top: 56px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      right: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), rgba(0,198,174,0.2));
+      z-index: 0;
+    }
+    .timeline-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 0 12px;
+    }
+    .timeline-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 20px;
+      transition: background var(--transition), color var(--transition);
+    }
+    .timeline-step:hover .timeline-num {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+    .timeline-step h4 {
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .timeline-step p {
+      font-size: 0.8rem;
+      color: var(--text-sec);
+      line-height: 1.5;
+    }
+    .timeline-step .timeline-time {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent2);
+      background: rgba(240,165,0,0.1);
+      border: 1px solid rgba(240,165,0,0.25);
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── 9. CONDIÇÕES COMERCIAIS ────────────────────────────── */
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .condition-card {
+      padding: 32px;
+    }
+    .condition-card h3 {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .condition-card p {
+      font-size: 0.88rem;
+      color: var(--text-sec);
+      line-height: 1.75;
+    }
+
+    /* ─── 10. RODAPÉ ──────────────────────────────────────────── */
+    footer {
+      background: #0a1520;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 64px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .footer-brand h3 span { color: var(--accent); }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      line-height: 1.7;
+    }
+    .footer-col h4 {
+      font-family: var(--font-title);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-sec);
+      margin-bottom: 16px;
+    }
+    .footer-col p, .footer-col a {
+      font-size: 0.85rem;
+      color: var(--text-sec);
+      line-height: 1.9;
+      display: block;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .signature-area {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    .signature-box h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-sec);
+      margin-bottom: 24px;
+    }
+    .signature-line {
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      min-height: 48px;
+    }
+    .signature-meta {
+      font-size: 0.78rem;
+      color: var(--text-sec);
+    }
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(143,163,177,0.6);
+    }
+
+    /* ─── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .client-grid,
+      .solution-grid,
+      .invest-top-grid,
+      .invest-bottom,
+      .conditions-grid,
+      .footer-grid { grid-template-columns: 1fr; }
+      .challenges-grid,
+      .channels-grid { grid-template-columns: 1fr 1fr; }
+      .timeline { flex-direction: column; align-items: center; }
+      .timeline::before { display: none; }
+      .timeline-step { width: 100%; max-width: 300px; }
+      .hero-nav { padding: 20px 24px; }
+      .signature-area { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 540px) {
+      .section { padding: 64px 0; }
+      .challenges-grid,
+      .channels-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .accordion-body-inner { padding-left: 24px; }
+      .invest-bottom { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Print ───────────────────────────────────────────────── */
+    @media print {
+      * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        border-color: #ccc !important;
+        -webkit-text-fill-color: black !important;
+      }
+      #hero-canvas { display: none; }
+      .hero-scroll { display: none; }
+      .reveal { opacity: 1; transform: none; }
+      body { font-size: 11pt; }
+      .btn { display: none; }
+      .section { padding: 40px 0; page-break-inside: avoid; }
+      .accordion-body { max-height: none !important; }
+      .accordion-body-inner { padding-left: 24px; }
+      footer { background: white !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     1. HERO
+════════════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+
+  <nav class="hero-nav">
+    <div class="hero-logo">Aut<span>ron</span></div>
+    <div class="badge badge-green">
+      <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00C6AE"/></svg>
+      Proposta Comercial
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="badge badge-green reveal" style="margin-bottom:20px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Proposta Exclusiva — Medicina Cursos
+    </div>
+
+    <h1 class="hero-headline reveal reveal-delay-1">
+      Atendimento Inteligente<br>para <em>Medicina Cursos</em>
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      Transforme a experiência de captação e atendimento da sua instituição com uma plataforma omnichannel potencializada por Inteligência Artificial — disponível 24 horas por dia, 7 dias por semana.
+    </p>
+
+    <div class="hero-meta reveal reveal-delay-3">
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8FA3B1" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Emitida em 14/05/2026
+      </span>
+      <span class="dot">·</span>
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F0A500" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Válida até 13/06/2026
+      </span>
+      <span class="dot">·</span>
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8FA3B1" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Preparada pela equipe Autron
+      </span>
+    </div>
+
+    <div class="reveal reveal-delay-4" style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+      <a href="#investimento" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Aceitar Proposta
+      </a>
+      <a href="#escopo" class="btn btn-outline">Ver Escopo Completo</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Rolar</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8FA3B1" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     2. SOBRE O CLIENTE
+════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="cliente">
+  <div class="container">
+    <span class="section-label reveal">Sobre o Cliente</span>
+    <h2 class="section-title reveal reveal-delay-1">Medicina Cursos</h2>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="client-grid">
+      <div class="reveal reveal-delay-1">
+        <p class="challenge-text">
+          A <strong>Medicina Cursos</strong> é uma instituição de ensino especializada em cursos e pós-graduação na área da saúde, com ampla presença no mercado de educação continuada. Com uma base crescente de alunos e interessados, a instituição enfrenta o desafio de escalar seu atendimento sem comprometer a qualidade e a agilidade esperadas por profissionais de saúde.
+        </p>
+        <br>
+        <p class="challenge-text">
+          O volume de dúvidas sobre grades curriculares, processos de matrícula, certificações e metodologias exige uma solução robusta capaz de atender <strong>múltiplos canais simultaneamente</strong>, qualificar leads com precisão e liberar a equipe humana para conversas de alto valor.
+        </p>
+      </div>
+
+      <div class="card reveal reveal-delay-2">
+        <h3 style="font-family: var(--font-title); font-size: 1rem; font-weight: 700; margin-bottom: 24px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.08em;">Dados Cadastrais</h3>
+        <div class="client-info-list">
+          <div class="client-info-item">
+            <div class="client-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div>
+              <strong>Empresa</strong>
+              <p>Medicina Cursos</p>
+            </div>
+          </div>
+          <div class="client-info-item">
+            <div class="client-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <strong>CNPJ</strong>
+              <p>07.050.619/0001-50</p>
+            </div>
+          </div>
+          <div class="client-info-item">
+            <div class="client-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.46 17z"/></svg>
+            </div>
+            <div>
+              <strong>Telefone / WhatsApp</strong>
+              <p>(11) 3273-8221 &nbsp;|&nbsp; (11) 97585-3514</p>
+            </div>
+          </div>
+          <div class="client-info-item">
+            <div class="client-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <strong>E-mail</strong>
+              <p>contato@medicinecursos.com.br</p>
+            </div>
+          </div>
+          <div class="client-info-item">
+            <div class="client-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <strong>Endereço</strong>
+              <p>R. Agostinho Rodrigues Filho, 559 — São Paulo/SP</p>
+            </div>
+          </div>
+          <div class="client-info-item">
+            <div class="client-info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <strong>Segmento</strong>
+              <p>Cursos e Pós-graduação — Área da Saúde</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     3. O DESAFIO
+════════════════════════════════════════════════════ -->
+<section class="section" id="desafio">
+  <div class="container">
+    <span class="section-label reveal">O Desafio</span>
+    <h2 class="section-title reveal reveal-delay-1">Por que agir agora?</h2>
+    <p class="section-sub reveal reveal-delay-2">Cada lead não atendido é uma matrícula perdida. Conheça os principais gargalos que impactam diretamente a receita da instituição.</p>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="challenges-grid">
+      <div class="card challenge-card reveal reveal-delay-1">
+        <div class="challenge-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F0A500" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Leads Perdidos Fora do Horário</h3>
+        <p>Interessados em cursos enviam mensagens à noite, fins de semana e feriados. Sem resposta imediata, a concorrência fecha a matrícula antes mesmo do próximo dia útil.</p>
+      </div>
+
+      <div class="card challenge-card reveal reveal-delay-2">
+        <div class="challenge-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F0A500" stroke-width="1.8">
+            <rect x="2" y="3" width="6" height="6" rx="1"/><rect x="9" y="3" width="6" height="6" rx="1"/><rect x="16" y="3" width="6" height="6" rx="1"/>
+            <rect x="2" y="11" width="6" height="6" rx="1"/><rect x="9" y="11" width="6" height="6" rx="1"/><rect x="16" y="11" width="6" height="6" rx="1"/>
+            <rect x="2" y="19" width="6" height="4" rx="1"/><rect x="9" y="19" width="6" height="4" rx="1"/><rect x="16" y="19" width="6" height="4" rx="1"/>
+          </svg>
+        </div>
+        <h3>Atendimento Fragmentado</h3>
+        <p>Conversas espalhadas entre WhatsApp, Instagram, e-mail e site, sem histórico unificado. O mesmo aluno precisa repetir informações em cada canal, gerando frustração e perda de contexto.</p>
+      </div>
+
+      <div class="card challenge-card reveal reveal-delay-3">
+        <div class="challenge-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F0A500" stroke-width="1.8">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Time Sobrecarregado</h3>
+        <p>A equipe gasta grande parte do tempo respondendo perguntas repetitivas sobre valores, grade curricular e prazos de inscrição — energia que deveria ser direcionada à conversão e ao relacionamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     4. A SOLUÇÃO
+════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="solucao">
+  <div class="container">
+    <span class="section-label reveal">A Solução</span>
+    <h2 class="section-title reveal reveal-delay-1">Como a Autron resolve</h2>
+    <p class="section-sub reveal reveal-delay-2">Uma plataforma inteligente que integra todos os seus canais de atendimento e potencializa a equipe com IA treinada no seu negócio.</p>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="solution-grid">
+      <div class="solution-visual reveal reveal-delay-1">
+        <div>
+          <div class="badge badge-green" style="margin-bottom: 20px;">Sistema Ativo</div>
+          <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 800; margin-bottom: 12px;">Plataforma Unificada</h3>
+          <p style="font-size: 0.9rem; color: var(--text-sec); line-height: 1.7;">Todos os canais convergem para um painel único. A IA responde instantaneamente e escalona para humanos quando identificado potencial de alta conversão.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-number">&lt; 3s</span>
+            <span class="stat-label">Tempo de Resposta</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Disponibilidade</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Conversas Salvas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-benefits reveal reveal-delay-2">
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div>
+            <h4>IA com Conhecimento Proprietário</h4>
+            <p>Base de conhecimento treinada com os produtos, valores, grades e políticas da Medicina Cursos. Respostas precisas e no tom da instituição.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <h4>Triagem e Qualificação Automática</h4>
+            <p>A IA identifica o estágio do lead no funil, coleta dados relevantes e prioriza contatos com maior probabilidade de matrícula para o time comercial.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <h4>Escalonamento Humano Inteligente</h4>
+            <p>Quando detectada a necessidade de atendimento especializado, a conversa é transferida seamlessly para um consultor com todo o histórico preservado.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <h4>Histórico Completo por Cliente</h4>
+            <p>Cada interação é registrada e indexada. Em qualquer futuro contato, o sistema reconhece o aluno e retoma a conversa de onde parou.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     5. ESCOPO DETALHADO
+════════════════════════════════════════════════════ -->
+<section class="section" id="escopo">
+  <div class="container">
+    <span class="section-label reveal">Escopo Detalhado</span>
+    <h2 class="section-title reveal reveal-delay-1">O que está incluído</h2>
+    <p class="section-sub reveal reveal-delay-2">Cada entrega foi cuidadosamente desenhada para maximizar o retorno da Medicina Cursos sobre o investimento em tecnologia de atendimento.</p>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="accordion reveal reveal-delay-1">
+
+      <div class="accordion-item open">
+        <div class="accordion-header">
+          <span class="accordion-num">01</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="accordion-title">WhatsApp Business + Instagram Direct + Webchat Unificados</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            Integração completa dos três principais canais de comunicação em uma única plataforma centralizada. Todas as mensagens recebidas via WhatsApp Business, Instagram Direct e widget de chat no site da Medicina Cursos são gerenciadas em um painel unificado, eliminando a necessidade de acessar múltiplos aplicativos. O histórico de cada contato é compartilhado entre canais, garantindo continuidade no atendimento independente de onde a conversa se inicia.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="accordion-num">02</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <span class="accordion-title">IA com Base de Conhecimento dos Produtos</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            Desenvolvemos e treinamos um modelo de linguagem customizado com toda a base de conhecimento da Medicina Cursos: catálogo de cursos, pós-graduações, valores, condições de pagamento, requisitos de matrícula, metodologia e diferenciais. A IA responde com precisão e no tom institucional da empresa, criando uma experiência de atendimento coerente e profissional. A base é atualizada periodicamente conforme a grade de produtos evolui.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="accordion-num">03</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span class="accordion-title">Triagem Automática e Escalonamento Humano</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            O sistema classifica automaticamente cada lead em categorias de prioridade com base em sinais de intenção de compra, como interesse em matrícula imediata, dúvidas sobre valores ou solicitações de proposta. Contatos de alta prioridade são escalados para a equipe humana com alerta em tempo real. Perguntas operacionais — horários, documentos, estrutura dos cursos — são resolvidas pela IA sem intervenção humana, liberando o time para negociações de alto impacto.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="accordion-num">04</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <span class="accordion-title">Histórico Completo de Conversa por Cliente</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            Toda interação — independente do canal de origem — é armazenada em um perfil unificado do contato, acessível por qualquer membro da equipe a qualquer momento. O consultor visualiza em segundos toda a jornada do lead: primeiro contato, cursos consultados, objeções levantadas e promessas feitas. Isso elimina o atrito de "recomeçar do zero" e aumenta significativamente a taxa de conversão em atendimentos humanos subsequentes.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="accordion-num">05</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="accordion-title">Resposta em Segundos — 24h/7 dias</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            A infraestrutura da Autron garante tempo de resposta inferior a 3 segundos em 99,9% das interações, com SLA de disponibilidade de 99,7% ao mês. Alunos e prospects recebem atenção imediata às 23h de uma quinta-feira ou às 7h de um domingo — eliminando definitivamente a perda de leads por demora no atendimento. A plataforma opera em regime de alta disponibilidade com redundância e monitoramento contínuo.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="accordion-num">06</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span class="accordion-title">Discovery & Modelagem — Mapeamento dos Canais Ativos</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            Na fase inicial do projeto, nossa equipe realiza um diagnóstico completo da operação atual de atendimento da Medicina Cursos: canais utilizados, volume de conversas, principais dúvidas recorrentes, fluxos de qualificação existentes e pontos de ruptura. Com base nesse mapeamento, desenhamos a arquitetura de automação e os fluxos conversacionais que maximizarão o impacto desde o primeiro dia de operação.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="accordion-num">07</span>
+          <div class="accordion-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <span class="accordion-title">SDR para Qualificação de Leads por IA</span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            A IA atua como um SDR (Sales Development Representative) virtual: aborda proativamente leads que interagiram com a instituição, faz perguntas de qualificação estruturadas (curso de interesse, nível de formação, urgência, forma de pagamento preferida), e entrega ao time comercial apenas os leads prontos para conversão — com ficha completa e score de intenção de compra. Aumenta a produtividade do time de vendas sem aumentar a equipe.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     6. CANAIS DE CONEXÃO
+════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="canais">
+  <div class="container">
+    <span class="section-label reveal">Canais de Conexão</span>
+    <h2 class="section-title reveal reveal-delay-1">Onde sua instituição estará presente</h2>
+    <p class="section-sub reveal reveal-delay-2">Integração nativa com os principais canais de comunicação, todos gerenciados a partir de um único ponto de controle.</p>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="channels-grid">
+      <div class="card channel-card reveal reveal-delay-1">
+        <div class="channel-icon" style="background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.25);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>WhatsApp Business</h3>
+        <p>Canal principal de relacionamento. Atendimento automatizado com respostas instantâneas, envio de materiais e qualificação de leads diretamente no aplicativo mais usado no Brasil.</p>
+      </div>
+
+      <div class="card channel-card reveal reveal-delay-2">
+        <div class="channel-icon" style="background: rgba(0,198,174,0.12); border: 1px solid rgba(0,198,174,0.25);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Site (Webchat)</h3>
+        <p>Widget de chat integrado ao site da Medicina Cursos. Abordagem proativa quando o visitante permanece mais de X segundos em páginas de cursos estratégicos.</p>
+      </div>
+
+      <div class="card channel-card reveal reveal-delay-3">
+        <div class="channel-icon" style="background: rgba(225,48,108,0.12); border: 1px solid rgba(225,48,108,0.25);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <h3>Instagram Direct</h3>
+        <p>Respostas automáticas para DMs e comentários no Instagram da Medicina Cursos, capturando leads vindos de anúncios e publicações orgânicas sem atraso.</p>
+      </div>
+
+      <div class="card channel-card reveal reveal-delay-1">
+        <div class="channel-icon" style="background: rgba(240,165,0,0.12); border: 1px solid rgba(240,165,0,0.25);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F0A500" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h5M8 16h3"/></svg>
+        </div>
+        <h3>Chatwoot — Omnichannel + CRM</h3>
+        <p>Plataforma central de gestão. Todos os canais convergem aqui. Sua equipe visualiza, responde e acompanha cada conversa com histórico e CRM integrado.</p>
+      </div>
+
+      <div class="card channel-card reveal reveal-delay-2">
+        <div class="channel-icon" style="background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.25);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <h3>E-commerce</h3>
+        <p>Integração com a plataforma de vendas online, notificações de carrinho abandonado, suporte pós-venda automatizado e assistência no processo de matrícula digital.</p>
+      </div>
+
+      <div class="card channel-card reveal reveal-delay-3">
+        <div class="channel-icon" style="background: rgba(0,198,174,0.12); border: 1px solid rgba(0,198,174,0.25);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/><path d="M8.5 8.5l1.5 1.5"/><path d="M15.5 8.5l-1.5 1.5"/></svg>
+        </div>
+        <h3>IA · Conversa</h3>
+        <p>Motor conversacional com processamento de linguagem natural em português. Entende variações, gírias do setor e mantém o contexto ao longo de conversas longas e complexas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     7. INVESTIMENTO
+════════════════════════════════════════════════════ -->
+<section class="section" id="investimento">
+  <div class="container">
+    <span class="section-label reveal">Investimento</span>
+    <h2 class="section-title reveal reveal-delay-1">Valores e Condições</h2>
+    <p class="section-sub reveal reveal-delay-2">Estrutura de investimento transparente, sem custos ocultos. Tudo que você precisa para transformar o atendimento da Medicina Cursos está incluído.</p>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="invest-top-grid">
+      <div class="invest-card invest-card-setup reveal reveal-delay-1">
+        <p class="invest-card-label">Setup — Pagamento Único</p>
+        <div class="invest-price"><sup>R$</sup> 5.800<span class="cents">,00</span></div>
+        <p class="invest-period">Investimento inicial único — sem recorrência</p>
+        <div class="invest-divider"></div>
+        <p class="invest-feat">Inclui discovery completo, modelagem dos fluxos, integração técnica de todos os canais, treinamento da IA com a base de conhecimento da Medicina Cursos, testes e go-live assistido.</p>
+      </div>
+
+      <div class="invest-card invest-card-monthly reveal reveal-delay-2">
+        <p class="invest-card-label">Recorrência Mensal</p>
+        <div class="invest-price"><sup>R$</sup> 2.000<span class="cents">,00</span></div>
+        <p class="invest-period">Por mês · Contrato mínimo de 12 meses</p>
+        <div class="invest-divider"></div>
+        <p class="invest-feat">Inclui operação da plataforma, atualizações da base de conhecimento, suporte técnico prioritário, relatórios mensais de performance e consultoria estratégica contínua ao longo de todo o período contratual.</p>
+      </div>
+    </div>
+
+    <div class="invest-bottom">
+      <div class="invest-includes reveal reveal-delay-1">
+        <h3>O que está incluso</h3>
+        <div class="includes-list">
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Integração WhatsApp Business, Instagram e Webchat</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>IA treinada com os cursos e produtos da instituição</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Licença Chatwoot + CRM omnichannel</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>SDR virtual para qualificação de leads</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Relatórios mensais de performance e conversão</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Suporte técnico prioritário (SLA 4h úteis)</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Atualizações da base de conhecimento da IA</span>
+          </div>
+          <div class="includes-item">
+            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Onboarding e treinamento da equipe interna</span>
+          </div>
+        </div>
+        <div class="consult-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0A500" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Consultoria estratégica por 12 meses inclusa — sem custo adicional</span>
+        </div>
+      </div>
+
+      <div class="comparison-table reveal reveal-delay-2">
+        <h3>Sem Autron × Com Autron</h3>
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Cenário</th>
+              <th class="col-no">Sem Autron</th>
+              <th class="col-yes">Com Autron</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tempo de resposta</td>
+              <td class="comp-no">Horas / dias</td>
+              <td class="comp-yes">&lt; 3 segundos</td>
+            </tr>
+            <tr>
+              <td>Atendimento noturno</td>
+              <td class="comp-no">Indisponível</td>
+              <td class="comp-yes">24h / 7 dias</td>
+            </tr>
+            <tr>
+              <td>Canais integrados</td>
+              <td class="comp-no">Fragmentados</td>
+              <td class="comp-yes">Unificados</td>
+            </tr>
+            <tr>
+              <td>Qualificação de leads</td>
+              <td class="comp-no">Manual</td>
+              <td class="comp-yes">Automática por IA</td>
+            </tr>
+            <tr>
+              <td>Histórico do cliente</td>
+              <td class="comp-no">Disperso</td>
+              <td class="comp-yes">Centralizado</td>
+            </tr>
+            <tr>
+              <td>Custo por atendimento</td>
+              <td class="comp-no">Alto (humano)</td>
+              <td class="comp-yes">Baixo (IA + escalone)</td>
+            </tr>
+            <tr>
+              <td>Escalonamento</td>
+              <td class="comp-no">Sem critério</td>
+              <td class="comp-yes">Inteligente por score</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     8. PRÓXIMOS PASSOS
+════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="proximos-passos">
+  <div class="container">
+    <span class="section-label reveal">Próximos Passos</span>
+    <h2 class="section-title reveal reveal-delay-1">Da decisão ao go-live</h2>
+    <p class="section-sub reveal reveal-delay-2">Um processo estruturado, com prazos claros e entregas transparentes em cada etapa.</p>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="timeline reveal reveal-delay-1">
+      <div class="timeline-step">
+        <div class="timeline-num">01</div>
+        <h4>Aceite da Proposta</h4>
+        <p>Assinatura do contrato e pagamento do setup. Início formal do projeto.</p>
+        <span class="timeline-time">Dia 01</span>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">02</div>
+        <h4>Discovery</h4>
+        <p>Mapeamento de canais, fluxos, base de conhecimento e modelagem da IA.</p>
+        <span class="timeline-time">Dias 02–07</span>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">03</div>
+        <h4>Implantação</h4>
+        <p>Integrações técnicas, configuração do Chatwoot, testes e homologação.</p>
+        <span class="timeline-time">Dias 08–21</span>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">04</div>
+        <h4>Go-live</h4>
+        <p>Ativação em produção com acompanhamento intensivo da equipe Autron.</p>
+        <span class="timeline-time">Dia 22–30</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     9. CONDIÇÕES COMERCIAIS
+════════════════════════════════════════════════════ -->
+<section class="section" id="condicoes">
+  <div class="container">
+    <span class="section-label reveal">Condições Comerciais</span>
+    <h2 class="section-title reveal reveal-delay-1">Termos e Diretrizes</h2>
+    <div class="divider reveal reveal-delay-1"></div>
+
+    <div class="conditions-grid">
+      <div class="card condition-card reveal reveal-delay-1">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Validade da Proposta
+        </h3>
+        <p>Esta proposta comercial é válida por <strong>30 (trinta) dias corridos</strong> a partir da data de emissão, com vencimento em <strong>13 de junho de 2026</strong>. Após este prazo, os valores e condições aqui apresentados poderão ser revisados pela Autron. Eventuais alterações de escopo solicitadas pelo contratante poderão impactar os valores praticados.</p>
+      </div>
+
+      <div class="card condition-card reveal reveal-delay-2">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Condições de Pagamento
+        </h3>
+        <p>O valor de <strong>setup (R$ 5.800,00)</strong> é devido na assinatura do contrato, antecipadamente ao início dos trabalhos. A <strong>recorrência mensal (R$ 2.000,00)</strong> será cobrada todo dia 1.º a partir do mês subsequente ao go-live, via boleto bancário ou PIX. O contrato tem vigência mínima de <strong>12 (doze) meses</strong>, com renovação automática salvo aviso prévio de 60 dias.</p>
+      </div>
+
+      <div class="card condition-card reveal reveal-delay-3">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Reajuste Anual
+        </h3>
+        <p>Os valores contratados serão reajustados anualmente pelo índice <strong>IGPM (IGP-M/FGV)</strong> acumulado dos últimos 12 meses, contados a partir da data de assinatura do contrato. O reajuste será comunicado ao contratante com antecedência mínima de <strong>30 (trinta) dias corridos</strong> antes de sua aplicação, por meio de notificação escrita ou eletrônica.</p>
+      </div>
+
+      <div class="card condition-card reveal reveal-delay-4">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C6AE" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Sigilo e Confidencialidade
+        </h3>
+        <p>Todas as informações trocadas entre as partes no âmbito desta proposta e do contrato decorrente são consideradas <strong>estritamente confidenciais</strong>. A Autron se compromete a não divulgar, compartilhar ou utilizar dados, fluxos, listas de contatos ou informações estratégicas da Medicina Cursos para qualquer finalidade que não seja a prestação dos serviços contratados, conforme as disposições da <strong>Lei Geral de Proteção de Dados (LGPD — Lei 13.709/2018)</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     10. RODAPÉ
+════════════════════════════════════════════════════ -->
+<footer id="contato">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Aut<span>ron</span></h3>
+        <p>Consultoria especializada em automação de atendimento e inteligência artificial para empresas que desejam escalar com eficiência e precisão.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Fornecedor</h4>
+        <p><strong style="color: var(--text-main);">Autron</strong></p>
+        <p>Consultoria em IA & Atendimento</p>
+        <a href="mailto:contato@autron.com.br">contato@autron.com.br</a>
+        <a href="https://www.autron.com.br">www.autron.com.br</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Cliente</h4>
+        <p><strong style="color: var(--text-main);">Medicina Cursos</strong></p>
+        <p>CNPJ: 07.050.619/0001-50</p>
+        <a href="tel:+551132738221">(11) 3273-8221</a>
+        <a href="tel:+5511975853514">(11) 97585-3514</a>
+        <a href="mailto:contato@medicinecursos.com.br">contato@medicinecursos.com.br</a>
+        <p>R. Agostinho Rodrigues Filho, 559<br>São Paulo — SP</p>
+      </div>
+    </div>
+
+    <div class="signature-area">
+      <div class="signature-box">
+        <h4>Autron — Fornecedor</h4>
+        <div class="signature-line"></div>
+        <div class="signature-meta">
+          <p>Nome: ___________________________________</p>
+          <p style="margin-top:6px;">Cargo: ___________________________________</p>
+          <p style="margin-top:6px;">Data: São Paulo, ______ de ____________ de 2026</p>
+        </div>
+      </div>
+      <div class="signature-box">
+        <h4>Medicina Cursos — Contratante</h4>
+        <div class="signature-line"></div>
+        <div class="signature-meta">
+          <p>Nome: ___________________________________</p>
+          <p style="margin-top:6px;">Cargo: ___________________________________</p>
+          <p style="margin-top:6px;">Data: São Paulo, ______ de ____________ de 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Autron. Todos os direitos reservados. Documento confidencial — uso restrito.</p>
+      <p>Proposta emitida em 14/05/2026 · Válida até 13/06/2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════ -->
+<script>
+  /* ── Hero Canvas: Constellation Particles ───────────── */
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], animId;
+
+    const CONFIG = {
+      count: 80,
+      maxDist: 130,
+      speed: 0.35,
+      radius: 1.8,
+      color: '0,198,174',
+      lineOpacity: 0.12,
+      dotOpacity: 0.45,
+    };
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    function Particle() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * CONFIG.speed;
+      this.vy = (Math.random() - 0.5) * CONFIG.speed;
+    }
+
+    function init() {
+      particles = [];
+      for (let i = 0; i < CONFIG.count; i++) particles.push(new Particle());
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, CONFIG.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${CONFIG.color},${CONFIG.dotOpacity})`;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONFIG.maxDist) {
+            const alpha = CONFIG.lineOpacity * (1 - dist / CONFIG.maxDist);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(${CONFIG.color},${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    function start() {
+      cancelAnimationFrame(animId);
+      resize();
+      init();
+      draw();
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      init();
+    });
+
+    start();
+  })();
+
+  /* ── IntersectionObserver: Fade-in on scroll ─────────── */
+  (function () {
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('visible'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => obs.observe(el));
+  })();
+
+  /* ── Accordion ───────────────────────────────────────── */
+  (function () {
+    const items = document.querySelectorAll('.accordion-item');
+    items.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        items.forEach(i => i.classList.remove('open'));
+        // Toggle clicked
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  })();
+
+  /* ── Smooth scroll polyfill for anchor buttons ───────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
