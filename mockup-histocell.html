@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histocell - Lançamento Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            800: '#115e59', /* FIX 1: cor 800 adicionada */
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #f8fafc; }
+        .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(10px); }
+
+        /* FIX 3: Toggle Switch com estilos base corrigidos */
+        .toggle-checkbox {
+            top: 0;
+            left: 0;
+            transition: left 0.2s ease;
+        }
+        .toggle-checkbox:checked {
+            left: calc(100% - 1.5rem);
+            border-color: #14b8a6;
+        }
+        .toggle-checkbox:checked + .toggle-label { background-color: #14b8a6; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased h-screen flex flex-col">
+
+<div id="app" class="flex-grow flex flex-col h-full">
+    <!-- Navbar -->
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-medical-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl leading-tight text-slate-800">Histocell</h1>
+                    <p class="text-xs text-slate-500 font-medium">Lançamento de Pedidos</p>
+                </div>
+            </div>
+
+            <button @click="step = 4" class="relative p-2 text-slate-600 hover:text-medical-600 transition-colors" v-if="cart.length > 0">
+                <i class="fa-solid fa-cart-shopping text-xl"></i>
+                <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform translate-x-1 -translate-y-1">
+                    {{ cart.length }}
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden relative min-h-[500px] flex flex-col">
+
+            <!-- Barra de Progresso -->
+            <div class="bg-slate-50 border-b border-slate-100 px-8 py-4 flex justify-between items-center text-sm font-medium text-slate-400">
+                <span :class="{'text-medical-600': step >= 1}">1. Finalidade</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span :class="{'text-medical-600': step >= 2}">2. Categoria</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span :class="{'text-medical-600': step >= 3}">3. Configuração</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span :class="{'text-medical-600': step >= 4}">4. Resumo</span>
+            </div>
+
+            <div class="p-8 flex-grow">
+                <transition name="fade" mode="out-in">
+
+                    <!-- PASSO 1: FINALIDADE -->
+                    <div v-if="step === 1" key="step1" class="space-y-6">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-bold text-slate-800">Qual a finalidade deste pedido?</h2>
+                            <p class="text-slate-500 mt-2">Isso define a tabela de preços que será aplicada.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button @click="setOrderType('rotina')"
+                                    class="group p-6 border-2 rounded-xl text-left transition-all duration-200 flex flex-col gap-3"
+                                    :class="orderType === 'rotina' ? 'border-medical-500 bg-medical-50' : 'border-slate-200 hover:border-medical-300 hover:bg-slate-50'">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-hospital"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-800">Rotina Diagnóstica</h3>
+                                    <p class="text-sm text-slate-500 mt-1">Exames clínicos diários, pacientes e convênios.</p>
+                                </div>
+                            </button>
+
+                            <button @click="setOrderType('pesquisa')"
+                                    class="group p-6 border-2 rounded-xl text-left transition-all duration-200 flex flex-col gap-3"
+                                    :class="orderType === 'pesquisa' ? 'border-medical-500 bg-medical-50' : 'border-slate-200 hover:border-medical-300 hover:bg-slate-50'">
+                                <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-flask"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-800">Projeto de Pesquisa</h3>
+                                    <p class="text-sm text-slate-500 mt-1">Instituições de ensino, teses e tabelas especiais.</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PASSO 2: CATEGORIA -->
+                    <div v-else-if="step === 2" key="step2" class="space-y-6">
+                        <div class="mb-6 flex items-center gap-3 cursor-pointer text-slate-500 hover:text-medical-600 transition-colors w-max" @click="step = 1">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span class="text-sm font-semibold">Voltar</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800">O que o médico solicitou?</h2>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button @click="setCategory('ap')" class="p-5 border border-slate-200 rounded-xl text-left hover:border-medical-500 hover:shadow-md transition-all flex items-center gap-4 group bg-white">
+                                <div class="w-10 h-10 rounded bg-slate-100 text-slate-600 flex items-center justify-center group-hover:bg-medical-100 group-hover:text-medical-600 transition-colors">
+                                    <i class="fa-solid fa-cut"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">Anátomo-Patológico</h3>
+                                    <p class="text-xs text-slate-500 mt-1">Biópsias, Peças, Macroscopia</p>
+                                </div>
+                            </button>
+
+                            <button @click="setCategory('ihc')" class="p-5 border border-slate-200 rounded-xl text-left hover:border-medical-500 hover:shadow-md transition-all flex items-center gap-4 group bg-white">
+                                <div class="w-10 h-10 rounded bg-slate-100 text-slate-600 flex items-center justify-center group-hover:bg-medical-100 group-hover:text-medical-600 transition-colors">
+                                    <i class="fa-solid fa-dna"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">Imunohistoquímica</h3>
+                                    <p class="text-xs text-slate-500 mt-1">Painéis, Marcadores e Anticorpos</p>
+                                </div>
+                            </button>
+
+                            <button @click="setCategory('coloracao')" class="p-5 border border-slate-200 rounded-xl text-left hover:border-medical-500 hover:shadow-md transition-all flex items-center gap-4 group bg-white">
+                                <div class="w-10 h-10 rounded bg-slate-100 text-slate-600 flex items-center justify-center group-hover:bg-medical-100 group-hover:text-medical-600 transition-colors">
+                                    <i class="fa-solid fa-eye-dropper"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">Colorações Especiais</h3>
+                                    <p class="text-xs text-slate-500 mt-1">PAS, Grocott, Masson, etc.</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PASSO 3: CONFIGURAÇÃO DINÂMICA -->
+                    <div v-else-if="step === 3" key="step3" class="space-y-6 h-full flex flex-col">
+                        <div class="mb-2 flex items-center gap-3 cursor-pointer text-slate-500 hover:text-medical-600 transition-colors w-max" @click="step = 2">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span class="text-sm font-semibold">Voltar às categorias</span>
+                        </div>
+
+                        <!-- Configuração: Anátomo Patológico -->
+                        <div v-if="category === 'ap'" class="space-y-6 flex-grow">
+                            <h2 class="text-2xl font-bold text-slate-800">Detalhes do Anátomo-Patológico</h2>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Tipo de Material</label>
+                                    <select v-model="ap.type" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-medical-500 focus:border-medical-500 bg-white">
+                                        <option value="simples">Biópsia / Peça Simples</option>
+                                        <option value="radical">Peça Cirúrgica Radical</option>
+                                        <option value="osseo">Material Ósseo (com descalcificação)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Quantidade de Amostras/Frascos</label>
+                                    <div class="flex items-center gap-4">
+                                        <button @click="if(ap.qty > 1) ap.qty--" class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center hover:bg-slate-100">-</button>
+                                        <span class="text-xl font-bold text-slate-800 w-8 text-center">{{ ap.qty }}</span>
+                                        <button @click="ap.qty++" class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center hover:bg-slate-100">+</button>
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-2"><i class="fa-solid fa-circle-info mr-1"></i> O sistema calculará o código exato baseado na quantidade (ex: Cód 215 para 2 amostras).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuração: Imunohistoquímica -->
+                        <div v-else-if="category === 'ihc'" class="space-y-6 flex-grow">
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-slate-800">Painel Imunohistoquímico</h2>
+                                    <p class="text-sm text-slate-500">Selecione os marcadores solicitados.</p>
+                                </div>
+                                <!-- FIX 3: Toggle Switch com estilos base corrigidos -->
+                                <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                                    <span class="text-sm font-medium text-slate-700">Anticorpo do Cliente?</span>
+                                    <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                                        <input type="checkbox" name="toggle" id="toggle" v-model="ihc.clientAntibody" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-300 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="relative">
+                                    <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-400"></i>
+                                    <input type="text" v-model="ihc.search" placeholder="Busque por marcador (ex: Ki67, P53...)" class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-medical-500 focus:border-medical-500 bg-white shadow-sm">
+                                </div>
+
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <button v-for="marker in filteredMarkers" :key="marker"
+                                            @click="toggleMarker(marker)"
+                                            class="px-4 py-2 rounded-full border transition-all text-sm font-medium"
+                                            :class="ihc.selected.includes(marker) ? 'bg-medical-500 text-white border-medical-500 shadow-md' : 'bg-white border-slate-200 text-slate-600 hover:border-medical-300'">
+                                        <i class="fa-solid fa-check mr-1" v-if="ihc.selected.includes(marker)"></i> {{ marker }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FIX 2: Configuração: Colorações Especiais (era inexistente) -->
+                        <div v-else-if="category === 'coloracao'" class="space-y-6 flex-grow">
+                            <h2 class="text-2xl font-bold text-slate-800">Colorações Especiais</h2>
+                            <p class="text-sm text-slate-500">Selecione as colorações solicitadas.</p>
+
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <button v-for="stain in allStains" :key="stain.code"
+                                        @click="toggleStain(stain)"
+                                        class="px-4 py-2 rounded-full border transition-all text-sm font-medium"
+                                        :class="coloracao.selected.find(s => s.code === stain.code) ? 'bg-medical-500 text-white border-medical-500 shadow-md' : 'bg-white border-slate-200 text-slate-600 hover:border-medical-300'">
+                                    <i class="fa-solid fa-check mr-1" v-if="coloracao.selected.find(s => s.code === stain.code)"></i>
+                                    {{ stain.name }}
+                                </button>
+                            </div>
+
+                            <p v-if="coloracao.selected.length > 0" class="text-xs text-slate-500">
+                                <i class="fa-solid fa-circle-info mr-1"></i>
+                                {{ coloracao.selected.length }} coloração(ões) selecionada(s).
+                            </p>
+                        </div>
+
+                        <!-- Botão de Ação -->
+                        <div class="pt-6 mt-auto border-t border-slate-100 flex justify-end">
+                            <button @click="addToCart" class="bg-slate-800 hover:bg-slate-900 text-white px-8 py-3 rounded-lg font-bold shadow-lg transition-transform active:scale-95 flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Adicionar ao Pedido
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PASSO 4: RESUMO (CARRINHO) -->
+                    <div v-else-if="step === 4" key="step4" class="space-y-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-slate-800">Resumo do Pedido</h2>
+                            <!-- FIX 1: medical-800 agora está definido no config -->
+                            <span class="bg-medical-100 text-medical-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                Tabela: {{ orderType }}
+                            </span>
+                        </div>
+
+                        <div v-if="cart.length === 0" class="text-center py-12 text-slate-400">
+                            <i class="fa-solid fa-box-open text-4xl mb-3"></i>
+                            <p>O pedido está vazio.</p>
+                            <button @click="step = 2" class="text-medical-600 font-semibold mt-4 hover:underline">Adicionar exames</button>
+                        </div>
+
+                        <div v-else class="space-y-4">
+                            <div class="border border-slate-200 rounded-xl overflow-hidden">
+                                <div v-for="(item, index) in cart" :key="index" class="p-4 border-b border-slate-100 last:border-0 bg-white flex justify-between items-center group">
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded">Cód: {{ item.simulatedCode }}</span>
+                                            <h4 class="font-bold text-slate-800">{{ item.name }}</h4>
+                                        </div>
+                                        <p class="text-sm text-slate-500 mt-1">{{ item.details }}</p>
+                                    </div>
+                                    <div class="flex items-center gap-6">
+                                        <span class="font-bold text-medical-600">R$ {{ item.price.toFixed(2) }}</span>
+                                        <button @click="removeFromCart(index)" class="text-slate-300 hover:text-red-500 transition-colors">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="font-bold text-slate-600">Total Previsto:</span>
+                                <span class="text-2xl font-black text-slate-800">R$ {{ cartTotal.toFixed(2) }}</span>
+                            </div>
+
+                            <div class="pt-4 flex gap-4">
+                                <button @click="step = 2" class="flex-1 py-3 border-2 border-slate-200 text-slate-600 rounded-lg font-bold hover:bg-slate-50 transition-colors">
+                                    <i class="fa-solid fa-plus mr-2"></i> Mais Exames
+                                </button>
+                                <button @click="finishOrder" class="flex-1 py-3 bg-medical-500 hover:bg-medical-600 text-white rounded-lg font-bold shadow-lg transition-transform active:scale-95">
+                                    <i class="fa-solid fa-check mr-2"></i> Finalizar Pedido
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </transition>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const { createApp, ref, computed } = Vue;
+
+    createApp({
+        setup() {
+            const step = ref(1);
+            const orderType = ref('');
+            const category = ref('');
+            const cart = ref([]);
+
+            const ap = ref({ type: 'simples', qty: 1 });
+
+            const ihc = ref({ clientAntibody: false, search: '', selected: [] });
+
+            // FIX 2: estado para colorações
+            const coloracao = ref({ selected: [] });
+
+            const allMarkers = ['Ki67', 'P53', 'HER2', 'RE (Estrogênio)', 'RP (Progesterona)', 'CD3', 'CD20', 'AE1/AE3', 'S100', 'Melan-A'];
+
+            // FIX 2: banco de colorações especiais com código e preço simulados
+            const allStains = [
+                { code: 'PAS',     name: 'PAS',              price: 45.00 },
+                { code: 'GRO',     name: 'Grocott',          price: 48.00 },
+                { code: 'MAS',     name: 'Masson',           price: 42.00 },
+                { code: 'ZIE',     name: 'Ziehl-Neelsen',   price: 48.00 },
+                { code: 'GIE',     name: 'Giemsa',           price: 40.00 },
+                { code: 'RET',     name: 'Reticulina',       price: 50.00 },
+                { code: 'CON',     name: 'Congo Red',        price: 52.00 },
+                { code: 'ALB',     name: 'Alcian Blue',      price: 44.00 },
+            ];
+
+            const filteredMarkers = computed(() => {
+                if (!ihc.value.search) return allMarkers;
+                return allMarkers.filter(m => m.toLowerCase().includes(ihc.value.search.toLowerCase()));
+            });
+
+            const cartTotal = computed(() => cart.value.reduce((total, item) => total + item.price, 0));
+
+            const setOrderType = (type) => {
+                orderType.value = type;
+                step.value = 2;
+            };
+
+            const setCategory = (cat) => {
+                category.value = cat;
+                step.value = 3;
+                if (cat === 'ihc') ihc.value.selected = [];
+                if (cat === 'coloracao') coloracao.value.selected = [];
+            };
+
+            const toggleMarker = (marker) => {
+                const idx = ihc.value.selected.indexOf(marker);
+                if (idx > -1) ihc.value.selected.splice(idx, 1);
+                else ihc.value.selected.push(marker);
+            };
+
+            // FIX 2: toggle para colorações
+            const toggleStain = (stain) => {
+                const idx = coloracao.value.selected.findIndex(s => s.code === stain.code);
+                if (idx > -1) coloracao.value.selected.splice(idx, 1);
+                else coloracao.value.selected.push(stain);
+            };
+
+            const addToCart = () => {
+                let itemsToAdd = [];
+
+                if (category.value === 'ap') {
+                    const basePrice = orderType.value === 'rotina' ? 10 : 8;
+                    const priceMultiplier = ap.value.qty; // FIX 4: typo corrigido
+                    const simulatedCode = ap.value.type === 'simples' ? (200 + ap.value.qty) : (300 + ap.value.qty);
+                    const typeName = ap.value.type === 'simples' ? 'Biópsia Simples' :
+                                     ap.value.type === 'radical' ? 'Peça Radical' : 'Material Ósseo';
+
+                    itemsToAdd.push({
+                        name: `Macroscopia e Processamento (${typeName})`,
+                        details: `Quantidade: ${ap.value.qty} amostra(s) | Tabela: ${orderType.value}`,
+                        price: basePrice * priceMultiplier,
+                        simulatedCode: simulatedCode
+                    });
+                }
+                else if (category.value === 'ihc') {
+                    if (ihc.value.selected.length === 0) {
+                        alert("Selecione pelo menos um marcador.");
+                        return;
+                    }
+                    const antibodySource = ihc.value.clientAntibody ? 'A/C do Cliente' : 'A/C Histocell';
+                    const unitPrice = ihc.value.clientAntibody ? 32.00 : 85.00;
+
+                    ihc.value.selected.forEach(marker => {
+                        itemsToAdd.push({
+                            name: `Imuno. ${marker}`,
+                            details: `Fonte: ${antibodySource} | Tabela: ${orderType.value}`,
+                            price: unitPrice,
+                            simulatedCode: ihc.value.clientAntibody ? `IHC-C-${Math.floor(Math.random()*100)}` : `IHC-H-${Math.floor(Math.random()*100)}`
+                        });
+                    });
+                }
+                // FIX 2: lógica de colorações especiais implementada
+                else if (category.value === 'coloracao') {
+                    if (coloracao.value.selected.length === 0) {
+                        alert("Selecione pelo menos uma coloração.");
+                        return;
+                    }
+                    const priceModifier = orderType.value === 'pesquisa' ? 0.85 : 1;
+
+                    coloracao.value.selected.forEach(stain => {
+                        itemsToAdd.push({
+                            name: `Coloração ${stain.name}`,
+                            details: `Coloração Especial | Tabela: ${orderType.value}`,
+                            price: stain.price * priceModifier,
+                            simulatedCode: `CE-${stain.code}`
+                        });
+                    });
+                }
+
+                cart.value.push(...itemsToAdd);
+                step.value = 4;
+            };
+
+            const removeFromCart = (index) => {
+                cart.value.splice(index, 1);
+            };
+
+            const finishOrder = () => {
+                alert("Pedido gerado com sucesso! Os códigos já foram traduzidos para o sistema financeiro.");
+                cart.value = [];
+                step.value = 1;
+                ap.value.qty = 1;
+                ihc.value.selected = [];
+                coloracao.value.selected = [];
+            };
+
+            return {
+                step, orderType, category, cart, ap, ihc, coloracao,
+                allStains, filteredMarkers, cartTotal,
+                setOrderType, setCategory, toggleMarker, toggleStain, addToCart, removeFromCart, finishOrder
+            };
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
