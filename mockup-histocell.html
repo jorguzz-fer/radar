@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histocell — Lançamento Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Dados REAIS extraídos de Histocell-serviços.xlsx (650 serviços, 326 marcadores IHC) -->
+    <script src="./histocell-data.js"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { medical: {
+            50:'#f0fdfa',100:'#ccfbf1',300:'#5eead4',500:'#14b8a6',600:'#0d9488',800:'#115e59',900:'#134e4a' } } } } }
+    </script>
+    <style>
+        body { font-family:'Inter',system-ui,sans-serif; background:#f8fafc; }
+        .fade-enter-active,.fade-leave-active{transition:opacity .25s ease,transform .25s ease}
+        .fade-enter-from,.fade-leave-to{opacity:0;transform:translateY(8px)}
+        .toggle-checkbox{top:0;left:0;transition:left .2s ease}
+        .toggle-checkbox:checked{left:calc(100% - 1.5rem);border-color:#14b8a6}
+        .toggle-checkbox:checked + .toggle-label{background:#14b8a6}
+        .scroll-area{max-height:340px;overflow-y:auto}
+        .scroll-area::-webkit-scrollbar{width:6px}
+        .scroll-area::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+    </style>
+</head>
+<body class="text-slate-800 antialiased h-screen flex flex-col">
+<div id="app" class="flex-grow flex flex-col h-full">
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-medical-500 rounded-lg flex items-center justify-center text-white text-xl">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl leading-tight text-slate-800">Histocell</h1>
+                    <p class="text-xs text-slate-500 font-medium">Lançamento de Pedidos · dados reais</p>
+                </div>
+            </div>
+            <button @click="step=4" class="relative p-2 text-slate-600 hover:text-medical-600" v-if="cart.length>0">
+                <i class="fa-solid fa-cart-shopping text-xl"></i>
+                <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center translate-x-1 -translate-y-1">{{ cart.length }}</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden relative min-h-[520px] flex flex-col">
+            <div class="bg-slate-50 border-b border-slate-100 px-8 py-4 flex justify-between items-center text-sm font-medium text-slate-400">
+                <span :class="{'text-medical-600':step>=1}">1. Finalidade</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span :class="{'text-medical-600':step>=2}">2. Categoria</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span :class="{'text-medical-600':step>=3}">3. Configuração</span>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span :class="{'text-medical-600':step>=4}">4. Resumo</span>
+            </div>
+
+            <div class="p-8 flex-grow flex flex-col">
+                <transition name="fade" mode="out-in">
+
+                <!-- PASSO 1 -->
+                <div v-if="step===1" key="s1" class="space-y-6">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold">Qual a finalidade deste pedido?</h2>
+                        <p class="text-slate-500 mt-2">Define qual coluna de preço real é aplicada (rotina vs pesquisa).</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="setOrderType('rotina')" class="group p-6 border-2 rounded-xl text-left transition-all flex flex-col gap-3"
+                            :class="orderType==='rotina'?'border-medical-500 bg-medical-50':'border-slate-200 hover:border-medical-300 hover:bg-slate-50'">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hospital"></i></div>
+                            <div><h3 class="text-lg font-bold">Rotina Diagnóstica</h3><p class="text-sm text-slate-500 mt-1">Pacientes, convênios e labs de apoio. Coluna <b>Valor rotina</b>.</p></div>
+                        </button>
+                        <button @click="setOrderType('pesquisa')" class="group p-6 border-2 rounded-xl text-left transition-all flex flex-col gap-3"
+                            :class="orderType==='pesquisa'?'border-medical-500 bg-medical-50':'border-slate-200 hover:border-medical-300 hover:bg-slate-50'">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-flask"></i></div>
+                            <div><h3 class="text-lg font-bold">Projeto de Pesquisa</h3><p class="text-sm text-slate-500 mt-1">Universidades, CEUA/CEP. Coluna <b>Valor pesquisa</b>.</p></div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PASSO 2 -->
+                <div v-else-if="step===2" key="s2" class="space-y-6">
+                    <div class="flex items-center gap-3 cursor-pointer text-slate-500 hover:text-medical-600 w-max" @click="step=1">
+                        <i class="fa-solid fa-arrow-left"></i><span class="text-sm font-semibold">Voltar</span>
+                    </div>
+                    <h2 class="text-2xl font-bold">O que o médico solicitou?</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button v-for="c in categories" :key="c.id" @click="setCategory(c.id)"
+                            class="p-5 border border-slate-200 rounded-xl text-left hover:border-medical-500 hover:shadow-md transition-all flex items-center gap-4 group bg-white">
+                            <div class="w-10 h-10 rounded bg-slate-100 text-slate-600 flex items-center justify-center group-hover:bg-medical-100 group-hover:text-medical-600 transition-colors"><i class="fa-solid" :class="c.icon"></i></div>
+                            <div><h3 class="font-bold">{{ c.title }}</h3><p class="text-xs text-slate-500 mt-1">{{ c.sub }}</p></div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PASSO 3 -->
+                <div v-else-if="step===3" key="s3" class="space-y-5 h-full flex flex-col">
+                    <div class="flex items-center gap-3 cursor-pointer text-slate-500 hover:text-medical-600 w-max" @click="step=2">
+                        <i class="fa-solid fa-arrow-left"></i><span class="text-sm font-semibold">Voltar às categorias</span>
+                    </div>
+
+                    <!-- AP -->
+                    <div v-if="category==='ap'" class="space-y-5 flex-grow">
+                        <h2 class="text-2xl font-bold">Anátomo-Patológico</h2>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Tipo de material</label>
+                            <select v-model="ap.type" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-medical-500">
+                                <option value="simples">Biópsia/Peça simples (s/ descrição macro)</option>
+                                <option value="comDescricao">Com descrição macroscópica</option>
+                                <option value="radical">Peça cirúrgica radical</option>
+                                <option value="osseo">Material ósseo</option>
+                                <option value="necropsia">Necrópsia</option>
+                            </select>
+                        </div>
+                        <div v-if="ap.type==='simples'||ap.type==='comDescricao'">
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Frascos/recipientes recebidos</label>
+                            <div class="flex items-center gap-4">
+                                <button @click="if(ap.qty>1)ap.qty--" class="w-10 h-10 rounded-full border border-slate-300 hover:bg-slate-100">−</button>
+                                <span class="text-xl font-bold w-8 text-center">{{ ap.qty }}</span>
+                                <button @click="ap.qty++" class="w-10 h-10 rounded-full border border-slate-300 hover:bg-slate-100">+</button>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800">
+                            <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                            A recepção registra o que <b>chegou</b>. O nº final de blocos e o código de macroscopia
+                            são <b>confirmados na clivagem</b> pelo patologista — o valor abaixo é a estimativa pré-selecionada.
+                        </div>
+                        <div v-if="apResolved" class="border border-slate-200 rounded-lg p-4 bg-slate-50">
+                            <p class="text-sm text-slate-500">Código pré-selecionado</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <span class="font-bold">{{ apResolved.nome }}</span>
+                                <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">Cód {{ apResolved.codigo }}</span>
+                            </div>
+                            <p class="text-medical-600 font-bold mt-1">{{ money(price(apResolved)) }}</p>
+                            <p v-if="ap.type==='osseo'" class="text-xs text-purple-700 mt-2">
+                                <i class="fa-solid fa-link mr-1"></i> Auto-inclui <b>Descalcificação</b> (Cód {{ HISTOCELL.macroscopiaResolver.autoAnexar.osseo.servico.codigo }} · {{ money(price(HISTOCELL.macroscopiaResolver.autoAnexar.osseo.servico)) }})
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- IHC -->
+                    <div v-else-if="category==='ihc'" class="space-y-4 flex-grow flex flex-col">
+                        <div class="flex justify-between items-end">
+                            <div><h2 class="text-2xl font-bold">Imunohistoquímica</h2>
+                                <p class="text-sm text-slate-500">{{ markerCount }} marcadores reais · painéis clínicos abaixo</p></div>
+                            <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                                <span class="text-sm font-medium">A/C do cliente?</span>
+                                <div class="relative inline-block w-12 align-middle select-none">
+                                    <input type="checkbox" id="tg" v-model="ihc.clientAntibody" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                    <label for="tg" class="toggle-label block h-6 rounded-full bg-slate-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Painéis clínicos (1 clique)</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button v-for="p in HISTOCELL.ihcPainelClinico" :key="p.nome" @click="applyPanel(p)"
+                                    class="px-3 py-1.5 rounded-full border text-sm font-medium bg-white border-slate-200 text-slate-700 hover:border-medical-400 hover:bg-medical-50 transition-all">
+                                    <i class="fa-solid mr-1" :class="p.icon"></i>{{ p.nome }}
+                                    <span class="text-xs text-slate-400">· {{ p.cobertura }}</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-400"></i>
+                            <input v-model="ihc.search" placeholder="Buscar marcador (ex: Ki67, P53, CD20...)"
+                                class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-medical-500">
+                        </div>
+                        <div class="scroll-area flex flex-wrap gap-2 content-start">
+                            <button v-for="m in filteredMarkers" :key="m.key" @click="toggleMarker(m.key)"
+                                class="px-3 py-1.5 rounded-full border transition-all text-sm font-medium"
+                                :class="ihc.selected.includes(m.key)?'bg-medical-500 text-white border-medical-500':'bg-white border-slate-200 text-slate-600 hover:border-medical-300'">
+                                <i class="fa-solid fa-check mr-1" v-if="ihc.selected.includes(m.key)"></i>{{ m.name }}
+                            </button>
+                        </div>
+                        <p v-if="ihc.selected.length" class="text-xs text-slate-500">{{ ihc.selected.length }} marcador(es) · resolve no código real conforme o toggle.</p>
+                    </div>
+
+                    <!-- COLORAÇÕES por pergunta clínica -->
+                    <div v-else-if="category==='coloracao'" class="space-y-3 flex-grow flex flex-col">
+                        <h2 class="text-2xl font-bold">Colorações Especiais</h2>
+                        <p class="text-sm text-slate-500">Organizadas pela <b>pergunta clínica</b> — você não precisa decorar o nome da técnica.</p>
+                        <div class="scroll-area space-y-2">
+                            <div v-for="q in HISTOCELL.coloracaoPorPerguntaClinica" :key="q.pergunta" class="border border-slate-200 rounded-lg overflow-hidden">
+                                <button @click="q._open=!q._open" class="w-full px-4 py-3 flex items-center justify-between bg-slate-50 hover:bg-slate-100 text-left">
+                                    <span class="font-semibold text-sm"><i class="fa-solid mr-2 text-medical-600" :class="q.icon"></i>{{ q.pergunta }}
+                                        <span class="text-xs text-slate-400 font-normal">· {{ q.contexto }}</span></span>
+                                    <i class="fa-solid text-xs text-slate-400" :class="q._open?'fa-chevron-up':'fa-chevron-down'"></i>
+                                </button>
+                                <div v-if="q._open" class="p-3 flex flex-wrap gap-2">
+                                    <button v-for="s in q.colorações" :key="s.nome" @click="toggleStain(s)" :disabled="s._faltante"
+                                        class="px-3 py-1.5 rounded-full border text-sm transition-all"
+                                        :class="s._faltante?'opacity-40 cursor-not-allowed border-slate-200':selectedStain(s)?'bg-medical-500 text-white border-medical-500':'bg-white border-slate-200 text-slate-600 hover:border-medical-300'">
+                                        <i class="fa-solid fa-check mr-1" v-if="selectedStain(s)"></i>{{ s.nome }}
+                                        <span class="text-xs opacity-70" v-if="!s._faltante">· Cód {{ s.codigo }}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <p v-if="coloracao.selected.length" class="text-xs text-slate-500">{{ coloracao.selected.length }} coloração(ões) selecionada(s).</p>
+                    </div>
+
+                    <!-- IF / Citologia (listas reais simples) -->
+                    <div v-else-if="category==='if'||category==='cito'" class="space-y-3 flex-grow flex flex-col">
+                        <h2 class="text-2xl font-bold">{{ category==='if'?'Imunofluorescência':'Citologia' }}</h2>
+                        <p class="text-sm text-slate-500">{{ category==='if'?'Painel renal e imunofluorescência (fluxo separado do bloco).':'Esfregaço, cell block, citospin — workflow sem bloco de parafina.' }}</p>
+                        <div class="scroll-area flex flex-wrap gap-2 content-start">
+                            <button v-for="s in simpleList" :key="s.codigo" @click="toggleSimple(s)"
+                                class="px-3 py-1.5 rounded-full border text-sm transition-all"
+                                :class="simpleSel(s)?'bg-medical-500 text-white border-medical-500':'bg-white border-slate-200 text-slate-600 hover:border-medical-300'">
+                                <i class="fa-solid fa-check mr-1" v-if="simpleSel(s)"></i>{{ s.servicoBase }}
+                                <span class="text-xs opacity-70">· {{ money(price(s)) }}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-5 mt-auto border-t border-slate-100 flex justify-end">
+                        <button @click="addToCart" class="bg-slate-800 hover:bg-slate-900 text-white px-8 py-3 rounded-lg font-bold shadow-lg active:scale-95 transition-transform flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Adicionar ao Pedido
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PASSO 4 -->
+                <div v-else-if="step===4" key="s4" class="space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold">Resumo do Pedido</h2>
+                        <span class="bg-medical-100 text-medical-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tabela: {{ orderType }}</span>
+                    </div>
+                    <div v-if="cart.length===0" class="text-center py-12 text-slate-400">
+                        <i class="fa-solid fa-box-open text-4xl mb-3"></i><p>O pedido está vazio.</p>
+                        <button @click="step=2" class="text-medical-600 font-semibold mt-4 hover:underline">Adicionar exames</button>
+                    </div>
+                    <div v-else class="space-y-4">
+                        <div class="border border-slate-200 rounded-xl overflow-hidden">
+                            <div v-for="(it,i) in cart" :key="i" class="p-4 border-b border-slate-100 last:border-0 flex justify-between items-center">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs font-bold px-2 py-0.5 rounded" :class="it.codigo?'text-slate-400 bg-slate-100':'text-amber-700 bg-amber-100'">
+                                            {{ it.codigo ? 'Cód '+it.codigo : 'Sem código' }}
+                                        </span>
+                                        <h4 class="font-bold">{{ it.name }}</h4>
+                                    </div>
+                                    <p class="text-sm text-slate-500 mt-1">{{ it.details }}</p>
+                                </div>
+                                <div class="flex items-center gap-6">
+                                    <span class="font-bold text-medical-600">{{ it.codigo? money(it.price):'a definir' }}</span>
+                                    <button @click="cart.splice(i,1)" class="text-slate-300 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-bold text-slate-600">Total previsto:</span>
+                            <span class="text-2xl font-black">{{ money(cartTotal) }}</span>
+                        </div>
+                        <div class="pt-2 flex gap-4">
+                            <button @click="step=2" class="flex-1 py-3 border-2 border-slate-200 text-slate-600 rounded-lg font-bold hover:bg-slate-50"><i class="fa-solid fa-plus mr-2"></i>Mais exames</button>
+                            <button @click="finishOrder" class="flex-1 py-3 bg-medical-500 hover:bg-medical-600 text-white rounded-lg font-bold shadow-lg active:scale-95 transition-transform"><i class="fa-solid fa-check mr-2"></i>Finalizar</button>
+                        </div>
+                    </div>
+                </div>
+
+                </transition>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+const { createApp, ref, computed, reactive } = Vue;
+createApp({
+    setup(){
+        const H = window.HISTOCELL;
+        const step = ref(1), orderType = ref(''), category = ref('');
+        const cart = ref([]);
+        const ap = reactive({ type:'simples', qty:1 });
+        const ihc = reactive({ clientAntibody:false, search:'', selected:[] });
+        const coloracao = reactive({ selected:[] });
+        const simpleSelected = ref([]);
+
+        const categories = [
+            {id:'ap',  icon:'fa-cut',         title:'Anátomo-Patológico', sub:'Macroscopia, processamento, cortes'},
+            {id:'ihc', icon:'fa-dna',         title:'Imunohistoquímica',  sub:'326 marcadores · painéis clínicos'},
+            {id:'coloracao', icon:'fa-eye-dropper', title:'Colorações Especiais', sub:'Por pergunta clínica'},
+            {id:'if',  icon:'fa-lightbulb',   title:'Imunofluorescência', sub:'Painel renal'},
+            {id:'cito',icon:'fa-vial',        title:'Citologia',          sub:'Esfregaço, cell block'},
+        ];
+
+        const priceKey = computed(()=> orderType.value==='pesquisa' ? 'valorPesquisa' : 'valorRotina');
+        const price = (row)=> row ? (row[priceKey.value] ?? row.valorRotina ?? 0) : 0;
+        const money = (v)=> 'R$ '+Number(v||0).toFixed(2).replace('.',',');
+
+        // --- IHC marker list ---
+        const markerList = Object.entries(H.ihcMarkerIndex).map(([key,v])=>({key,name:v.name,...v}));
+        const markerCount = markerList.length;
+        const filteredMarkers = computed(()=>{
+            const q = ihc.search.trim().toLowerCase();
+            const base = q ? markerList.filter(m=> m.name.toLowerCase().includes(q) || m.key.toLowerCase().includes(q)) : markerList;
+            return base.slice(0, q?80:60);
+        });
+        const toggleMarker = (k)=>{ const i=ihc.selected.indexOf(k); i>-1?ihc.selected.splice(i,1):ihc.selected.push(k); };
+        const applyPanel = (p)=>{ p.marcadores.forEach(m=>{ if(m.markerKey && !ihc.selected.includes(m.markerKey)) ihc.selected.push(m.markerKey); }); };
+
+        const resolveMarker = (key)=>{
+            const m = H.ihcMarkerIndex[key]; if(!m) return null;
+            const wantClient = ihc.clientAntibody;
+            const primary = wantClient ? m.cliente : m.histocell;
+            const fallback = wantClient ? m.histocell : m.cliente;
+            const src = primary ? (wantClient?'A/C cliente':'A/C Histocell')
+                      : fallback ? (wantClient?'A/C Histocell (cliente indisponível)':'A/C cliente (Histocell indisponível)')
+                      : null;
+            const row = primary || fallback;
+            return { name:m.name, codigo: row?row.codigo:null, price: row?price(row):0, src };
+        };
+
+        // --- Colorações ---
+        const selectedStain = (s)=> coloracao.selected.some(x=>x.codigo===s.codigo);
+        const toggleStain = (s)=>{ if(s._faltante)return; const i=coloracao.selected.findIndex(x=>x.codigo===s.codigo); i>-1?coloracao.selected.splice(i,1):coloracao.selected.push(s); };
+
+        // --- IF / Citologia ---
+        const simpleList = computed(()=> category.value==='if' ? H.catalog['IF'] : H.catalog['Citologia']);
+        const simpleSel = (s)=> simpleSelected.value.some(x=>x.codigo===s.codigo && x.servicoBase===s.servicoBase);
+        const toggleSimple = (s)=>{ const i=simpleSelected.value.findIndex(x=>x.codigo===s.codigo&&x.servicoBase===s.servicoBase); i>-1?simpleSelected.value.splice(i,1):simpleSelected.value.push(s); };
+
+        // --- Macroscopia resolver ---
+        const apResolved = computed(()=>{
+            const R = H.macroscopiaResolver.regras;
+            if(ap.type==='radical') return R.radical;
+            if(ap.type==='osseo')   return R.osseo;
+            if(ap.type==='necropsia') return R.necropsia;
+            const set = ap.type==='comDescricao' ? R.comDescricao : R.simples;
+            const q = ap.qty>=4 ? '3+' : String(ap.qty);
+            return set[q] || set['3+'] || set['1'];
+        });
+
+        const setOrderType = (t)=>{ orderType.value=t; step.value=2; };
+        const setCategory = (c)=>{ category.value=c; step.value=3; ihc.selected=[]; coloracao.selected=[]; simpleSelected.value=[]; };
+
+        const addToCart = ()=>{
+            const tag = orderType.value;
+            if(category.value==='ap'){
+                const r = apResolved.value;
+                if(r) cart.value.push({ name:r.nome, codigo:r.codigo, price:price(r), details:`Macroscopia · ${ap.type==='simples'||ap.type==='comDescricao'?ap.qty+' frasco(s) · ':''}tabela ${tag} · confirmar na clivagem` });
+                if(ap.type==='osseo'){ const d=H.macroscopiaResolver.autoAnexar.osseo.servico; cart.value.push({ name:d.nome, codigo:d.codigo, price:price(d), details:`Auto-incluído (material ósseo) · tabela ${tag}` }); }
+            } else if(category.value==='ihc'){
+                if(!ihc.selected.length) return alert('Selecione ao menos um marcador.');
+                ihc.selected.forEach(k=>{ const r=resolveMarker(k); cart.value.push({ name:`Imuno · ${r.name}`, codigo:r.codigo, price:r.price, details:`${r.src||'Marcador não ofertado — consultar laboratório'} · tabela ${tag}` }); });
+            } else if(category.value==='coloracao'){
+                if(!coloracao.selected.length) return alert('Selecione ao menos uma coloração.');
+                coloracao.selected.forEach(s=> cart.value.push({ name:`Coloração ${s.nome}`, codigo:s.codigo, price:price(s), details:`Coloração especial · tabela ${tag}` }));
+            } else {
+                if(!simpleSelected.value.length) return alert('Selecione ao menos um item.');
+                simpleSelected.value.forEach(s=> cart.value.push({ name:s.servicoBase, codigo:s.codigo, price:price(s), details:`${category.value==='if'?'Imunofluorescência':'Citologia'} · tabela ${tag}` }));
+            }
+            step.value=4;
+        };
+        const cartTotal = computed(()=> cart.value.reduce((t,i)=> t + (i.codigo? Number(i.price)||0 : 0), 0));
+        const finishOrder = ()=>{ alert('Pedido gerado. Códigos reais traduzidos para o financeiro.'); cart.value=[]; step.value=1; ap.qty=1; ihc.selected=[]; coloracao.selected=[]; simpleSelected.value=[]; };
+
+        return { HISTOCELL:H, step, orderType, category, cart, ap, ihc, coloracao, categories,
+            price, money, markerCount, filteredMarkers, toggleMarker, applyPanel,
+            selectedStain, toggleStain, simpleList, simpleSel, toggleSimple, apResolved,
+            setOrderType, setCategory, addToCart, cartTotal, finishOrder };
+    }
+}).mount('#app');
+</script>
+</body>
+</html>
