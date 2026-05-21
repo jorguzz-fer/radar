@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contrato PST · Move Giro × Tudo Mudou! · MGR-001/2026</title>
+<style>
+  @page {
+    size: A4;
+    margin: 25mm 20mm 22mm 25mm;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11.5pt;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #fff;
+  }
+
+  /* ── CABEÇALHO ── */
+  .header {
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-brand {
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .header-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    text-align: right;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* ── TÍTULO ── */
+  .doc-title {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  .doc-title h1 {
+    font-size: 17pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .doc-title .doc-num {
+    font-family: 'Courier New', monospace;
+    font-size: 9pt;
+    color: #666;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── PARTES ── */
+  .partes {
+    margin-bottom: 28px;
+    background: #f9f7f4;
+    border: 1px solid #ddd;
+    padding: 18px 20px;
+  }
+  .partes-title {
+    font-size: 9pt;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #888;
+    margin-bottom: 14px;
+  }
+  .partes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .parte h3 {
+    font-size: 10pt;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #444;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+  }
+  .parte p {
+    font-size: 10.5pt;
+    line-height: 1.7;
+    color: #1a1a1a;
+  }
+  .parte p strong {
+    font-weight: 600;
+  }
+  .placeholder {
+    color: #888;
+    font-style: italic;
+  }
+
+  /* ── CLÁUSULAS ── */
+  .clause {
+    margin-bottom: 22px;
+    page-break-inside: avoid;
+  }
+  .clause-header {
+    font-size: 12pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1.5px solid #1a1a1a;
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .clause-num {
+    font-family: 'Courier New', monospace;
+    font-size: 9pt;
+    color: #888;
+    font-weight: 400;
+    flex-shrink: 0;
+    letter-spacing: 0.08em;
+  }
+  .clause p {
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .clause p:last-child { margin-bottom: 0; }
+
+  .sub-title {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #666;
+    margin: 14px 0 6px;
+  }
+
+  ol.legal {
+    margin: 8px 0 10px 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: legal-counter;
+  }
+  ol.legal li {
+    counter-increment: legal-counter;
+    padding: 5px 0 5px 28px;
+    position: relative;
+    border-top: 1px solid #e8e4de;
+    font-size: 11pt;
+    text-align: justify;
+    hyphens: auto;
+  }
+  ol.legal li:last-child { border-bottom: 1px solid #e8e4de; }
+  ol.legal li::before {
+    content: counter(legal-counter, lower-roman) ".";
+    position: absolute;
+    left: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 9pt;
+    color: #999;
+    top: 6px;
+  }
+
+  .notice {
+    background: #f5f5f0;
+    border-left: 3px solid #888;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 10.5pt;
+    color: #444;
+  }
+  .notice.warn { border-left-color: #b8841a; background: #fdf8ee; }
+
+  /* ── VALORES ── */
+  table.values {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 11pt;
+  }
+  table.values th {
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 500;
+  }
+  table.values td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+  table.values tr:nth-child(even) td { background: #f9f7f4; }
+  table.values tr.total td {
+    background: #f0ece5;
+    font-weight: 700;
+    font-size: 12pt;
+    border-top: 2px solid #1a1a1a;
+  }
+  table.values td.mono {
+    font-family: 'Courier New', monospace;
+    font-size: 11pt;
+    font-weight: 600;
+  }
+
+  /* ── QUEBRA DE PÁGINA ── */
+  .page-break { page-break-before: always; }
+
+  /* ── FORO ── */
+  .foro {
+    text-align: center;
+    margin: 24px 0;
+    font-size: 10pt;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* ── ASSINATURA ── */
+  .signature-block {
+    page-break-before: always;
+    padding-top: 10px;
+  }
+  .signature-title {
+    font-size: 10pt;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #888;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .signature-place-date {
+    text-align: center;
+    font-size: 11.5pt;
+    margin-bottom: 40px;
+    color: #333;
+  }
+  .signature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 16px;
+  }
+  .signer {
+    text-align: center;
+  }
+  .sign-line {
+    border-bottom: 1.5px solid #1a1a1a;
+    margin-bottom: 10px;
+    height: 48px;
+  }
+  .signer p {
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+  .signer .role {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* DocuSign signature field hints (invisible na impressão normal) */
+  .docusign-field {
+    display: inline-block;
+    min-width: 200px;
+    height: 20px;
+    border-bottom: 1px dashed #ccc;
+    color: transparent;
+    font-size: 1pt;
+  }
+
+  /* ── RODAPÉ ── */
+  .doc-footer {
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #ccc;
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    color: #aaa;
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .clause { page-break-inside: avoid; }
+    a { text-decoration: none; color: inherit; }
+  }
+
+  /* ── BOTÃO IMPRIMIR (não aparece no PDF) ── */
+  .print-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 14px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    z-index: 100;
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #333; }
+  @media print { .print-btn { display: none; } }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">&#x2193; Gerar PDF</button>
+
+<!-- CABEÇALHO -->
+<div class="header">
+  <div class="header-brand">Tudo Mudou!</div>
+  <div class="header-meta">
+    Contrato de Prestação de Serviços<br>
+    Nº MGR-001/2026 · Emitido em 27/04/2026
+  </div>
+</div>
+
+<!-- TÍTULO -->
+<div class="doc-title">
+  <h1>Contrato de Prestação de Serviços</h1>
+  <div class="doc-num">Nº MGR-001/2026 · Vigência: 12 meses · Foro: Osasco — SP</div>
+</div>
+
+<!-- PARTES -->
+<div class="partes">
+  <div class="partes-title">Partes Contratantes</div>
+  <div class="partes-grid">
+    <div class="parte">
+      <h3>Contratante</h3>
+      <p>
+        <strong>Move Giro Moto Peças</strong><br>
+        CNPJ: 53.180.510/0001-54<br>
+        Av. dos Autonomistas, 3588 — Vila Yara<br>
+        CEP 06090-015 — Osasco/SP<br>
+        Repr.: Vanderlei Ribeiro · Sócio<br>
+        Tel.: (11) 93720-0404 · adm@movegiro.com.br
+      </p>
+    </div>
+    <div class="parte">
+      <h3>Contratada</h3>
+      <p>
+        <strong>Tudo Mudou Marketing e Consultoria LTDA</strong><br>
+        CNPJ: 40.790.711/0001-21<br>
+        Av. Santo Antônio, 1453 — Vila Osasco<br>
+        CEP 06083-210 — Osasco/SP<br>
+        Repr.: Fernando Jorge
+      </p>
+    </div>
+  </div>
+</div>
+
+<p style="text-align:justify; margin-bottom:24px; font-size:11pt;">
+  As partes acima identificadas celebram o presente <strong>Contrato de Prestação de Serviços</strong>, que se regerá pelas cláusulas e condições a seguir:
+</p>
+
+<!-- ══════════════════════════════════════════════════════════════
+     CLÁUSULAS
+     ══════════════════════════════════════════════════════════════ -->
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 1ª</span> Objeto do Contrato</div>
+
+  <p>O presente contrato tem por objeto a prestação de serviços de tecnologia e automação pela <strong>Contratante</strong> à <strong>Contratada</strong>, compreendendo o setup, implementação, treinamento e manutenção continuada das seguintes frentes:</p>
+
+  <p class="sub-title">Frente 01 — Atendente IA Omnichannel</p>
+  <p>Implementação do <strong>Chatwoot</strong> como hub de atendimento unificado, com integração de <strong>WhatsApp Business</strong> e <strong>Instagram Direct</strong>. Inclui configuração de Inteligência Artificial atendente com base de conhecimento dos produtos da Contratada, fluxos de triagem automática, escalonamento humano e resposta automatizada 24 (vinte e quatro) horas por dia, 7 (sete) dias por semana.</p>
+
+  <p class="sub-title">Frente 02 — Integração Bling + WhatsApp com Visão Computacional</p>
+  <p>Automação de consulta de estoque via WhatsApp, com reconhecimento de produtos por imagem (visão computacional) e por texto (fuzzy matching), integração ao ERP Bling em tempo real, retornando ao cliente disponibilidade de estoque, preço e link de compra direto na conversa, sem intervenção humana.</p>
+
+  <div class="notice">
+    <strong>Parágrafo único.</strong> Quaisquer funcionalidades, integrações ou módulos não listados explicitamente nesta cláusula são considerados fora do escopo e deverão ser formalizados em aditivo contratual específico, mediante nova proposta comercial.
+  </div>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 2ª</span> Prazo e Vigência</div>
+
+  <p class="sub-title">§ 1º — Fase de Setup</p>
+  <p>A fase de setup e implementação das 2 (duas) frentes terá duração de até <strong>6 (seis) semanas corridas</strong> a partir da data de assinatura deste instrumento e da confirmação do pagamento do valor de setup previsto na Cláusula 3ª.</p>
+
+  <p class="sub-title">§ 2º — Contrato de Operação</p>
+  <p>O contrato de manutenção e suporte continuado terá vigência de <strong>12 (doze) meses</strong>, com início na data de go-live confirmado por escrito por ambas as partes.</p>
+
+  <p class="sub-title">§ 3º — Renovação Automática</p>
+  <p>O contrato será renovado automaticamente por iguais períodos de 12 (doze) meses, salvo comunicação de não renovação por qualquer das partes com antecedência mínima de <strong>30 (trinta) dias</strong> antes do término do período vigente, mediante notificação por escrito ou por e-mail com confirmação de leitura.</p>
+
+  <p class="sub-title">§ 4º — Atraso por Responsabilidade da Contratante</p>
+  <p>Caso o setup ultrapasse 6 (seis) semanas por responsabilidade exclusiva da Contratante, a Contratada não será penalizada e o período de operação contratado será contado a partir da data efetiva de go-live.</p>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 3ª</span> Valores e Condições de Pagamento</div>
+
+  <table class="values">
+    <thead>
+      <tr>
+        <th>Serviço</th>
+        <th>Modalidade</th>
+        <th>Vencimento</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Setup — Implementação completa das 2 frentes</td>
+        <td>Pagamento único</td>
+        <td>Antes do início do setup</td>
+        <td class="mono">R$ 1.650,00</td>
+      </tr>
+      <tr>
+        <td>Mensalidade — Manutenção e suporte continuado</td>
+        <td>Recorrente · 12 meses</td>
+        <td>Todo dia 10 de cada mês</td>
+        <td class="mono">R$ 275,00/mês</td>
+      </tr>
+      <tr class="total">
+        <td colspan="3">Total do contrato (setup + 12 mensalidades)</td>
+        <td class="mono">R$ 4.950,00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="sub-title">§ 1º — Forma de Pagamento</p>
+  <p>Os pagamentos serão realizados via <strong>PIX</strong> (chave CNPJ: 40.790.711/0001-21) ou boleto bancário emitido pela Contratante. O valor de setup deverá ser quitado integralmente antes do início dos trabalhos de implementação.</p>
+
+  <p class="sub-title">§ 2º — Atraso no Pagamento</p>
+  <p>O não pagamento na data de vencimento acarretará <strong>multa de 2% (dois por cento)</strong> sobre o valor em aberto, acrescida de <strong>juros moratórios de 1% (um por cento) ao mês</strong>, calculados pro rata die, além de correção monetária pelo IPCA/IBGE do período.</p>
+
+  <p class="sub-title">§ 3º — Reajuste Anual</p>
+  <p>Os valores mensais serão reajustados anualmente na data de aniversário do contrato pelo índice <strong>IGPM (FGV)</strong> ou <strong>IPCA (IBGE)</strong>, o que for maior, acumulado nos últimos 12 (doze) meses.</p>
+
+  <p class="sub-title">§ 4º — Custos de Responsabilidade da Contratada</p>
+  <p>São de responsabilidade financeira exclusiva da Contratada os seguintes custos de plataformas e infraestrutura:</p>
+  <ol class="legal">
+    <li>Infraestrutura de servidor/VPS para hospedagem do Chatwoot e automações;</li>
+    <li>Domínio e certificado SSL/TLS;</li>
+    <li>APIs de Inteligência Artificial (OpenAI, Anthropic/Claude e similares);</li>
+    <li>Evolution API para integração com WhatsApp Business;</li>
+    <li>Quaisquer outras plataformas SaaS ou serviços de terceiros necessários à operação.</li>
+  </ol>
+</div>
+
+<div class="clause page-break">
+  <div class="clause-header"><span class="clause-num">Cláusula 4ª</span> Obrigações da Contratante</div>
+  <p>São obrigações da Contratada (Tudo Mudou!):</p>
+  <ol class="legal">
+    <li>Executar os serviços descritos na Cláusula 1ª dentro dos prazos estabelecidos na Cláusula 2ª, ressalvadas situações de força maior ou dependência de ações da Contratada;</li>
+    <li>Manter a IA atendente atualizada e funcional durante todo o período de vigência do contrato, realizando ajustes e melhorias com base em conversas reais;</li>
+    <li>Prestar suporte técnico para dúvidas, falhas e manutenção das ferramentas sob sua responsabilidade;</li>
+    <li>Monitorar a disponibilidade (uptime) dos canais configurados e notificar a Contratada em caso de instabilidade identificada;</li>
+    <li>Manter backups regulares das configurações e dados operacionais sob sua gestão direta;</li>
+    <li>Tratar com estrito sigilo todos os dados, conversas e informações de clientes da Contratada, em conformidade com a LGPD;</li>
+    <li>Notificar a Contratada com antecedência mínima de 24 (vinte e quatro) horas sobre manutenções programadas que impactem os serviços;</li>
+    <li>Apresentar relatório mensal simplificado com métricas de uso e atendimento, enviado por e-mail ao ponto focal da Contratada.</li>
+  </ol>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 5ª</span> Obrigações da Contratada</div>
+  <p>São obrigações da Contratante (Move Giro):</p>
+  <ol class="legal">
+    <li>Efetuar os pagamentos nos valores e prazos estabelecidos na Cláusula 3ª;</li>
+    <li>Fornecer, no prazo de até <strong>5 (cinco) dias úteis</strong> após a assinatura deste contrato, todos os acessos e credenciais necessários às plataformas: Bling (API key), WhatsApp Business (número ativo), Instagram (credenciais), Shopify (se aplicável) e demais ferramentas listadas no escopo;</li>
+    <li>Designar um responsável interno (ponto focal) para acompanhar o projeto, validar entregas e responder comunicações da Contratante;</li>
+    <li>Responder solicitações de validação e aprovação em até <strong>3 (três) dias úteis</strong>;</li>
+    <li>Arcar com todos os custos de infraestrutura, APIs e plataformas terceiras listados no § 4º da Cláusula 3ª;</li>
+    <li>Não realizar alterações diretas nas configurações do Chatwoot, fluxos do N8N ou demais automações sem anuência prévia e expressa da Contratante;</li>
+    <li>Comunicar previamente qualquer mudança em processos internos que possa impactar os fluxos automatizados configurados;</li>
+    <li>Utilizar os serviços contratados em conformidade com a legislação vigente, em especial a Lei Geral de Proteção de Dados (LGPD).</li>
+  </ol>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 6ª</span> Escopo Não Incluso</div>
+  <p>Não estão inclusos no presente contrato, podendo ser cotados mediante aditivo formal:</p>
+  <ol class="legal">
+    <li>Criação ou otimização de textos descritivos do catálogo Shopify;</li>
+    <li>Integração com plataformas além das especificadas neste contrato (Chatwoot, Bling, WhatsApp Business, Instagram Direct);</li>
+    <li>Desenvolvimento de novas frentes ou módulos de atendimento não previstos neste instrumento;</li>
+    <li>Treinamento presencial ou remoto formal da equipe da Contratada;</li>
+    <li>Gestão de campanhas de marketing digital ou anúncios pagos;</li>
+    <li>Criação de conteúdo para a base de conhecimento da IA (a responsabilidade de fornecer as informações e catálogo de produtos é da Contratada).</li>
+  </ol>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 7ª</span> Propriedade Intelectual</div>
+
+  <p class="sub-title">§ 1º — Propriedade da Contratada</p>
+  <p>As configurações, fluxos de automação, bases de conhecimento e demais personalizações criadas especificamente para a Contratada são de <strong>propriedade da Contratada</strong>, podendo ser exportadas ao término do contrato mediante solicitação formal enviada por escrito.</p>
+
+  <p class="sub-title">§ 2º — Propriedade da Contratante</p>
+  <p>A metodologia, os frameworks de automação, os modelos de Inteligência Artificial e demais desenvolvimentos de caráter genérico realizados pela Contratante permanecem como <strong>propriedade intelectual exclusiva da Contratante</strong> (Tudo Mudou!), não podendo ser reproduzidos, cedidos ou sublicenciados pela Contratada a qualquer terceiro.</p>
+
+  <p class="sub-title">§ 3º — Entrega de Ativos na Rescisão</p>
+  <p>Em caso de rescisão contratual, por qualquer motivo, a Contratante disponibilizará à Contratada arquivo de exportação contendo todas as configurações do Chatwoot, fluxos do N8N e bases de dados pertencentes à Contratada, no prazo de <strong>15 (quinze) dias úteis</strong> após o encerramento dos serviços.</p>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 8ª</span> Confidencialidade</div>
+
+  <p>Ambas as partes comprometem-se a manter em estrito sigilo todas as informações confidenciais às quais tiverem acesso em razão deste contrato, incluindo, sem limitação: estratégias comerciais, dados de clientes, listas de preços, processos internos, base de conhecimento da IA e configurações técnicas.</p>
+
+  <p>A obrigação de confidencialidade permanece vigente por <strong>2 (dois) anos</strong> após o término ou rescisão deste contrato, independentemente do motivo.</p>
+
+  <ol class="legal">
+    <li>Não são consideradas confidenciais as informações que já sejam de domínio público por meios lícitos, independentemente da atuação das partes;</li>
+    <li>O descumprimento do dever de sigilo sujeitará a parte infratora à reparação integral dos danos materiais e morais causados à outra parte, apurados em processo judicial ou arbitral.</li>
+  </ol>
+</div>
+
+<div class="clause page-break">
+  <div class="clause-header"><span class="clause-num">Cláusula 9ª</span> Proteção de Dados — LGPD</div>
+
+  <p>As partes declaram conhecer e comprometem-se a cumprir integralmente a <strong>Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais — LGPD)</strong> e demais normas regulatórias aplicáveis ao tratamento de dados pessoais.</p>
+
+  <p class="sub-title">§ 1º — Papéis no Tratamento de Dados</p>
+  <ol class="legal">
+    <li><strong>Controladora:</strong> a Contratante (Move Giro), que determina as finalidades e os meios do tratamento dos dados pessoais de seus clientes e usuários;</li>
+    <li><strong>Operadora:</strong> a Contratada (Tudo Mudou!), que realiza o tratamento dos dados pessoais em nome e sob as instruções da Controladora, no contexto dos serviços contratados.</li>
+  </ol>
+
+  <p class="sub-title">§ 2º — Compromissos da Operadora (Tudo Mudou!)</p>
+  <ol class="legal">
+    <li>Tratar os dados pessoais exclusivamente nas condições e finalidades determinadas pela Controladora;</li>
+    <li>Adotar medidas técnicas e organizacionais adequadas para proteger os dados contra acesso não autorizado, perda, destruição ou divulgação indevida;</li>
+    <li>Notificar a Controladora em até <strong>72 (setenta e duas) horas</strong> após tomar conhecimento de qualquer incidente de segurança que envolva dados pessoais;</li>
+    <li>Eliminar ou devolver os dados pessoais à Controladora ao término do contrato, conforme instrução expressa da Controladora;</li>
+    <li>Colaborar para o exercício dos direitos dos titulares (acesso, correção, portabilidade, exclusão e oposição), conforme solicitação da Controladora.</li>
+  </ol>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 10ª</span> Rescisão</div>
+
+  <p class="sub-title">§ 1º — Por Descumprimento Contratual</p>
+  <p>Qualquer das partes poderá rescindir este contrato em caso de descumprimento de cláusula pela outra parte, mediante notificação prévia por escrito com prazo de <strong>15 (quinze) dias corridos</strong> para regularização. Persistindo o descumprimento após este prazo, a rescisão será considerada efetivada de pleno direito.</p>
+
+  <p class="sub-title">§ 2º — Por Inadimplência</p>
+  <p>O atraso no pagamento superior a <strong>30 (trinta) dias corridos</strong> confere à Contratada o direito de suspender imediatamente os serviços e rescindir o contrato sem necessidade de aviso prévio adicional, sem prejuízo da cobrança integral dos valores em aberto e das penalidades previstas na Cláusula 3ª.</p>
+
+  <p class="sub-title">§ 3º — Rescisão Antecipada sem Justa Causa</p>
+  <p>A parte que desejar rescindir o contrato antes do término do período contratado de 12 (doze) meses, sem justa causa reconhecida, deverá:</p>
+  <ol class="legal">
+    <li>Comunicar a outra parte com antecedência mínima de <strong>30 (trinta) dias corridos</strong>; e</li>
+    <li>Pagar multa compensatória equivalente a <strong>30% (trinta por cento)</strong> do valor total das mensalidades remanescentes até o término natural do contrato.</li>
+  </ol>
+
+  <div class="notice warn">
+    <strong>Exemplo ilustrativo:</strong> rescisão antecipada no 6º mês implica multa sobre 6 mensalidades remanescentes × R$ 275,00 = R$ 1.650,00 × 30% = <strong>R$ 495,00</strong>, além do aviso prévio de 30 dias ou pagamento equivalente.
+  </div>
+
+  <p class="sub-title">§ 4º — Efeitos da Rescisão</p>
+  <ol class="legal">
+    <li>Os serviços serão encerrados ao final do período de aviso prévio ou na data acordada entre as partes;</li>
+    <li>A Contratante disponibilizará os arquivos de exportação previstos na Cláusula 7ª, § 3º, em até 15 dias úteis;</li>
+    <li>Valores em aberto, acrescidos de encargos previstos na Cláusula 3ª, serão cobrados integralmente.</li>
+  </ol>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 11ª</span> Limitação de Responsabilidade</div>
+
+  <p>A Contratante não se responsabiliza por:</p>
+  <ol class="legal">
+    <li>Indisponibilidade de serviços de terceiros (Meta/WhatsApp, Instagram, Bling, APIs de IA) por período que exceda sua capacidade de controle ou mitigação;</li>
+    <li>Resultados comerciais, financeiros ou operacionais decorrentes do uso ou não uso dos serviços contratados;</li>
+    <li>Perdas causadas por informações incorretas, incompletas ou desatualizadas fornecidas pela Contratada para a base de conhecimento da IA;</li>
+    <li>Danos indiretos, lucros cessantes, perdas de oportunidade ou danos emergentes não diretamente causados por ação ou omissão da Contratante.</li>
+  </ol>
+
+  <p><strong>Parágrafo único.</strong> A responsabilidade máxima da Contratante, em qualquer hipótese prevista neste contrato, fica limitada ao valor total efetivamente pago pela Contratada nos últimos <strong>3 (três) meses</strong> de vigência do contrato.</p>
+</div>
+
+<div class="clause">
+  <div class="clause-header"><span class="clause-num">Cláusula 12ª</span> Disposições Gerais</div>
+
+  <ol class="legal">
+    <li>Este instrumento substitui e prevalece sobre qualquer entendimento verbal ou escrito anterior entre as partes relativo ao mesmo objeto;</li>
+    <li>Qualquer alteração ao presente contrato somente terá validade se formalizada por <strong>aditivo contratual escrito</strong>, assinado por representantes legais de ambas as partes;</li>
+    <li>O presente contrato não gera vínculo empregatício, societário, de parceria ou de qualquer outra natureza entre as partes, além da relação de prestação de serviços aqui descrita;</li>
+    <li>A tolerância de uma parte em relação ao descumprimento pela outra não implica novação, renúncia de direito, remissão ou qualquer alteração dos termos contratuais;</li>
+    <li>Se qualquer cláusula ou disposição deste contrato for declarada inválida, nula ou inexequível por decisão judicial, as demais cláusulas permanecerão em pleno vigor e efeito.</li>
+  </ol>
+
+  <p class="sub-title">§ 1º — Foro</p>
+  <p>As partes elegem o Foro da Comarca de <strong>Osasco, Estado de São Paulo</strong>, com exclusão de qualquer outro, por mais privilegiado que seja, para dirimir quaisquer controvérsias ou litígios oriundos do presente contrato. As partes comprometem-se a tentar a solução amigável de eventuais conflitos antes de recorrer ao Poder Judiciário.</p>
+
+  <p class="sub-title">§ 2º — Lei Aplicável</p>
+  <p>O presente contrato é regido pelas leis da <strong>República Federativa do Brasil</strong>, em especial pelo Código Civil (Lei nº 10.406/2002) e pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
+</div>
+
+<!-- ASSINATURA -->
+<div class="signature-block">
+  <div class="signature-title">Assinaturas</div>
+
+  <p style="text-align:justify; margin-bottom:28px; font-size:11pt;">
+    E por estarem assim justas e contratadas, as partes assinam o presente instrumento em 2 (duas) vias de igual teor e forma, juntamente com 2 (duas) testemunhas.
+  </p>
+
+  <div class="signature-place-date">
+    Osasco, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de 2026.
+  </div>
+
+  <div class="signature-grid">
+    <!-- Contratante -->
+    <div class="signer">
+      <div class="sign-line"></div>
+      <p>
+        <strong>Vanderlei Ribeiro</strong><br>
+        Move Giro Moto Peças<br>
+        CNPJ: 53.180.510/0001-54<br>
+        <span class="role">Contratante</span>
+      </p>
+    </div>
+    <!-- Contratada -->
+    <div class="signer">
+      <div class="sign-line"></div>
+      <p>
+        <strong>Fernando Jorge</strong><br>
+        Tudo Mudou Marketing e Consultoria LTDA<br>
+        CNPJ: 40.790.711/0001-21<br>
+        <span class="role">Contratada</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="signature-grid" style="margin-top: 48px;">
+    <!-- Testemunha 1 -->
+    <div class="signer">
+      <div class="sign-line"></div>
+      <p>
+        <strong class="placeholder">[NOME COMPLETO]</strong><br>
+        CPF: <span class="placeholder">[CPF]</span><br>
+        <span class="role">Testemunha 1</span>
+      </p>
+    </div>
+    <!-- Testemunha 2 -->
+    <div class="signer">
+      <div class="sign-line"></div>
+      <p>
+        <strong class="placeholder">[NOME COMPLETO]</strong><br>
+        CPF: <span class="placeholder">[CPF]</span><br>
+        <span class="role">Testemunha 2</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- RODAPÉ -->
+<div class="doc-footer">
+  Tudo Mudou Marketing e Consultoria LTDA · CNPJ 40.790.711/0001-21 · Osasco/SP · 2026<br>
+  Contrato Nº MGR-001/2026 · Prestação de Serviços de Tecnologia e Automação
+</div>
+
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anexo I — Roadmap de Implantação · Move Giro × Tudo Mudou!</title>
+<style>
+  @page {
+    size: A4;
+    margin: 25mm 20mm 22mm 25mm;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    line-height: 1.65;
+    color: #1a1a1a;
+    background: #fff;
+  }
+
+  /* ── CABEÇALHO ── */
+  .header {
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-brand { font-size: 15pt; font-weight: 700; letter-spacing: -0.02em; }
+  .header-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    text-align: right;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* ── TÍTULO ── */
+  .doc-title {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #ccc;
+  }
+  .doc-title .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  .doc-title h1 {
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .doc-title .doc-ref {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    color: #888;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── INTRO ── */
+  .intro-box {
+    background: #f5f5f0;
+    border: 1px solid #ddd;
+    border-left: 3px solid #1a1a1a;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 10.5pt;
+    color: #333;
+    line-height: 1.7;
+  }
+  .intro-box strong { font-weight: 700; }
+
+  /* ── LINHA DO TEMPO VISUAL ── */
+  .timeline-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 36px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+  }
+  .tl-cell {
+    flex: 1;
+    padding: 10px 8px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-right: 1px solid #ddd;
+    line-height: 1.4;
+  }
+  .tl-cell:last-child { border-right: none; }
+  .tl-cell.active { background: #1a1a1a; color: #fff; }
+  .tl-cell .week { font-size: 9.5pt; font-weight: 700; display: block; }
+  .tl-cell .label { font-size: 7pt; display: block; color: inherit; opacity: 0.85; }
+  .tl-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14pt;
+    color: #ccc;
+    padding: 0;
+    border-right: 1px solid #ddd;
+    min-width: 18px;
+    background: #f9f9f9;
+  }
+
+  /* ── FASE ── */
+  .phase { margin-bottom: 26px; page-break-inside: avoid; }
+  .phase-header {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 12px;
+    border: 1px solid #1a1a1a;
+  }
+  .phase-badge {
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 14px;
+    writing-mode: horizontal-tb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    text-align: center;
+    line-height: 1.5;
+    flex-shrink: 0;
+  }
+  .phase-badge .num { font-size: 18pt; font-weight: 700; font-family: 'Times New Roman', serif; line-height: 1; }
+  .phase-title-block {
+    padding: 10px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+  .phase-period {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .phase-title { font-size: 13pt; font-weight: 700; color: #1a1a1a; }
+  .phase-goal {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    color: #555;
+    letter-spacing: 0.04em;
+    border-left: 1px solid #1a1a1a;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+
+  /* ── BODY DA FASE ── */
+  .phase-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .phase-col {}
+  .col-title {
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #888;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+
+  /* Tarefas */
+  .tasks { list-style: none; }
+  .tasks li {
+    font-size: 10.5pt;
+    padding: 5px 0 5px 18px;
+    position: relative;
+    border-bottom: 1px solid #f0ece6;
+    color: #222;
+    line-height: 1.5;
+  }
+  .tasks li:last-child { border-bottom: none; }
+  .tasks li::before {
+    content: "□";
+    position: absolute;
+    left: 0;
+    font-size: 9pt;
+    color: #bbb;
+    top: 5px;
+  }
+  .tasks li strong { font-weight: 600; }
+
+  /* Entregas */
+  .deliverables { list-style: none; }
+  .deliverables li {
+    font-size: 10.5pt;
+    padding: 6px 0 6px 20px;
+    position: relative;
+    border-bottom: 1px solid #f0ece6;
+    color: #1a1a1a;
+    line-height: 1.5;
+  }
+  .deliverables li:last-child { border-bottom: none; }
+  .deliverables li::before {
+    content: "▸";
+    position: absolute;
+    left: 2px;
+    font-size: 8pt;
+    color: #555;
+    top: 7px;
+  }
+  .deliverable-check {
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* Responsável */
+  .phase-resp {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #f9f7f4;
+    border: 1px solid #e8e4de;
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    color: #555;
+    display: flex;
+    gap: 24px;
+  }
+  .resp-item strong { color: #1a1a1a; }
+
+  /* ── CRITÉRIOS DE ACEITE ── */
+  .acceptance {
+    margin-top: 26px;
+    page-break-inside: avoid;
+  }
+  .acceptance-title {
+    font-size: 10pt;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #1a1a1a;
+    border-bottom: 1.5px solid #1a1a1a;
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+  }
+  table.accept-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+  }
+  table.accept-table th {
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 500;
+  }
+  table.accept-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  table.accept-table tr:nth-child(even) td { background: #f9f7f4; }
+  table.accept-table td:first-child {
+    font-family: 'Courier New', monospace;
+    font-size: 9pt;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #333;
+    border-right: 1px solid #ddd;
+  }
+
+  /* ── SUPORTE RECORRENTE ── */
+  .support-block {
+    margin-top: 26px;
+    page-break-inside: avoid;
+  }
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+  }
+  .support-cell {
+    padding: 14px 16px;
+    border-right: 1px solid #ddd;
+  }
+  .support-cell:last-child { border-right: none; }
+  .support-cell-label {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  .support-cell-title { font-size: 11pt; font-weight: 700; margin-bottom: 6px; }
+  .support-cell p { font-size: 10pt; color: #444; line-height: 1.5; }
+
+  /* ── PREMISSAS ── */
+  .premises {
+    margin-top: 26px;
+    page-break-inside: avoid;
+    background: #fdf8ee;
+    border: 1px solid #e8d8a0;
+    border-left: 3px solid #b8841a;
+    padding: 14px 18px;
+  }
+  .premises-title {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #b8841a;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .premises ol {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 10.5pt;
+    color: #444;
+  }
+  .premises ol li { padding: 3px 0; line-height: 1.55; }
+
+  /* ── ASSINATURA ── */
+  .sign-block {
+    margin-top: 36px;
+    page-break-before: always;
+    padding-top: 8px;
+  }
+  .sign-label {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #888;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .sign-note {
+    font-size: 10pt;
+    color: #555;
+    text-align: center;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .sign-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .signer { text-align: center; }
+  .sign-line { border-bottom: 1.5px solid #1a1a1a; height: 48px; margin-bottom: 10px; }
+  .signer p { font-size: 10.5pt; line-height: 1.6; }
+  .signer .role {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* ── RODAPÉ ── */
+  .doc-footer {
+    margin-top: 32px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    color: #bbb;
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .phase, .acceptance, .support-block, .premises { page-break-inside: avoid; }
+  }
+
+  .print-btn {
+    position: fixed; bottom: 32px; right: 32px;
+    background: #1a1a1a; color: #fff; border: none;
+    padding: 14px 24px;
+    font-family: 'Courier New', monospace; font-size: 10pt;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    cursor: pointer; z-index: 100; transition: background 0.2s;
+  }
+  .print-btn:hover { background: #333; }
+  @media print { .print-btn { display: none; } }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">&#x2193; Gerar PDF</button>
+
+<!-- CABEÇALHO -->
+<div class="header">
+  <div class="header-brand">Tudo Mudou!</div>
+  <div class="header-meta">
+    Anexo I — Roadmap de Implantação<br>
+    Ref. Contrato MGR-001/2026 · Emitido em 27/04/2026
+  </div>
+</div>
+
+<!-- TÍTULO -->
+<div class="doc-title">
+  <div class="eyebrow">Anexo I do Contrato de Licença de Uso, Automação e Suporte Tecnológico</div>
+  <h1>Roadmap de Implantação e Entregas</h1>
+  <div class="doc-ref">Move Giro Moto Peças × Tudo Mudou Marketing e Consultoria · MGR-001/2026</div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-box">
+  Este documento integra o <strong>Contrato de Licença de Uso, Automação e Suporte Tecnológico nº MGR-001/2026</strong>, descrevendo o escopo de implantação em fases, com respectivas tarefas, entregas e critérios de aceite. O roadmap é referência para gestão do projeto e homologação formal da solução. Prazo total de implantação: <strong>até 6 (seis) semanas</strong> após confirmação do pagamento do setup e entrega integral dos acessos.
+</div>
+
+<!-- LINHA DO TEMPO -->
+<div class="timeline-bar">
+  <div class="tl-cell active"><span class="week">S1</span><span class="label">Discovery</span></div>
+  <div class="tl-cell active"><span class="week">S2</span><span class="label">Infraestrutura</span></div>
+  <div class="tl-cell active"><span class="week">S3</span><span class="label">Canais</span></div>
+  <div class="tl-cell active"><span class="week">S3–4</span><span class="label">IA & Automações</span></div>
+  <div class="tl-cell active"><span class="week">S4–5</span><span class="label">Bling + Estoque</span></div>
+  <div class="tl-cell active"><span class="week">S6</span><span class="label">Testes & Go-Live</span></div>
+  <div class="tl-cell"><span class="week">S7+</span><span class="label">Suporte recorrente</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FASE 1
+     ═══════════════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-badge"><span class="num">1</span>FASE</div>
+    <div class="phase-title-block">
+      <div class="phase-period">Semana 1 — Dias 1 a 7</div>
+      <div class="phase-title">Discovery & Preparação</div>
+    </div>
+    <div class="phase-goal">Objetivo: alinhar escopo técnico e coletar todos os insumos</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-col">
+      <div class="col-title">Tarefas</div>
+      <ul class="tasks">
+        <li>Reunião de kick-off com ponto focal da Move Giro</li>
+        <li>Coleta e validação de todos os acessos e credenciais</li>
+        <li>Mapeamento dos fluxos de atendimento atuais</li>
+        <li>Levantamento de FAQs, catálogo e base de produtos</li>
+        <li>Definição de tom de voz e regras da IA atendente</li>
+        <li>Levantamento dos canais ativos (WhatsApp, Instagram)</li>
+        <li>Validação do número WhatsApp Business e conta Meta</li>
+        <li>Acesso à conta Bling e mapeamento de campos de estoque</li>
+      </ul>
+    </div>
+    <div class="phase-col">
+      <div class="col-title">Entregas</div>
+      <ul class="deliverables">
+        <li>
+          Documento de Escopo Técnico validado
+          <span class="deliverable-check">→ assinado pela CONTRATANTE</span>
+        </li>
+        <li>
+          Checklist de acessos recebidos e validados
+          <span class="deliverable-check">→ confirmado por e-mail</span>
+        </li>
+        <li>
+          Mapa de fluxos de atendimento documentado
+          <span class="deliverable-check">→ aprovado pelo ponto focal</span>
+        </li>
+        <li>
+          Cronograma detalhado atualizado
+          <span class="deliverable-check">→ compartilhado com a CONTRATANTE</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase-resp">
+    <span><strong>Responsável principal:</strong> Tudo Mudou!</span>
+    <span><strong>Participação obrigatória:</strong> Ponto focal Move Giro</span>
+    <span><strong>Prazo de resposta CONTRATANTE:</strong> até 3 dias úteis</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FASE 2
+     ═══════════════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-badge"><span class="num">2</span>FASE</div>
+    <div class="phase-title-block">
+      <div class="phase-period">Semana 2 — Dias 8 a 14</div>
+      <div class="phase-title">Setup de Infraestrutura</div>
+    </div>
+    <div class="phase-goal">Objetivo: ambiente base operacional e seguro</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-col">
+      <div class="col-title">Tarefas</div>
+      <ul class="tasks">
+        <li>Provisionamento do servidor/VPS (responsabilidade da CONTRATANTE)</li>
+        <li>Instalação e hardening do Chatwoot em servidor dedicado</li>
+        <li>Configuração de domínio e certificado SSL</li>
+        <li>Instalação e configuração do Evolution API para WhatsApp</li>
+        <li>Configuração de backups automáticos</li>
+        <li>Validação de uptime e monitoramento básico</li>
+        <li>Documentação do ambiente instalado</li>
+      </ul>
+    </div>
+    <div class="phase-col">
+      <div class="col-title">Entregas</div>
+      <ul class="deliverables">
+        <li>
+          Chatwoot instalado e acessível via domínio próprio
+          <span class="deliverable-check">→ URL de acesso enviada</span>
+        </li>
+        <li>
+          Evolution API configurada e funcional
+          <span class="deliverable-check">→ teste de conectividade confirmado</span>
+        </li>
+        <li>
+          Certificado SSL ativo (HTTPS)
+          <span class="deliverable-check">→ verificação automática</span>
+        </li>
+        <li>
+          Documento de configuração de infraestrutura
+          <span class="deliverable-check">→ entregue à CONTRATANTE</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase-resp">
+    <span><strong>Responsável principal:</strong> Tudo Mudou!</span>
+    <span><strong>Critério de avanço:</strong> Chatwoot acessível via HTTPS</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FASE 3
+     ═══════════════════════════════════════════ -->
+<div class="phase page-break">
+  <div class="phase-header">
+    <div class="phase-badge"><span class="num">3</span>FASE</div>
+    <div class="phase-title-block">
+      <div class="phase-period">Semana 3 — Dias 15 a 21</div>
+      <div class="phase-title">Integração de Canais</div>
+    </div>
+    <div class="phase-goal">Objetivo: WhatsApp e Instagram unificados no Chatwoot</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-col">
+      <div class="col-title">Tarefas</div>
+      <ul class="tasks">
+        <li>Conexão do número WhatsApp Business ao Evolution API</li>
+        <li>Integração WhatsApp → Chatwoot (caixa de entrada)</li>
+        <li>Integração Instagram Direct → Chatwoot</li>
+        <li>Configuração de perfil de atendimento e horários</li>
+        <li>Criação de agentes e times no Chatwoot</li>
+        <li>Configuração de rótulos e categorias de conversa</li>
+        <li>Configuração de mensagens de ausência e boas-vindas</li>
+        <li>Testes de fluxo de mensagem ponta a ponta</li>
+      </ul>
+    </div>
+    <div class="phase-col">
+      <div class="col-title">Entregas</div>
+      <ul class="deliverables">
+        <li>
+          WhatsApp Business ativo e recebendo mensagens no Chatwoot
+          <span class="deliverable-check">→ teste realizado e aprovado</span>
+        </li>
+        <li>
+          Instagram Direct integrado ao Chatwoot
+          <span class="deliverable-check">→ teste realizado e aprovado</span>
+        </li>
+        <li>
+          Agentes e times configurados com acesso ao painel
+          <span class="deliverable-check">→ credenciais entregues ao ponto focal</span>
+        </li>
+        <li>
+          Mensagens automáticas de boas-vindas e ausência ativas
+          <span class="deliverable-check">→ validadas pela CONTRATANTE</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase-resp">
+    <span><strong>Responsável principal:</strong> Tudo Mudou!</span>
+    <span><strong>Dependência:</strong> conta Meta Business verificada</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FASE 4
+     ═══════════════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-badge"><span class="num">4</span>FASE</div>
+    <div class="phase-title-block">
+      <div class="phase-period">Semanas 3–4 — Dias 15 a 28</div>
+      <div class="phase-title">IA Atendente & Automações</div>
+    </div>
+    <div class="phase-goal">Objetivo: atendente IA operacional 24h em todos os canais</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-col">
+      <div class="col-title">Tarefas</div>
+      <ul class="tasks">
+        <li>Estruturação da base de conhecimento com FAQs Move Giro</li>
+        <li>Configuração do agente de IA (LLM) com prompt personalizado</li>
+        <li>Treinamento com catálogo, políticas e informações comerciais</li>
+        <li>Configuração de fluxo de triagem automática de atendimentos</li>
+        <li>Configuração de escalonamento para atendente humano</li>
+        <li>Automação de resposta fora do horário comercial</li>
+        <li>Configuração de encerramento automático de tickets inativos</li>
+        <li>Testes de conversas com cenários reais de clientes</li>
+        <li>Ajustes de prompts baseados nos testes</li>
+      </ul>
+    </div>
+    <div class="phase-col">
+      <div class="col-title">Entregas</div>
+      <ul class="deliverables">
+        <li>
+          IA atendente configurada e respondendo mensagens
+          <span class="deliverable-check">→ 10 cenários de teste aprovados</span>
+        </li>
+        <li>
+          Fluxo de triagem automática ativo
+          <span class="deliverable-check">→ validado pelo ponto focal</span>
+        </li>
+        <li>
+          Escalonamento humano funcionando
+          <span class="deliverable-check">→ testado e aprovado</span>
+        </li>
+        <li>
+          Base de conhecimento documentada
+          <span class="deliverable-check">→ entregue à CONTRATANTE</span>
+        </li>
+        <li>
+          Relatório de testes da IA
+          <span class="deliverable-check">→ entregue para homologação</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase-resp">
+    <span><strong>Responsável principal:</strong> Tudo Mudou!</span>
+    <span><strong>Insumo obrigatório:</strong> FAQs e catálogo fornecidos pela Move Giro</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FASE 5
+     ═══════════════════════════════════════════ -->
+<div class="phase page-break">
+  <div class="phase-header">
+    <div class="phase-badge"><span class="num">5</span>FASE</div>
+    <div class="phase-title-block">
+      <div class="phase-period">Semanas 4–5 — Dias 22 a 35</div>
+      <div class="phase-title">Integração Bling + Consulta de Estoque</div>
+    </div>
+    <div class="phase-goal">Objetivo: cliente consulta estoque via WhatsApp em tempo real</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-col">
+      <div class="col-title">Tarefas</div>
+      <ul class="tasks">
+        <li>Conexão à API do Bling com credenciais da CONTRATANTE</li>
+        <li>Mapeamento de campos de produto e estoque no Bling</li>
+        <li>Desenvolvimento da automação de consulta por nome/código</li>
+        <li>Implementação de busca com <em>fuzzy matching</em> (tolerância a erros de digitação)</li>
+        <li>Configuração de resposta automatizada com preço, estoque e link</li>
+        <li>Testes de consulta com produtos reais do catálogo</li>
+        <li>Tratamento de respostas para produto não encontrado</li>
+        <li>Documentação técnica da integração</li>
+      </ul>
+    </div>
+    <div class="phase-col">
+      <div class="col-title">Entregas</div>
+      <ul class="deliverables">
+        <li>
+          Consulta de estoque por texto funcional via WhatsApp
+          <span class="deliverable-check">→ 5 produtos testados e aprovados</span>
+        </li>
+        <li>
+          Resposta automática com preço, estoque e link de compra
+          <span class="deliverable-check">→ formato validado pela CONTRATANTE</span>
+        </li>
+        <li>
+          Tratamento de produto não encontrado configurado
+          <span class="deliverable-check">→ mensagem padrão aprovada</span>
+        </li>
+        <li>
+          Documentação da integração Bling
+          <span class="deliverable-check">→ entregue à CONTRATANTE</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase-resp">
+    <span><strong>Responsável principal:</strong> Tudo Mudou!</span>
+    <span><strong>Dependência:</strong> API key e acesso Bling fornecidos na Fase 1</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FASE 6
+     ═══════════════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-badge"><span class="num">6</span>FASE</div>
+    <div class="phase-title-block">
+      <div class="phase-period">Semana 6 — Dias 36 a 42</div>
+      <div class="phase-title">Testes Integrados, Ajustes & Go-Live</div>
+    </div>
+    <div class="phase-goal">Objetivo: homologação formal e abertura para clientes reais</div>
+  </div>
+  <div class="phase-body">
+    <div class="phase-col">
+      <div class="col-title">Tarefas</div>
+      <ul class="tasks">
+        <li>Testes integrados de todos os fluxos (end-to-end)</li>
+        <li>Simulação de cenários críticos de atendimento</li>
+        <li>Ajustes finais com base no feedback da CONTRATANTE</li>
+        <li>Orientação operacional ao ponto focal (uso do painel)</li>
+        <li>Entrega da documentação operacional mínima</li>
+        <li>Configuração de monitoramento de uptime</li>
+        <li>Homologação formal do ambiente pela CONTRATANTE</li>
+        <li>Abertura para atendimento de clientes reais (go-live)</li>
+      </ul>
+    </div>
+    <div class="phase-col">
+      <div class="col-title">Entregas</div>
+      <ul class="deliverables">
+        <li>
+          Relatório de testes integrados
+          <span class="deliverable-check">→ entregue antes da homologação</span>
+        </li>
+        <li>
+          Documentação operacional mínima
+          <span class="deliverable-check">→ acesso ao painel, fluxos e contatos</span>
+        </li>
+        <li>
+          Termo de Homologação assinado
+          <span class="deliverable-check">→ prazo: 5 dias úteis após entrega</span>
+        </li>
+        <li>
+          Sistema em produção (go-live confirmado)
+          <span class="deliverable-check">→ início da vigência contratual recorrente</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase-resp">
+    <span><strong>Responsável homologação:</strong> Move Giro (ponto focal)</span>
+    <span><strong>Prazo homologação:</strong> até 5 dias úteis (Cláusula 8 do contrato)</span>
+    <span><strong>Marco:</strong> início da mensalidade recorrente</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     CRITÉRIOS DE ACEITE
+     ═══════════════════════════════════════════ -->
+<div class="acceptance">
+  <div class="acceptance-title">Critérios de Aceite por Entrega</div>
+  <table class="accept-table">
+    <thead>
+      <tr>
+        <th>Entrega</th>
+        <th>Critério mínimo de aceite</th>
+        <th>Forma de validação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Chatwoot</td>
+        <td>Painel acessível via HTTPS, login de agente funcional</td>
+        <td>Teste pela CONTRATANTE</td>
+      </tr>
+      <tr>
+        <td>WhatsApp</td>
+        <td>Mensagem enviada e recebida no painel Chatwoot</td>
+        <td>Envio de mensagem teste</td>
+      </tr>
+      <tr>
+        <td>Instagram</td>
+        <td>DM recebida e exibida no painel Chatwoot</td>
+        <td>Envio de DM teste</td>
+      </tr>
+      <tr>
+        <td>IA Atendente</td>
+        <td>10 perguntas do catálogo respondidas corretamente pela IA</td>
+        <td>Roteiro de testes aprovado</td>
+      </tr>
+      <tr>
+        <td>Escalonamento</td>
+        <td>Conversa transferida ao agente humano quando acionado</td>
+        <td>Teste de fluxo completo</td>
+      </tr>
+      <tr>
+        <td>Consulta Bling</td>
+        <td>5 produtos consultados com retorno correto de estoque e preço</td>
+        <td>Teste com produtos reais</td>
+      </tr>
+      <tr>
+        <td>Go-Live</td>
+        <td>Todos os itens acima aprovados, Termo de Homologação assinado</td>
+        <td>Assinatura do Termo</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SUPORTE RECORRENTE (pós go-live)
+     ═══════════════════════════════════════════ -->
+<div class="support-block">
+  <div class="acceptance-title">Suporte Recorrente — Após Go-Live (Meses 1 a 12)</div>
+  <div class="support-grid">
+    <div class="support-cell">
+      <div class="support-cell-label">Escopo do Suporte</div>
+      <div class="support-cell-title">O que está incluso</div>
+      <p>Correção de falhas no escopo implantado · Ajustes de configuração do Chatwoot · Manutenção da base de conhecimento da IA · Suporte à integração Bling (configuração) · Monitoramento de uptime dos serviços gerenciados</p>
+    </div>
+    <div class="support-cell">
+      <div class="support-cell-label">SLA de Atendimento</div>
+      <div class="support-cell-title">Horário e prazos</div>
+      <p>Segunda a sexta-feira · 09h às 18h<br><br>Incidentes críticos: resposta em até <strong>24h úteis</strong><br>Dúvidas operacionais: resposta em até <strong>48h úteis</strong><br>Prazos prorrogáveis por dependência de terceiros</p>
+    </div>
+    <div class="support-cell">
+      <div class="support-cell-label">Fora do Suporte</div>
+      <div class="support-cell-title">O que não está incluso</div>
+      <p>Novas integrações · Novas automações · Alterações estruturais · Treinamento adicional · Manutenção evolutiva · Falhas de plataformas terceiras (Meta, Bling, OpenAI, VPS) · Demandas fora do escopo contratado</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PREMISSAS
+     ═══════════════════════════════════════════ -->
+<div class="premises">
+  <div class="premises-title">Premissas e Condições para Cumprimento do Prazo</div>
+  <ol>
+    <li>O prazo de 6 semanas é contado a partir da confirmação do pagamento do setup <strong>e</strong> da entrega integral de todos os acessos listados na Fase 1.</li>
+    <li>A CONTRATANTE deverá disponibilizar ponto focal com disponibilidade mínima para validações em até 3 dias úteis.</li>
+    <li>O número WhatsApp Business deve estar ativo, verificado e com conta Meta Business em situação regular antes do início da Fase 3.</li>
+    <li>As credenciais de acesso ao Bling (API key com permissões de leitura de estoque e produtos) devem ser fornecidas até o início da Fase 4.</li>
+    <li>A base de FAQs, catálogo de produtos e informações comerciais devem ser entregues pela CONTRATANTE até o início da Fase 4.</li>
+    <li>O servidor/VPS e o domínio devem estar provisionados e apontados pela CONTRATANTE antes do início da Fase 2.</li>
+    <li>Atrasos causados por pendências da CONTRATANTE serão descontados do prazo total, sem penalidade à CONTRATADA.</li>
+  </ol>
+</div>
+
+
+<!-- ASSINATURA -->
+<div class="sign-block">
+  <div class="sign-label">Aprovação do Roadmap — Anexo I</div>
+  <p class="sign-note">
+    Ao assinar este Anexo, as partes declaram estar de acordo com as fases, tarefas, entregas,<br>
+    critérios de aceite e premissas aqui descritos, que passam a integrar o contrato MGR-001/2026.
+  </p>
+
+  <p style="text-align:center; margin-bottom:36px; font-size:11pt; color:#444;">
+    Osasco, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de 2026.
+  </p>
+
+  <div class="sign-grid">
+    <div class="signer">
+      <div class="sign-line"></div>
+      <p>
+        <strong>Vanderlei Ribeiro</strong><br>
+        Move Giro Moto Peças<br>
+        CNPJ: 53.180.510/0001-54<br>
+        <span class="role">Contratante</span>
+      </p>
+    </div>
+    <div class="signer">
+      <div class="sign-line"></div>
+      <p>
+        <strong>Fernando Jorge</strong><br>
+        Tudo Mudou Marketing e Consultoria LTDA<br>
+        CNPJ: 40.790.711/0001-21<br>
+        <span class="role">Contratada</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- RODAPÉ -->
+<div class="doc-footer">
+  Tudo Mudou Marketing e Consultoria LTDA · CNPJ 40.790.711/0001-21 · Osasco/SP · 2026<br>
+  Anexo I — Roadmap de Implantação · Ref. Contrato MGR-001/2026 · Move Giro Moto Peças
+</div>
+
+<!-- BOTÃO IMPRIMIR (final de página, fora do fluxo de impressão) -->
+<div class="no-print" style="text-align:center; margin: 48px 0 32px;">
+  <button onclick="window.print()" style="
+    background: #1a1a1a; color: #fff; border: none;
+    padding: 16px 40px;
+    font-family: 'Courier New', monospace; font-size: 10pt;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    cursor: pointer; transition: background 0.2s;
+  " onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1a1a1a'">
+    &#x2193;&nbsp; Imprimir / Salvar PDF
+  </button>
+</div>
+
+</body>
+</html>
